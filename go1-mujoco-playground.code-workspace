@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../go1_gesture_tracking"
+		}
+	],
+	"settings": {}
+}
