@@ -33,17 +33,20 @@ Students may push to their team branch. Do not push directly to `main`.
 
 | Time | Activity | Evidence |
 |---:|---|---|
-| 0:00–0:20 | Create or verify a GitHub account and review repository rules | Repository access |
-| 0:20–0:45 | Clone the repository and inspect branches | Terminal output |
-| 0:45–1:05 | Switch to the assigned team branch | Current branch |
-| 1:05–1:40 | Run the existing Go1 keyboard simulation | Screenshot or recording |
-| 1:40–1:55 | Make a documentation-only commit | Commit hash |
-| 1:55–2:00 | Complete the weekly summary | `week-01.md` |
+| 0:00–0:15 | Read the control-pipeline and MuJoCo orientation pages | One systems question |
+| 0:15–0:35 | Create or verify a GitHub account and review repository rules | Repository access |
+| 0:35–0:55 | Clone the repository and enter the team branch | Current branch |
+| 0:55–1:25 | Run the existing Go1 keyboard simulation | Screenshot or recording |
+| 1:25–1:45 | Make a documentation-only commit | Commit hash |
+| 1:45–2:00 | Complete the weekly summary and design question | `week-01.md` |
 
 ## Task 1: GitHub access
 
 Use the companion [Week 1 Git Worksheet](git-worksheet.md) for the commands
 used during this session.
+
+Before coding, read the [Control Pipeline overview](https://dyco-ai.github.io/go1_gesture_tracking/control-pipeline/)
+and [MuJoCo Orientation](https://dyco-ai.github.io/go1_gesture_tracking/mujoco-orientation/).
 
 If you do not already have a GitHub account, create one at
 [github.com](https://github.com/). Use an account name you are comfortable using
