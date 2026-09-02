@@ -7,6 +7,22 @@ Go1 keyboard controller from the instructor-provided `main` code.
 
 This is a two-hour onboarding session. Do not modify the robot controller yet.
 
+## The standard weekly workflow
+
+Most weeks follow this pattern:
+
+1. Fetch the latest instructor materials.
+2. Read the week's activity page and the relevant code.
+3. Complete the worksheet or experiment requested for the week.
+4. Push the worksheet and documentation to your team branch.
+5. Make code changes only when the activity requires them or after discussing
+   the proposed change with the instructor.
+
+Documentation is the default deliverable. If you are confident that a code
+change is useful, ask for instructor consent before pushing it. After approval,
+make the change on your team branch, explain it in your weekly summary, and
+include evidence that the baseline still works.
+
 ## Learning objectives
 
 By the end of this week, you should be able to:
