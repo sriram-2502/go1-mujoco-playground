@@ -120,6 +120,22 @@ Click inside the MuJoCo viewer so it receives keyboard input.
 
 For this first session, do not change controller parameters or simulation code.
 
+## Open-ended systems question
+
+The baseline keyboard controller stores the last command, so an arrow-key press
+can continue producing motion after the key is released. Enter explicitly sends
+a zero command. Think about how you would improve this behavior without changing
+the locomotion policy:
+
+- Would a joystick or gamepad be a better input device?
+- How would you detect that the input source stopped updating?
+- What timeout should cause the command to return to zero?
+- How would you keep the stop command higher priority than motion?
+
+For your weekly summary, sketch one possible design and explain the tradeoff
+between responsiveness and accidental stopping. Do not connect a physical
+joystick or robot yet.
+
 ## Task 5: Make a documentation-only commit
 
 Create `weekly-summaries/week-01.md` in your team branch using the template
