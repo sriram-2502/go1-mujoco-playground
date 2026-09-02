@@ -42,6 +42,9 @@ Students may push to their team branch. Do not push directly to `main`.
 
 ## Task 1: GitHub access
 
+Use the companion [Week 1 Git Worksheet](git-worksheet.md) for the commands
+used during this session.
+
 If you do not already have a GitHub account, create one at
 [github.com](https://github.com/). Use an account name you are comfortable using
 for course work. Enable two-factor authentication if possible.
