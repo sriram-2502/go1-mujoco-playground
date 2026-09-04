@@ -11,12 +11,11 @@ This is a two-hour onboarding session. Do not modify the robot controller yet.
 
 Complete the work in this order:
 
-1. **Prerequisite:** finish the [Windows 11 setup](windows-setup.md), including
-   Git, VS Code, Miniconda, and the course dependencies.
+1. **Before class:** finish the [Windows 11 and MuJoCo simulation setup](../week-01-windows-simulation/README.md), including Git, VS Code, Miniconda, the course environment, dependencies, and robot assets.
 2. **Study:** read the [Control Pipeline](https://dyco-ai.github.io/go1_gesture_tracking/control-pipeline/)
    and [MuJoCo Orientation](https://dyco-ai.github.io/go1_gesture_tracking/mujoco-orientation/).
-3. **Run:** fetch the repository, enter `team-alpha` or `team-bravo`, and run
-   the existing Go1 MuJoCo Playground keyboard controller.
+3. **Run:** fetch the repository, enter your assigned `team-alpha` or
+   `team-bravo` branch, and run the existing Go1 MuJoCo Playground keyboard controller.
 4. **Question:** propose one safer input idea, such as joystick, voice,
    gestures, or a stale-command timeout.
 5. **Submit:** complete your individual Markdown summary and push it to your
@@ -96,10 +95,12 @@ other sensitive data.
 ## Task 2: Clone the repository
 
 If Git and Miniconda are not installed, first follow the
-[Windows 11 setup sheet](windows-setup.md). It covers the clean installation
-of Git for Windows, Miniconda, the course environment, and MuJoCo dependencies.
+[Windows 11 and MuJoCo simulation setup](../week-01-windows-simulation/README.md).
+It covers the clean installation of Git for Windows, Miniconda, the course
+environment, dependencies, and robot assets.
 
-Use **Git Bash** or **Miniconda Prompt**:
+Use **Git Bash** or **Miniconda Prompt**. The simulation itself must be run from
+the activated `go1-mj-playground` environment:
 
 ```powershell
 cd $HOME\Downloads
@@ -124,13 +125,13 @@ git log --oneline -5
 Switch to the branch assigned by the instructor:
 
 ```powershell
-git switch team-alpha
+git switch --track origin/team-alpha
 ```
 
 Team Bravo should use:
 
 ```powershell
-git switch team-bravo
+git switch --track origin/team-bravo
 ```
 
 Confirm the active branch:
@@ -148,6 +149,8 @@ exist, stop and ask the instructor rather than creating a different branch.
 The instructor has already prepared the baseline code. From the repository root:
 
 ```powershell
+conda activate go1-mj-playground
+cd C:\path\to\go1-mujoco-playground
 python .\mujoco_playground\experimental\sim2sim\play_go1_keyboard.py
 ```
 
@@ -185,15 +188,16 @@ joystick or robot yet.
 Copy [the Week 1 summary template](weekly-summary-template.md) into your team
 branch as `weekly-summaries/week-01-firstname-lastname.md`. Each student submits
 an individual summary. Fill it out with your own findings, then commit and push
-it:
+only that documentation file. Replace `<your-team-branch>` with your assigned
+branch name:
 
 ```powershell
 git add weekly-summaries/week-01-firstname-lastname.md
 git commit -m "Add week 01 onboarding summary"
-git push -u origin team-alpha
+git push -u origin <your-team-branch>
 ```
 
-Team Bravo should replace the final branch name with `team-bravo`.
+For example, a Team Alpha student uses `git push -u origin team-alpha`.
 
 ## Completion checklist
 
@@ -207,11 +211,11 @@ Team Bravo should replace the final branch name with `team-bravo`.
 
 ## Deliverables
 
-- Team branch containing each student's `weekly-summaries/week-01-firstname-lastname.md`.
+- Shared team branch containing each student's individual `weekly-summaries/week-01-firstname-lastname.md`.
 - Screenshot or short recording of the existing simulation.
 - One sentence explaining the difference between `main` and the team branch.
 
 ## Next week
 
-Continue to the instructor-provided MuJoCo setup and baseline exercise.
+Continue to the Week 2 activity page and the next instructor-provided baseline exercise.
 
