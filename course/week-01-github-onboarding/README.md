@@ -7,6 +7,24 @@ Go1 keyboard controller from the instructor-provided `main` code.
 
 This is a two-hour onboarding session. Do not modify the robot controller yet.
 
+## Week 1 in one pass
+
+Complete the work in this order:
+
+1. **Prerequisite:** finish the [Windows 11 setup](windows-setup.md), including
+   Git, VS Code, Miniconda, and the course dependencies.
+2. **Study:** read the [Control Pipeline](https://dyco-ai.github.io/go1_gesture_tracking/control-pipeline/)
+   and [MuJoCo Orientation](https://dyco-ai.github.io/go1_gesture_tracking/mujoco-orientation/).
+3. **Run:** fetch the repository, enter `team-alpha` or `team-bravo`, and run
+   the existing Go1 MuJoCo Playground keyboard controller.
+4. **Question:** propose one safer input idea, such as joystick, voice,
+   gestures, or a stale-command timeout.
+5. **Submit:** complete your individual Markdown summary and push it to your
+   team branch.
+
+The expected Week 1 code change is documentation only. Ask the instructor
+before pushing any controller or simulation code change.
+
 ## The standard weekly workflow
 
 Most weeks follow this pattern:
