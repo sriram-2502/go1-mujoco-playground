@@ -79,13 +79,13 @@ commands. Do not install the full Anaconda distribution for this course.
 Run this once:
 
 ```powershell
-conda create -n go1-mj-playground python=3.12 pip setuptools wheel -y
+conda create -n go1-mujoco-playground python=3.12 pip setuptools wheel -y
 ```
 
 Activate it:
 
 ```powershell
-conda activate go1-mj-playground
+conda activate go1-mujoco-playground
 python --version
 ```
 
@@ -108,7 +108,7 @@ Then follow the [Week 1 Git Worksheet](git-worksheet.md) to enter
 
 ## 6. Install the MuJoCo course dependencies
 
-From the repository root, with `go1-mj-playground` active:
+From the repository root, with `go1-mujoco-playground` active:
 
 ```powershell
 python -m pip install --upgrade pip

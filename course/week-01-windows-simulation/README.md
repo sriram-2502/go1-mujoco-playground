@@ -71,8 +71,8 @@ Expected results are `creative-inquiry-dev` and `True`.
 ## Task 3: Create the Python environment
 
 ```powershell
-conda create -n go1-mj-playground python=3.12 pip setuptools wheel -y
-conda activate go1-mj-playground
+conda create -n go1-mujoco-playground python=3.12 pip setuptools wheel -y
+conda activate go1-mujoco-playground
 python --version
 ```
 
@@ -158,7 +158,7 @@ how you addressed it.
 
 ## Completion checklist
 
-- [ ] The `go1-mj-playground` environment activates.
+- [ ] The `go1-mujoco-playground` environment activates.
 - [ ] The ONNX test returns an action shape of `(1, 12)`.
 - [ ] The MuJoCo viewer opens.
 - [ ] The four arrow-key commands change the robot's motion.
@@ -194,7 +194,7 @@ python -c "from mujoco_playground._src import mjx_env; mjx_env.ensure_menagerie_
 ## Daily startup
 
 ```powershell
-conda activate go1-mj-playground
+conda activate go1-mujoco-playground
 cd C:\path\to\go1-mujoco-playground
 python .\mujoco_playground\experimental\sim2sim\play_go1_keyboard.py
 ```

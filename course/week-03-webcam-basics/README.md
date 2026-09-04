@@ -16,12 +16,12 @@ adding gesture recognition.
 
 - Weeks 1 and 2 completed
 - Laptop webcam available and permitted by Windows privacy settings
-- `go1-mj-playground` environment active
+- `go1-mujoco-playground` environment active
 
 ## Task 1: Prepare a team branch and folder
 
 ```powershell
-conda activate go1-mj-playground
+conda activate go1-mujoco-playground
 cd C:\path\to\go1-mujoco-playground
 git switch creative-inquiry-dev
 git pull

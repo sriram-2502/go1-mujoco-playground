@@ -15,13 +15,13 @@ and document it with Git.
 ## Prerequisites
 
 - Week 1 checklist completed
-- Go1 simulator runs from `go1-mj-playground`
+- Go1 simulator runs from `go1-mujoco-playground`
 - A text editor such as Visual Studio Code installed
 
 ## Task 1: Prepare your workspace
 
 ```powershell
-conda activate go1-mj-playground
+conda activate go1-mujoco-playground
 cd C:\path\to\go1-mujoco-playground
 git switch creative-inquiry-dev
 git pull

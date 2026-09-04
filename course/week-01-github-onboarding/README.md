@@ -100,7 +100,7 @@ It covers the clean installation of Git for Windows, Miniconda, the course
 environment, dependencies, and robot assets.
 
 Use **Git Bash** or **Miniconda Prompt**. The simulation itself must be run from
-the activated `go1-mj-playground` environment:
+the activated `go1-mujoco-playground` environment:
 
 ```powershell
 cd $HOME\Downloads
@@ -149,7 +149,7 @@ exist, stop and ask the instructor rather than creating a different branch.
 The instructor has already prepared the baseline code. From the repository root:
 
 ```powershell
-conda activate go1-mj-playground
+conda activate go1-mujoco-playground
 cd C:\path\to\go1-mujoco-playground
 python .\mujoco_playground\experimental\sim2sim\play_go1_keyboard.py
 ```
