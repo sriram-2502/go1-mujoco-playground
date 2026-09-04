@@ -77,6 +77,10 @@ other sensitive data.
 
 ## Task 2: Clone the repository
 
+If Git and Miniconda are not installed, first follow the
+[Windows 11 setup sheet](windows-setup.md). It covers the clean installation
+of Git for Windows, Miniconda, the course environment, and MuJoCo dependencies.
+
 Use **Git Bash** or **Miniconda Prompt**:
 
 ```powershell
