@@ -61,7 +61,8 @@ git status
 
 ## 5. Commit and push your weekly summary
 
-Create `weekly-summaries/week-01.md`, then run:
+Copy `weekly-summary-template.md` to `weekly-summaries/week-01.md`, fill it out,
+then run:
 
 ```powershell
 git add weekly-summaries/week-01.md

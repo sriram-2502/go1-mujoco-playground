@@ -164,8 +164,9 @@ joystick or robot yet.
 
 ## Task 5: Make a documentation-only commit
 
-Create `weekly-summaries/week-01.md` in your team branch using the template
-below. Then commit and push it:
+Copy [the Week 1 summary template](weekly-summary-template.md) into your team
+branch as `weekly-summaries/week-01.md`. Fill it out with your own findings,
+then commit and push it:
 
 ```powershell
 git add weekly-summaries/week-01.md
@@ -174,38 +175,6 @@ git push -u origin team-alpha
 ```
 
 Team Bravo should replace the final branch name with `team-bravo`.
-
-## Weekly summary template
-
-```markdown
-# Week 01 Summary
-
-## Team
-Names:
-
-## Goal
-What were we trying to accomplish?
-
-## What we did
--
--
-
-## Evidence
-Commit:
-Simulation result:
-
-## What worked
--
-
-## Problem and resolution
--
-
-## What I learned
--
-
-## Next week
--
-```
 
 ## Completion checklist
 
