@@ -22,7 +22,40 @@ git --version
 A version number should appear. If Windows says that `git` is not recognized,
 close and reopen the terminal. If it still fails, ask the instructor.
 
-## 2. Install Miniconda
+## 2. Install Visual Studio Code
+
+Download and install [Visual Studio Code](https://code.visualstudio.com/download)
+for Windows. The default installer choices are appropriate for this course.
+
+During installation, enable these options if they are offered:
+
+- Add `Open with Code` to the Windows Explorer context menu.
+- Register Code as an editor for supported file types.
+- Add VS Code to the PATH.
+
+Open VS Code once after installation and install these extensions from the
+Extensions panel:
+
+| Extension | Publisher | Why we use it |
+|---|---|---|
+| Python | Microsoft | Run and debug Python programs |
+| Pylance | Microsoft | Python code completion and type information |
+| Markdown All in One | Yu Zhang | Write and preview weekly summaries |
+| YAML | Red Hat | Read configuration files later in the course |
+
+The **Git Graph** extension is optional. Git commands in the worksheet remain
+the primary way to learn the workflow.
+
+To open the repository in VS Code later:
+
+```powershell
+code .
+```
+
+If the `code` command is not recognized, open VS Code from the Start menu and
+choose **File → Open Folder** instead.
+
+## 3. Install Miniconda
 
 1. Download the **Miniconda Windows 64-bit graphical installer** from
    <https://docs.anaconda.com/miniconda/install/>.
@@ -41,7 +74,7 @@ conda --version
 A version number should appear. Use Miniconda Prompt for the remaining course
 commands. Do not install the full Anaconda distribution for this course.
 
-## 3. Create the course environment
+## 4. Create the course environment
 
 Run this once:
 
@@ -59,7 +92,7 @@ python --version
 The Python version should begin with `3.12`. You must activate this environment
 whenever you open a new terminal for the course.
 
-## 4. Get the course code
+## 5. Get the course code
 
 ```powershell
 cd $HOME\Downloads
@@ -73,7 +106,7 @@ git pull --ff-only origin main
 Then follow the [Week 1 Git Worksheet](git-worksheet.md) to enter
 `team-alpha` or `team-bravo`.
 
-## 5. Install the MuJoCo course dependencies
+## 6. Install the MuJoCo course dependencies
 
 From the repository root, with `go1-mj-playground` active:
 
@@ -87,7 +120,7 @@ python -c "from mujoco_playground._src import mjx_env; mjx_env.ensure_menagerie_
 The commands install the Python package, CPU ONNX Runtime, and the pinned robot
 model assets used by the baseline.
 
-## 6. Verify the baseline files
+## 7. Verify the baseline files
 
 ```powershell
 Test-Path .\mujoco_playground\experimental\sim2sim\play_go1_keyboard.py
