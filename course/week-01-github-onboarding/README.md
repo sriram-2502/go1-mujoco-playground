@@ -54,7 +54,7 @@ Students may push to their team branch. Do not push directly to `main`.
 | 0:35–0:55 | Clone the repository and enter the team branch | Current branch |
 | 0:55–1:25 | Run the existing Go1 keyboard simulation | Screenshot or recording |
 | 1:25–1:45 | Make a documentation-only commit | Commit hash |
-| 1:45–2:00 | Complete the weekly summary and design question | `week-01.md` |
+| 1:45–2:00 | Complete the individual summary and design question | Your named Markdown file |
 
 ## Task 1: GitHub access
 
@@ -165,11 +165,12 @@ joystick or robot yet.
 ## Task 5: Make a documentation-only commit
 
 Copy [the Week 1 summary template](weekly-summary-template.md) into your team
-branch as `weekly-summaries/week-01.md`. Fill it out with your own findings,
-then commit and push it:
+branch as `weekly-summaries/week-01-firstname-lastname.md`. Each student submits
+an individual summary. Fill it out with your own findings, then commit and push
+it:
 
 ```powershell
-git add weekly-summaries/week-01.md
+git add weekly-summaries/week-01-firstname-lastname.md
 git commit -m "Add week 01 onboarding summary"
 git push -u origin team-alpha
 ```
@@ -188,7 +189,7 @@ Team Bravo should replace the final branch name with `team-bravo`.
 
 ## Deliverables
 
-- Team branch containing `weekly-summaries/week-01.md`.
+- Team branch containing each student's `weekly-summaries/week-01-firstname-lastname.md`.
 - Screenshot or short recording of the existing simulation.
 - One sentence explaining the difference between `main` and the team branch.
 
