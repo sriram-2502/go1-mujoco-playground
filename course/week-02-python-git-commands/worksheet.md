@@ -7,7 +7,8 @@ Personal branch:
 ## 1. Baseline data table
 
 Run the unchanged controller. Record the command after one input and the
-observed motion. Repeat each trial three times when possible.
+observed motion. Press Enter before each trial so the command starts at zero.
+Repeat each trial three times when possible.
 
 | Trial | Input | vx forward | vy lateral | yaw rate | Observed motion |
 |---:|---|---:|---:|---:|---|
@@ -66,6 +67,9 @@ With instructor approval, change one command increment:
 
 Record the exact value you changed:  
 
+Before running again, check the code diff and make sure you changed only the
+matching `dvx` or `dwz` value inside `key_callback`.
+
 | Trial | Input | New vx | New vy | New yaw | Observed motion |
 |---:|---|---:|---:|---:|---|
 | 1 | Same input as baseline | | | | |
@@ -75,6 +79,11 @@ Record the exact value you changed:
 What changed compared with the baseline?  
 
 Was the robot easier or harder to control? Why?  
+
+What did you observe about the first command after pressing the key?
+
+Did the robot's visible motion change immediately, or after the command
+accumulated over several key presses?
 
 Restore the baseline value after the experiment:  
 

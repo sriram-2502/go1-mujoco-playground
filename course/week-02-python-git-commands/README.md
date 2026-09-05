@@ -63,6 +63,11 @@ python .\mujoco_playground\experimental\sim2sim\play_go1_keyboard.py
 | Right | | | |
 | Enter | | | |
 
+Press **Enter** before each trial so the command starts at zero. One Up-arrow
+press should add `0.25` to forward velocity (`vx`), and one Left-arrow press
+should add `0.50` to yaw rate. The command persists until another command or
+Enter is pressed.
+
 ## Task 3: Read the controller
 
 Open
@@ -77,6 +82,31 @@ Open
 In your own words, write one sentence explaining each item. Then complete the
 [Week 2 worksheet](worksheet.md), including the control-systems and
 reinforcement-learning questions.
+
+### Find the code you will change
+
+Open this file in VS Code:
+
+```text
+mujoco_playground/experimental/sim2sim/play_go1_keyboard.py
+```
+
+For the required experiment, edit only the four command-increment values inside
+`key_callback`:
+
+```python
+if keycode == glfw.KEY_UP:
+  controller.change_command(dvx=0.25)
+elif keycode == glfw.KEY_DOWN:
+  controller.change_command(dvx=-0.25)
+elif keycode == glfw.KEY_LEFT:
+  controller.change_command(dwz=0.50)
+elif keycode == glfw.KEY_RIGHT:
+  controller.change_command(dwz=-0.50)
+```
+
+Do not edit `action_scale`, the ONNX model, the observation vector, the MuJoCo
+XML, or the command limits for the required experiment.
 
 ### Control-systems connection
 
@@ -103,8 +133,10 @@ Choose **one** instructor-approved change:
 
 Change only the matching argument in `key_callback`. Save the file, rerun the
 simulator, and complete the before/after data tables in the worksheet. Use the
-same input and number of trials as the baseline. Restore the original value
-after recording your results.
+same input and number of trials as the baseline. Press Enter between trials.
+The first Up press should now be approximately `+0.50`, or the first Left press
+approximately `+1.00`. Observe whether motion becomes faster, sharper, harder
+to stop, or harder to align. Restore the original value after recording results.
 
 ## Task 5: Inspect and record the change
 
@@ -122,12 +154,17 @@ git commit -m "Adjust keyboard command increment"
 
 Follow the instructor's directions before pushing a student branch to GitHub.
 
+Your diff should normally show only one changed number. If it shows changes to
+the policy, action scaling, robot model, or other files, stop and ask the
+instructor before continuing.
+
 ## Task 6: Optional stability challenge
 
 With instructor approval, gradually increase one command value until the
-simulated robot becomes visibly unstable. Record the smallest value that causes
-instability and describe what happened. This is simulation-only: never try to
-make the physical robot fall.
+simulated robot becomes visibly unstable. Start from the original value, test
+one value at a time, and use Enter to reset between tests. Record the smallest
+value that causes instability and describe what happened. This is
+simulation-only: never try to make the physical robot fall.
 
 ## Task 7: End-of-session design challenge
 
