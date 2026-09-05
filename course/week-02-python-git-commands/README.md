@@ -1,21 +1,27 @@
-# Week 2: Python, Git, and robot commands
+# Week 2: Read, measure, and modify the Go1 controller
 
 ## Milestone
 
-Trace a keyboard press through the Python controller, make one controlled change,
-and document it with Git.
+Trace a keyboard press through the Python controller, connect the code to basic
+control and reinforcement-learning ideas, make one controlled change, and
+measure the result.
 
 ## Learning objectives
 
 - Recognize variables, functions, classes, conditionals, and arrays in Python.
 - Explain the three command values: forward, lateral, and yaw velocity.
-- Create a Git branch and inspect a code change.
+- Explain the difference between a high-level command, a controller, an
+  observation, and an actuator action.
+- Describe at a high level how the ONNX locomotion policy was developed with
+  reinforcement learning.
+- Create a personal work branch from the assigned team branch and inspect a
+  code change.
 - Change one controller parameter and test its effect in simulation.
 
 ## Prerequisites
 
 - Week 1 checklist completed
-- Go1 simulator runs from `go1-mujoco-playground`
+- Go1 simulator runs from the `go1-mujoco-playground` Conda environment
 - A text editor such as Visual Studio Code installed
 
 ## Task 1: Prepare your workspace
@@ -23,22 +29,27 @@ and document it with Git.
 ```powershell
 conda activate go1-mujoco-playground
 cd C:\path\to\go1-mujoco-playground
-git switch creative-inquiry-dev
-git pull
+git fetch origin
+git switch --track origin/team-alpha
+git pull --ff-only
 git status
 ```
 
-Create a work branch. Replace `TEAM-NAME` with the name assigned by the
-instructor, using lowercase letters and hyphens:
+Team Bravo should use `origin/team-bravo` instead. Create a personal work branch
+from your assigned team branch. Replace `YOUR-NAME` with a short lowercase name:
 
 ```powershell
-git switch -c week-02/TEAM-NAME
+git switch -c week-02/YOUR-NAME
 ```
+
+Do not push directly to `main` or to the shared team branch while experimenting.
+Ask the instructor before pushing an approved code change.
 
 ## Task 2: Establish a baseline
 
-Run the unmodified controller. Record the printed command after one press of
-each arrow key and after Enter.
+Run the unmodified controller. Record the printed command and observed motion
+in the [Week 2 worksheet](worksheet.md). Repeat the important trials so you can
+compare baseline and modified behavior.
 
 ```powershell
 python .\mujoco_playground\experimental\sim2sim\play_go1_keyboard.py
@@ -63,17 +74,37 @@ Open
 4. `control`, where the ONNX policy produces joint actions; and
 5. `key_callback`, where key codes are mapped to command changes.
 
-In your own words, write one sentence explaining each item.
+In your own words, write one sentence explaining each item. Then complete the
+[Week 2 worksheet](worksheet.md), including the control-systems and
+reinforcement-learning questions.
 
-## Task 4: Make one measured change
+### Control-systems connection
+
+The keyboard does not directly command individual motors. It produces a desired
+body velocity. The pretrained locomotion policy uses that desired velocity plus
+robot measurements to produce joint actions. In control language, the desired
+velocity is a reference, the measured robot state is feedback, the policy is the
+controller, and the simulated robot is the plant.
+
+### Reinforcement-learning connection
+
+The ONNX file is a frozen neural-network policy trained before this course. In
+training, an agent observes the simulated robot state, chooses joint actions,
+receives rewards for stable motion and command tracking, and repeats this over
+many simulated episodes. In this course, students use the trained policy; they
+are not retraining it. Week 2 focuses on understanding its inputs and outputs.
+
+## Task 4: Required challenge - increase sensitivity
 
 Choose **one** instructor-approved change:
 
-- reduce the forward increment from `0.25` to `0.10`; or
-- reduce the yaw increment from `0.50` to `0.25`.
+- increase the forward increment from `0.25` to `0.50`; or
+- increase the yaw increment from `0.50` to `1.00`.
 
 Change only the matching argument in `key_callback`. Save the file, rerun the
-simulator, and repeat the measurement table. Do not increase the command limits.
+simulator, and complete the before/after data tables in the worksheet. Use the
+same input and number of trials as the baseline. Restore the original value
+after recording your results.
 
 ## Task 5: Inspect and record the change
 
@@ -91,12 +122,34 @@ git commit -m "Adjust keyboard command increment"
 
 Follow the instructor's directions before pushing a student branch to GitHub.
 
+## Task 6: Optional stability challenge
+
+With instructor approval, gradually increase one command value until the
+simulated robot becomes visibly unstable. Record the smallest value that causes
+instability and describe what happened. This is simulation-only: never try to
+make the physical robot fall.
+
+## Task 7: End-of-session design challenge
+
+Use your measurements to design the next input interface. Choose a joystick,
+gesture, or voice command interface and specify:
+
+1. what its input values are;
+2. how those values become `vx`, `vy`, and `yaw`; and
+3. what should happen when the input stops updating.
+
+Draw the design as a five-box block diagram and write one tradeoff. This is a
+design exercise only; do not implement the new interface yet.
+
 ## Engineering questions
 
 1. Why does a smaller increment make the robot easier or harder to command?
 2. What is the difference between command increment and command limit?
 3. Why should one experiment change only one value at a time?
 4. What happens to the command when Enter is pressed?
+5. What are the reference, feedback signal, controller, and plant here?
+6. What does the RL policy receive as input, and what does it return?
+7. Why can a policy trained in simulation still require safety limits at runtime?
 
 ## Completion checklist
 
@@ -106,6 +159,9 @@ Follow the instructor's directions before pushing a student branch to GitHub.
 - [ ] Modified behavior measured in simulation.
 - [ ] `git diff` reviewed before committing.
 - [ ] Engineering questions answered.
+- [ ] Before/after data table completed.
+- [ ] Original parameter restored.
+- [ ] Five-box input-interface design completed.
 
 ## Deliverables
 
@@ -113,6 +169,8 @@ Follow the instructor's directions before pushing a student branch to GitHub.
 - Five-sentence controller explanation
 - Git commit identifier from `git log -1 --oneline`
 - Answers to the engineering questions
+- Before/after sensitivity data table
+- Five-box input-interface design
 
 ## Next week
 
