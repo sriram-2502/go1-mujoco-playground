@@ -1,4 +1,4 @@
-# Week 2 worksheet: Read, measure, and modify
+# Week 2 worksheet: Go1 controller behavior, control, and reinforcement learning
 
 Name:  
 Team: `team-alpha` / `team-bravo`  

@@ -1,4 +1,4 @@
-# Week 2: Read, measure, and modify the Go1 controller
+# Week 2: Go1 controller behavior, control, and reinforcement learning
 
 ## Milestone
 
@@ -125,6 +125,14 @@ many simulated episodes. In this course, students use the trained policy; they
 are not retraining it. Week 2 focuses on understanding its inputs and outputs.
 
 ## Task 4: Required challenge - increase sensitivity
+
+Change this file only:
+
+```text
+mujoco_playground/experimental/sim2sim/play_go1_keyboard.py
+```
+
+Inside that file, edit only the command-increment value in `key_callback`.
 
 Choose **one** instructor-approved change:
 
