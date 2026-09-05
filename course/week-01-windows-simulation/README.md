@@ -207,5 +207,5 @@ python .\mujoco_playground\experimental\sim2sim\play_go1_keyboard.py
 
 ## Next week
 
-Continue to [Week 2: Python, Git, and robot
-commands](../week-02-python-git-commands/README.md).
+Continue to [Week 2: Go1 controller behavior, control, and reinforcement
+learning](../week-02-go1-controller/README.md).

@@ -95,7 +95,7 @@ Students can launch the course environment and explain the major components of t
 
 ---
 
-## Week 2 — Go1 Simulation and Locomotion
+## Week 2 — Go1 Controller Behavior, Control, and Reinforcement Learning
 
 ### Topics
 
@@ -103,6 +103,8 @@ Students can launch the course environment and explain the major components of t
 - Robot models, joints, actuators, and sensors
 - High-level and low-level robot control
 - Pretrained locomotion controllers
+- Basic feedback-control concepts
+- Reinforcement-learning policy concepts
 - Simulation as a robotics development tool
 
 ### Student Activities
@@ -120,79 +122,68 @@ Students can run the pretrained Go1 locomotion controller and explain how high-l
 
 ---
 
-## Week 3 — Velocity Commands and Coordinate Frames
+## Week 3 — Webcam Input and Hand Tracking
 
 ### Topics
 
-- Robot body frame
-- World frame
-- Linear velocity
-- Angular velocity
-- Forward, backward, and turning commands
-- Command saturation
-- Emergency stopping
-
-### Student Activities
-
-- Use the provided keyboard controller
-- Drive the simulated Go1
-- Modify safe velocity limits
-- Visualize commanded and measured velocities
-- Complete a command-saturation function
-- Test the emergency-stop behavior
-
-### Milestone
-
-Students can safely control the simulated Go1 using keyboard commands.
-
----
-
-## Week 4 — Webcam Input and Hand Tracking
-
-### Topics
-
-- Camera image acquisition
-- Image coordinates
-- Frame rate and latency
-- Hand landmarks
-- Real-time perception pipelines
-- Perception noise and failure cases
+- Webcam image acquisition
+- Image coordinates, frame rate, and latency
+- Hand landmarks and real-time perception
+- Lighting, occlusion, and perception failure cases
 
 ### Student Activities
 
 - Capture video from a laptop webcam
 - Run the provided hand-landmark detector
-- Display detected landmarks
-- Measure the camera frame rate
-- Investigate the effects of lighting and occlusion
-- Save sample gesture images for testing
+- Display landmarks and measure frame rate
+- Test lighting, distance, and occlusion
+- Save representative examples and document failure cases
 
 ### Milestone
 
-Students can reliably detect and visualize a hand using a laptop webcam.
+Students can acquire webcam frames and visualize a hand reliably enough for the next perception activity.
 
 ---
 
-## Week 5 — Gesture Recognition and Temporal Filtering
+## Week 4 — Gesture Recognition and Temporal Filtering
 
 ### Topics
 
-- Gesture classification
-- Discrete command vocabularies
-- Confidence scores
-- Temporal filtering
-- Debouncing
-- Gesture hold time
+- Gesture features and discrete command vocabularies
+- Confidence scores and unknown detections
+- Temporal filtering, debouncing, and hold time
 - Finite-state machines
 
 ### Student Activities
 
-- Complete gesture-classification logic
-- Test the starter gesture set
-- Add confidence thresholds
-- Implement gesture hold-time logic
+- Run the starter gesture classifier
+- Test stop, forward, left, right, and slow-mode gestures
+- Add confidence and hold-time checks
 - Handle unknown gestures
-- Evaluate false detections
+- Measure false detections and stable recognition time
+
+### Milestone
+
+Students can produce stable symbolic gesture commands from live webcam input.
+
+---
+
+## Week 5 — Gesture-to-Command Control in MuJoCo
+
+### Topics
+
+- Mapping discrete gestures to continuous commands
+- Body-frame velocity commands: vx, vy, and yaw
+- Command persistence, smoothing, and scaling
+- Simulation testing and reproducible experiments
+
+### Student Activities
+
+- Connect validated gesture intent to the existing Go1 command interface
+- Run the gesture controller in MuJoCo
+- Tune forward and turning speeds
+- Add smooth command transitions
+- Test stop behavior and input loss in simulation
 
 ### Suggested Starter Gestures
 
@@ -204,57 +195,50 @@ Students can reliably detect and visualize a hand using a laptop webcam.
 
 ### Milestone
 
-Students can produce stable symbolic gesture commands from live webcam input.
+Students can guide the simulated Go1 with validated gestures by the end of Week 5.
 
 ---
 
-## Week 6 — Gesture-to-Motion Control
+## Week 6 — Hardware Interface and Safety Checkout
 
 ### Topics
 
-- Mapping discrete gestures to continuous commands
-- Motion primitives
-- Command persistence
-- Command smoothing
-- Velocity scaling
-- Human–robot interaction
+- Simulation-to-hardware interface
+- Go1 communication architecture
+- Robot health and command heartbeat
+- Emergency stop and default-stop behavior
+- Hardware operating procedures
 
 ### Student Activities
 
-- Map gestures to Go1 velocity commands
-- Connect gesture output to the simulated robot
-- Tune forward speed
-- Tune turning speed
-- Add smooth command transitions
-- Test movement and stopping behavior
+- Compare the simulation and physical command interfaces
+- Connect to the physical Go1 under instructor supervision
+- Run stationary communication and heartbeat tests
+- Verify health monitoring and emergency stop
+- Do not enable locomotion until the instructor approves
 
 ### Milestone
 
-Students can control the simulated Go1 using hand gestures.
+Students can verify the hardware interface safely without commanding physical motion.
 
 ---
 
-## Week 7 — Safety Supervisor and Fault Handling
+## Week 7 — Supervised Hardware Integration
 
 ### Topics
 
-- Safety layers in robotic systems
-- Fail-safe behavior
-- Stale-command detection
-- Perception-loss handling
-- Communication-loss handling
-- Velocity and acceleration limits
-- Software emergency stops
+- Incremental hardware testing
+- Safe operating envelopes
+- Simulation-to-real differences
+- Stale-command and perception-loss handling
+- Structured qualification checklists
 
 ### Student Activities
 
-- Complete the safety-supervisor functions
-- Add a command timeout
-- Add low-confidence rejection
-- Add acceleration limiting
-- Add turn-rate limiting
-- Test emergency-stop behavior
-- Verify that perception loss produces a stop command
+- Test gesture commands at zero or very low speed
+- Verify timeout, low-confidence, communication-loss, and emergency-stop behavior
+- Compare commanded and measured motion
+- Complete the instructor-approved hardware qualification checklist
 
 ### Required Safety Tests
 
@@ -269,127 +253,90 @@ Students must demonstrate that the robot stops when:
 
 ### Milestone
 
-Students demonstrate that the simulated robot safely handles the required fault conditions.
+Students demonstrate a supervised, bounded gesture-control loop on the physical Go1.
 
 ---
 
-## Week 8 — Physical Go1 and Camera Integration
+## Week 8 — Final Project Definition and Architecture
 
 ### Topics
 
-- Simulation-to-hardware transition
-- Go1 communication architecture
-- Network configuration
-- Robot health monitoring
-- Robot-mounted camera streaming
-- Hardware operating procedures
+- Final project requirements and team roles
+- System architecture and interface contracts
+- Mission-control design
+- Testable success criteria and safety constraints
+- Modular maze and robot-clearance requirements
 
 ### Student Activities
 
-- Connect to the physical Go1 under instructor supervision
-- Display the robot-mounted camera feed
-- Run a stationary communication test
-- Verify the command heartbeat
-- Test the physical emergency stop
-- Compare the simulation and hardware interfaces
+- Select a team extension or mission objective
+- Draw the complete perception-to-motion architecture
+- Define interfaces between gesture, command, safety, camera, and robot modules
+- Create a project backlog and test plan
 
 ### Milestone
 
-Students can connect to the Go1, view the robot camera, and verify safe communication without moving the robot.
+Each team has an approved final-project design, interfaces, backlog, and safety/test plan.
 
 ---
 
-## Week 9 — Hardware Qualification
+## Week 9 — Final Project Implementation
 
 ### Topics
 
-- Structured hardware testing
-- Incremental validation
-- Safe operating envelopes
-- Simulation-to-real differences
-- Experimental checklists
-- Data collection
+- Full-system implementation in simulation
+- Mission-control and robot-camera integration
+- Logging and operator feedback
+- Team-selected design extension
 
 ### Student Activities
 
-- Perform a low-speed forward-motion test
-- Perform a controlled stop test
-- Perform left- and right-turn tests
-- Test stale-command stopping
-- Test perception-loss stopping
-- Record commanded and measured behavior
-- Complete the hardware qualification checklist
-
-### Qualification Sequence
-
-Each team must pass:
-
-1. Stationary communication test
-2. Emergency-stop test
-3. Forward-motion test
-4. Controlled-stop test
-5. Left-turn test
-6. Right-turn test
-7. Perception-loss test
-8. Communication-loss test
+- Integrate gesture recognition, command generation, safety supervision, and Go1 simulation
+- Add the approved team extension
+- Run repeatable simulation trials
+- Record failures and update the implementation plan
 
 ### Milestone
 
-Each team passes the required Go1 hardware qualification.
+Each team demonstrates its complete project in simulation and has a working test log.
 
 ---
 
-## Week 10 — Mission-Control Integration and Maze Construction
+## Week 10 — Reliability Testing and Maze Preparation
 
 ### Topics
 
-- Full-system integration
-- Operator feedback
-- Robot-camera navigation
-- Maze geometry
-- Robot clearances
-- Logging and performance metrics
-- Human–robot teaming
+- Repeatability and failure-mode analysis
+- Performance metrics and trial logs
+- Maze geometry, clearances, and operator procedures
 
 ### Student Activities
 
-- Integrate the webcam pipeline
-- Integrate gesture detection
-- Integrate command generation
-- Integrate safety supervision
-- Display the robot-mounted camera feed
-- Build a modular maze
-- Test corridor widths and turn clearances
-- Navigate a partial maze
+- Run repeated end-to-end trials
+- Measure completion time, latency, false gestures, stops, and resets
+- Build and inspect the modular maze
+- Test partial navigation in simulation or under instructor direction
 
 ### Milestone
 
-Students complete a partial maze using the integrated gesture-guided Go1 system.
+Each team has a documented, repeatable system and an instructor-approved demonstration plan.
 
 ---
 
-## Week 11 — Reliability Testing and Team Extension
+## Week 11 — Supervised Final Demonstration Rehearsal
 
 ### Topics
 
-- Repeatability
-- Failure-mode analysis
-- Performance evaluation
-- Parameter tuning
-- Engineering iteration
-- Experimental validation
+- Final safety review
+- Supervised hardware rehearsal
+- Technical communication and troubleshooting
 
 ### Student Activities
 
-- Run repeated maze trials
-- Record completion time
-- Record false gesture commands
-- Record safety stops
-- Record collisions and manual resets
-- Identify common failure modes
-- Tune gesture thresholds
-- Tune velocity limits
-- Complete one team-selected extension
+- Pass the hardware and emergency-stop checklist
+- Rehearse the complete mission under supervision
+- Fix only approved high-priority failures
+- Prepare the final demonstration and technical explanation
 
 ### Possible Team Extensions
 
@@ -405,11 +352,11 @@ Students complete a partial maze using the integrated gesture-guided Go1 system.
 
 ### Milestone
 
-Each team demonstrates repeatable performance and documents at least one design improvement.
+Each team completes a supervised rehearsal and is ready for final evaluation.
 
 ---
 
-## Week 12 — Physical Maze Competition and Technical Review
+## Week 12 — Final Project Demonstration and Technical Review
 
 ### Activities
 

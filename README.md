@@ -62,7 +62,7 @@ deliverables, and completion checklist. Complete the weeks in order.
 | Week | Milestone | Student outcome |
 |:--:|---|---|
 | 1 | [GitHub onboarding and Go1 baseline](course/week-01-github-onboarding/README.md) | Access the repository, enter the assigned team branch, run the existing baseline, and document the work. |
-| 2 | [Python, Git, and robot commands](course/week-02-python-git-commands/README.md) | Trace keyboard input through the controller and make a small measured change. |
+| 2 | [Go1 controller behavior, control, and reinforcement learning](course/week-02-go1-controller/README.md) | Trace keyboard input, measure command sensitivity, and make one approved change. |
 | 3 | [Webcam image acquisition](course/week-03-webcam-basics/README.md) | Capture, display, and describe images from a laptop webcam. |
 | 4 | [Hand landmarks and gesture vocabulary](course/week-04-hand-landmarks/README.md) | Detect a hand, visualize landmarks, and define useful gestures. |
 | 5 | [Gesture classification and validation](course/week-05-gesture-classification/README.md) | Measure gesture predictions and reject uncertain or unstable classifications. |
