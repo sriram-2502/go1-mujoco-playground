@@ -19,7 +19,27 @@ You need a Windows 11 laptop, internet access, and enough permission to install
 user-level software. Install:
 
 1. [Git for Windows](https://git-scm.com/download/win)
-2. [Miniconda for Windows](https://docs.conda.io/projects/miniconda/en/latest/)
+2. [Visual Studio Code for Windows](https://code.visualstudio.com/download)
+3. [Miniconda for Windows](https://docs.conda.io/projects/miniconda/en/latest/)
+
+## Install Visual Studio Code
+
+Use VS Code as the editor for Python files, Markdown worksheets, and Git
+changes. During installation, enable **Add to PATH** and **Open with Code** if
+those options are offered.
+
+In VS Code, install these extensions from the Extensions panel:
+
+| Extension | Publisher | Purpose |
+|---|---|---|
+| Python | Microsoft | Run and debug Python |
+| Pylance | Microsoft | Python completion and diagnostics |
+| Markdown All in One | Yu Zhang | Edit weekly summaries |
+| YAML | Red Hat | Read configuration files |
+
+After cloning the repository, open it with `code .`. If `code` is not
+recognized, use **File > Open Folder** and select `go1-mujoco-playground`.
+Use Miniconda Prompt for course commands; VS Code is the editor and debugger.
 
 Open **Miniconda Prompt** from the Windows Start menu. Use it for every command
 in this task sheet.
