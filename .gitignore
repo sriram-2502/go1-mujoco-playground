@@ -7,3 +7,4 @@ mujoco_menagerie
 checkpoints/
 logs
 .mujoco_playground_asset_cache/
+course/week-03-webcam-basics/hand_landmarker.task
