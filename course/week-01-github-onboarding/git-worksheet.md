@@ -62,15 +62,16 @@ git status
 ## 5. Commit and push your weekly summary
 
 Copy `weekly-summary-template.md` to
-`weekly-summaries/week-01-firstname-lastname.md`, fill out your individual
-summary, then run:
+`course/student-work/team-alpha/first-last/weekly-summaries/week-01.md`.
+Use your own name and replace `team-alpha` with `team-bravo` when applicable.
+Fill out your individual summary, then run:
 
 ```powershell
-git add weekly-summaries/week-01-firstname-lastname.md
+git add course/student-work/team-alpha/first-last/weekly-summaries/week-01.md
 git status
 git commit -m "Add week 01 summary"
 git log --oneline -1
-git push
+git push -u origin team-alpha
 ```
 
 Refresh your team branch on GitHub and confirm that the file is visible.
@@ -89,7 +90,7 @@ git remote -v              # Connected GitHub repository
 
 - Work on `team-alpha` or `team-bravo`, not `main`.
 - Read `git status` before committing.
-- Make small commits with clear messages.
+- Until Week 5, commit and push weekly summaries only.
 - Never commit passwords, tokens, robot credentials, private videos, or large
   generated files.
 

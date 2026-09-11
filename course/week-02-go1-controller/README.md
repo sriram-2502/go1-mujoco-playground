@@ -14,8 +14,7 @@ measure the result.
   observation, and an actuator action.
 - Describe at a high level how the ONNX locomotion policy was developed with
   reinforcement learning.
-- Create a personal work branch from the assigned team branch and inspect a
-  code change.
+- Work directly on the assigned team branch and inspect a local code change.
 - Change one controller parameter and test its effect in simulation.
 
 ## Prerequisites
@@ -35,15 +34,9 @@ git pull --ff-only
 git status
 ```
 
-Team Bravo should use `origin/team-bravo` instead. Create a personal work branch
-from your assigned team branch. Replace `YOUR-NAME` with a short lowercase name:
-
-```powershell
-git switch -c week-02/YOUR-NAME
-```
-
-Do not push directly to `main` or to the shared team branch while experimenting.
-Ask the instructor before pushing an approved code change.
+Team Bravo should use `origin/team-bravo` instead. Do not create another branch.
+The sensitivity experiment is local only; restore the original parameter before
+finishing the session.
 
 ## Task 2: Establish a baseline
 
@@ -153,14 +146,9 @@ git diff
 git status
 ```
 
-Check that the diff contains only the intended edit. Then record it:
-
-```powershell
-git add .\mujoco_playground\experimental\sim2sim\play_go1_keyboard.py
-git commit -m "Adjust keyboard command increment"
-```
-
-Follow the instructor's directions before pushing a student branch to GitHub.
+Check that the diff contains only the intended edit. Do not add or commit the
+controller file. It is a local experiment only.
+Record the result in your individual Week 2 summary.
 
 Your diff should normally show only one changed number. If it shows changes to
 the policy, action scaling, robot model, or other files, stop and ask the
@@ -212,10 +200,25 @@ design exercise only; do not implement the new interface yet.
 
 - Baseline and modified command tables
 - Five-sentence controller explanation
-- Git commit identifier from `git log -1 --oneline`
+- GitHub link to the individual Week 2 summary on the team branch
 - Answers to the engineering questions
 - Before/after sensitivity data table
 - Five-box input-interface design
+
+Save the worksheet answers and experiment results in your individual summary:
+
+```text
+course/student-work/team-alpha/first-last/weekly-summaries/week-02.md
+```
+
+Create the folders if they do not already exist:
+
+```powershell
+New-Item -ItemType Directory -Force .\course\student-work\team-alpha\first-last\weekly-summaries
+```
+
+Push only that Markdown summary to `team-alpha` or `team-bravo`. Code commits
+will begin only when the instructor announces the Week 5 integration milestone.
 
 ## Next week
 

@@ -2,7 +2,7 @@
 
 Name:  
 Team: `team-alpha` / `team-bravo`  
-Personal branch:  
+Team branch: `team-alpha` / `team-bravo`
 
 ## 1. Baseline data table
 

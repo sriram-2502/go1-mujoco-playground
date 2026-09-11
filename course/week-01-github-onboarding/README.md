@@ -31,9 +31,10 @@ Most weeks follow this pattern:
 1. Fetch the latest instructor materials.
 2. Read the week's activity page and the relevant code.
 3. Complete the worksheet or experiment requested for the week.
-4. Push the worksheet and documentation to your team branch.
-5. Make code changes only when the activity requires them or after discussing
-   the proposed change with the instructor.
+4. Save your individual weekly summary in your student folder and push only
+   that summary to your team branch.
+5. Do not push code changes until the instructor announces the Week 5 code
+   integration milestone.
 
 Documentation is the default deliverable. If you are confident that a code
 change is useful, ask for instructor consent before pushing it. After approval,
@@ -185,19 +186,19 @@ joystick or robot yet.
 
 ## Task 5: Make a documentation-only commit
 
-Copy [the Week 1 summary template](weekly-summary-template.md) into your team
-branch as `weekly-summaries/week-01-firstname-lastname.md`. Each student submits
-an individual summary. Fill it out with your own findings, then commit and push
-only that documentation file. Replace `<your-team-branch>` with your assigned
-branch name:
+Create your student folder and copy [the Week 1 summary template](weekly-summary-template.md)
+into `course/student-work/team-alpha/first-last/weekly-summaries/week-01.md`.
+Use `team-bravo` instead of `team-alpha` when applicable. Each student submits
+an individual summary. Push only that documentation file:
 
 ```powershell
-git add weekly-summaries/week-01-firstname-lastname.md
+New-Item -ItemType Directory -Force .\course\student-work\team-alpha\first-last\weekly-summaries
+git add course/student-work/team-alpha/first-last/weekly-summaries/week-01.md
 git commit -m "Add week 01 onboarding summary"
-git push -u origin <your-team-branch>
+git push -u origin team-alpha
 ```
 
-For example, a Team Alpha student uses `git push -u origin team-alpha`.
+Team Bravo should replace both `team-alpha` values with `team-bravo`.
 
 ## Completion checklist
 
@@ -211,7 +212,7 @@ For example, a Team Alpha student uses `git push -u origin team-alpha`.
 
 ## Deliverables
 
-- Shared team branch containing each student's individual `weekly-summaries/week-01-firstname-lastname.md`.
+- Shared team branch containing each student's individual summary under `course/student-work/<team>/<student>/weekly-summaries/`.
 - Screenshot or short recording of the existing simulation.
 - One sentence explaining the difference between `main` and the team branch.
 

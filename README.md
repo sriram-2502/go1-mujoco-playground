@@ -103,6 +103,21 @@ At the beginning of each week:
 Do not copy commands blindly. Read the sentence before each command and compare
 your output with the expected result.
 
+## Student branch and submission policy
+
+Students use only their assigned team branch: `team-alpha` or `team-bravo`.
+Do not create personal branches. Until the Week 5 gesture-to-simulation
+milestone, students push weekly summaries only; code experiments remain local.
+Save each summary in a unique folder:
+
+```text
+course/student-work/<team>/<first-last>/weekly-summaries/week-XX.md
+```
+
+When code integration begins, the instructor will announce whether approved
+changes should be added directly to the team branch or placed on an
+instructor-managed integration branch.
+
 ## Repository map
 
 ```text

@@ -20,7 +20,7 @@ classify simple gestures, and print a high-level velocity intent.
 - Laptop webcam available and permitted by Windows privacy settings
 - `go1-mujoco-playground` environment active
 
-## Task 1: Prepare a personal Week 3 branch
+## Task 1: Enter your team branch
 
 ```powershell
 conda activate go1-mujoco-playground
@@ -28,11 +28,12 @@ cd C:\path\to\go1-mujoco-playground
 git fetch origin
 git switch --track origin/team-alpha
 git pull --ff-only
-git switch -c week-03/YOUR-NAME
+git branch --show-current
 ```
 
-Team Bravo should use `origin/team-bravo` instead. Do not push directly to
-`main` or the shared team branch while experimenting.
+Team Bravo should use `origin/team-bravo` instead. Do not create another branch.
+Weeks 1-4 use the team branch for individual summaries only; code experiments
+remain local.
 
 Install OpenCV:
 
@@ -129,7 +130,8 @@ course/week-03-webcam-basics/gesture_rules.py
 The starter rules classify `OPEN_PALM`, `POINT`, `FIST`, and `OTHER`. Change one
 rule or one gesture-to-intent mapping, rerun the demo, and observe the label and
 `vx/vy/yaw` output. Keep `OPEN_PALM`, `FIST`, `OTHER`, and `NO_HAND` mapped to a
-zero command. Do not connect the output to MuJoCo yet.
+zero command. Do not connect the output to MuJoCo yet, and do not commit this
+local code experiment.
 
 Record at least ten trials for two gestures under normal lighting, dim lighting,
 and a changed hand distance. Note correct labels, incorrect labels, and cases
@@ -151,17 +153,28 @@ git status
 git diff
 ```
 
-Do not commit captured videos or Conda files. Commit the small Python program and
-your instructor-approved notes only. Complete the [Week 3 worksheet](worksheet.md)
-and include it with your documentation. The downloaded `.task` model is ignored
-by Git and should not be committed.
+Do not commit captured videos, Conda files, or code changes during Weeks 1-4.
+Complete the [Week 3 worksheet](worksheet.md), copy your answers into your
+individual summary at `course/student-work/team-alpha/first-last/weekly-summaries/week-03.md`,
+and push only that Markdown file. The downloaded `.task` model is ignored by
+Git and should not be committed.
+
+Create the folders if they do not already exist:
 
 ```powershell
-git add .\course\week-03-webcam-basics\hand_landmarks_webcam.py .\course\week-03-webcam-basics\gesture_rules.py .\course\week-03-webcam-basics\download_hand_model.py .\course\week-03-webcam-basics\worksheet.md
-git diff --cached --stat
-git commit -m "Add Week 3 MediaPipe hand activity"
-git push -u origin week-03/YOUR-NAME
+New-Item -ItemType Directory -Force .\course\student-work\team-alpha\first-last\weekly-summaries
 ```
+
+```powershell
+git add .\course\student-work\team-alpha\first-last\weekly-summaries\week-03.md
+git diff --cached --stat
+git commit -m "Add week 03 summary"
+git push -u origin team-alpha
+```
+
+Team Bravo should replace `team-alpha` in the path and push command with
+`team-bravo`. The instructor-provided Week 3 code remains on the team branch;
+students do not upload modified code yet.
 
 ## Completion checklist
 
