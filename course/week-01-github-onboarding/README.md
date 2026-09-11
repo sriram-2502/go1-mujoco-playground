@@ -7,6 +7,24 @@ Go1 keyboard controller from the instructor-provided `main` code.
 
 This is a two-hour onboarding session. Do not modify the robot controller yet.
 
+## Week 1 in one pass
+
+Complete the work in this order:
+
+1. **Prerequisite:** finish the [Windows 11 setup](windows-setup.md), including
+   Git, VS Code, Miniconda, and the course dependencies.
+2. **Study:** read the [Control Pipeline](https://dyco-ai.github.io/go1_gesture_tracking/control-pipeline/)
+   and [MuJoCo Orientation](https://dyco-ai.github.io/go1_gesture_tracking/mujoco-orientation/).
+3. **Run:** fetch the repository, enter `team-alpha` or `team-bravo`, and run
+   the existing Go1 MuJoCo Playground keyboard controller.
+4. **Question:** propose one safer input idea, such as joystick, voice,
+   gestures, or a stale-command timeout.
+5. **Submit:** complete your individual Markdown summary and push it to your
+   team branch.
+
+The expected Week 1 code change is documentation only. Ask the instructor
+before pushing any controller or simulation code change.
+
 ## The standard weekly workflow
 
 Most weeks follow this pattern:
@@ -54,7 +72,7 @@ Students may push to their team branch. Do not push directly to `main`.
 | 0:35–0:55 | Clone the repository and enter the team branch | Current branch |
 | 0:55–1:25 | Run the existing Go1 keyboard simulation | Screenshot or recording |
 | 1:25–1:45 | Make a documentation-only commit | Commit hash |
-| 1:45–2:00 | Complete the weekly summary and design question | `week-01.md` |
+| 1:45–2:00 | Complete the individual summary and design question | Your named Markdown file |
 
 ## Task 1: GitHub access
 
@@ -76,6 +94,10 @@ Do not upload passwords, API keys, robot network credentials, private videos, or
 other sensitive data.
 
 ## Task 2: Clone the repository
+
+If Git and Miniconda are not installed, first follow the
+[Windows 11 setup sheet](windows-setup.md). It covers the clean installation
+of Git for Windows, Miniconda, the course environment, and MuJoCo dependencies.
 
 Use **Git Bash** or **Miniconda Prompt**:
 
@@ -160,48 +182,18 @@ joystick or robot yet.
 
 ## Task 5: Make a documentation-only commit
 
-Create `weekly-summaries/week-01.md` in your team branch using the template
-below. Then commit and push it:
+Copy [the Week 1 summary template](weekly-summary-template.md) into your team
+branch as `weekly-summaries/week-01-firstname-lastname.md`. Each student submits
+an individual summary. Fill it out with your own findings, then commit and push
+it:
 
 ```powershell
-git add weekly-summaries/week-01.md
+git add weekly-summaries/week-01-firstname-lastname.md
 git commit -m "Add week 01 onboarding summary"
 git push -u origin team-alpha
 ```
 
 Team Bravo should replace the final branch name with `team-bravo`.
-
-## Weekly summary template
-
-```markdown
-# Week 01 Summary
-
-## Team
-Names:
-
-## Goal
-What were we trying to accomplish?
-
-## What we did
--
--
-
-## Evidence
-Commit:
-Simulation result:
-
-## What worked
--
-
-## Problem and resolution
--
-
-## What I learned
--
-
-## Next week
--
-```
 
 ## Completion checklist
 
@@ -215,7 +207,7 @@ Simulation result:
 
 ## Deliverables
 
-- Team branch containing `weekly-summaries/week-01.md`.
+- Team branch containing each student's `weekly-summaries/week-01-firstname-lastname.md`.
 - Screenshot or short recording of the existing simulation.
 - One sentence explaining the difference between `main` and the team branch.
 
