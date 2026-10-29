@@ -26,8 +26,13 @@ class KeyboardController:
     self.n_substeps = n_substeps
     self.counter = 0
 
+    # This small network does not benefit from a pool of spinning CPU threads.
+    options = rt.SessionOptions()
+    options.intra_op_num_threads = 1
+    options.inter_op_num_threads = 1
     self.session = rt.InferenceSession(
         _POLICY_PATH.as_posix(),
+        sess_options=options,
         providers=["CPUExecutionProvider"],
     )
 
