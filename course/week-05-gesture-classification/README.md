@@ -1,116 +1,65 @@
-# Week 5: Gesture classification and validation
+# Week 5: Gesture Validation and Command Supervision
+
+## Transfer the supervision ideas to Go2
+
+Keep the simulation limits in the reference table below. Later, Go2 uses a
+different speed profile and supports sideways motion. Compare units, stop
+priority, fresh-input requirements, and explicit enabling using the hardware
+guide. Explain why a zero request or a transmitted packet alone does not prove
+a physical robot has stopped; no physical motion is required this week.
+
+See [Go2 hardware onboarding](../GO2_HARDWARE.md) for the later hardware path.
 
 ## Milestone
 
-Classify the approved gesture vocabulary and prevent weak or unstable
-predictions from becoming commands.
+Turn raw timestamped labels into bounded, interruptible velocity commands. Verify command behavior independently before Week 6 live navigation.
 
-## Learning objectives
+## Reference code
 
-- Explain labels, confidence, thresholds, and temporal consistency.
-- Build a labeled test set that includes different people and conditions.
-- Calculate per-gesture accuracy and identify common confusion pairs.
-- Convert raw predictions into validated intent or `UNKNOWN`.
+`safety.py` contains pure-Python `Prediction`, `Limits` and `Supervisor` types. A prediction carries a raw label and its monotonic frame-acquisition timestamp. `Supervisor.approve()` returns an approved `(vx, vy, yaw_rate)` tuple and a status reason.
 
-## Prerequisites
+| Rule | Reference behavior |
+|---|---|
+| Forward bound | 0.25 m/s |
+| Lateral velocity | Always zero |
+| Turning bound | +/-0.50 rad/s |
+| Motion hold | 0.30 s of consistent fresh predictions |
+| Frame / dashboard timeout | 0.40 s |
+| STOP, UNKNOWN, no hand, multiple hands | Immediate zero request, without motion hold |
+| Camera error | No-hand input and zero request |
+| Stop button | Latched disarm until explicit Enable motion |
 
-- Week 4 gesture vocabulary approved by the instructor
-- Landmark pipeline works with multiple team members
-- No perception output is connected to robot motion
+The simulation worker checks input age even if the camera worker stops publishing. Reusing one frame does not satisfy hold time. Invalid, expired or out-of-order input resets the motion candidate. After a stop, a fresh motion sequence must satisfy the hold again.
 
-## Task 1: Define the interface
+The reference uses geometric classification without a calibrated confidence value. If adding a confidence-based classifier, document the score and evaluate thresholds separately from MediaPipe detection/tracking thresholds.
 
-Every prediction record should contain at least:
+## Activities
 
-```text
-timestamp, predicted_label, confidence, hand_detected
+1. Read `Supervisor.approve()` and draw its state transitions.
+2. Run the scripted tests without a webcam.
+3. Explain each input and the reason for a zero command.
+4. Measure gesture accuracy and rejection behavior across people and lighting. Record expected label, raw label, approved command and timestamp.
+5. Compare transition delay and false motion before/after hold filtering.
+6. Use the dashboard with motion disabled to inspect labels. Then use `--input mock --scene arena` for an instructor-reviewed command-path check.
+
+## Verification
+
+```powershell
+python -m unittest discover -s course/week-05-gesture-classification -v
 ```
 
-Validated intent must be one of:
-
-```text
-STOP, FORWARD, BACKWARD, LEFT, RIGHT, UNKNOWN
-```
-
-Document how `no hand`, `unknown gesture`, and low confidence are represented.
-
-## Task 2: Create a test plan
-
-Collect instructor-approved test samples for every gesture and for `UNKNOWN`.
-Include:
-
-- every consenting team member;
-- at least two lighting conditions;
-- at least two hand distances or orientations; and
-- transitions between gestures.
-
-Keep training and evaluation samples separate if the classifier is trained on
-student-collected data.
-
-## Task 3: Measure raw predictions
-
-Run the classifier without command output. Save expected label, predicted label,
-confidence, and timestamp to CSV. Complete a confusion table:
-
-| Expected | STOP | FORWARD | BACKWARD | LEFT | RIGHT | UNKNOWN |
-|---|---:|---:|---:|---:|---:|---:|
-| STOP | | | | | | |
-| FORWARD | | | | | | |
-| BACKWARD | | | | | | |
-| LEFT | | | | | | |
-| RIGHT | | | | | | |
-| UNKNOWN | | | | | | |
-
-Report overall accuracy and per-gesture accuracy. Do not hide failed samples.
-
-## Task 4: Add confidence validation
-
-Begin with the companion project's conservative development threshold:
-
-```text
-minimum confidence = 0.80
-```
-
-Predictions below the threshold become `UNKNOWN`. Recalculate accepted accuracy
-and report what fraction of samples is rejected. Explain the tradeoff between
-rejecting too much and accepting incorrect commands.
-
-## Task 5: Add temporal validation
-
-Require a gesture to remain consistent for an initial hold time of 0.30 seconds
-before it becomes valid. Reset the hold timer when the label changes, the hand
-disappears, or confidence falls below the threshold.
-
-Measure:
-
-- false transitions before and after validation;
-- time from gesture presentation to validated intent; and
-- behavior when the operator rapidly changes gestures.
-
-## Task 6: Review safety semantics
-
-At this stage, validated intent is still printed or logged only. It must not
-publish a velocity or Go1 command. Decide with the instructor whether a confident
-`STOP` should be accepted faster than motion gestures.
-
-## Completion checklist
-
-- [ ] Prediction record format documented.
-- [ ] Test set covers gestures, unknown cases, people, and conditions.
-- [ ] Confusion table and per-class accuracy completed.
-- [ ] Confidence threshold implemented and evaluated.
-- [ ] Temporal consistency implemented and evaluated.
-- [ ] Output remains in non-actuating mock mode.
+Tests cover hold, repeated frames, stop priority, invalid labels, expiry, dashboard heartbeat, rearming, timestamp anomalies and limits. Live failure-case timing is checked again in Week 6.
 
 ## Deliverables
 
-- Test protocol and sample counts
-- Confusion table and accuracy results
-- Threshold/rejection analysis
-- Short plot or table of validation delay
-- Recommendation for Week 6 parameters
+Mapping and bounds table, confusion counts, hold/latency measurements, scripted test output and explanations of stale-input and stop behavior.
 
-## Next week
+Next: [Week 6 integrated navigation dashboard](../week-06-mock-command-mapping/README.md).
 
-Continue to [Week 6: Gesture-to-command
-mapping](../week-06-mock-command-mapping/README.md).
+## Weekly submission
+
+Submit your individual `week-05/README.md` in your student folder on the
+assigned team branch. Put worksheet answers, results, and evidence summaries there.
+Any code, CSVs, recordings, or ZIPs named in this lab are local working artifacts,
+not additional weekly Git submissions. Optional small media and the final report
+follow [the submission and data policy](../SUBMISSIONS.md).

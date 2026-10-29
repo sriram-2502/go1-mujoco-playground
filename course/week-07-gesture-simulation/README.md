@@ -1,110 +1,54 @@
-# Week 7: Gesture-controlled Go1 simulation
+# Week 7: Go2 hardware inventory and Windows setup
 
-## Milestone
+## Hardware path
 
-Use validated hand gestures instead of keyboard input to command the Go1 in
-MuJoCo.
+This course now uses **Unitree Go2 + Windows 11 + Wi-Fi/WebRTC** for physical
+navigation. The Go2's onboard camera supplies robot FPV; the Windows webcam
+supplies MediaPipe hands. No laptop ROS installation or external Jetson/ZED stack
+is required. This folder retains its historical name to preserve existing links.
 
-## Learning objectives
-
-- Integrate perception and control through a small, documented interface.
-- Preserve the existing ONNX locomotion policy while changing command input.
-- Manage camera and simulator timing without freezing either interface.
-- Demonstrate stop and reset behavior in simulation.
+The simulation code and the Weeks 1–6 simulation exercises are unchanged. Use the separate instructor-provided
+Go2 application; the simulation launcher does not connect to the physical robot.
 
 ## Prerequisites
 
-- Keyboard simulation passes Week 1
-- Gesture validation passes Week 5
-- Mock command mapping passes Week 6
-- Instructor approves the mapping and initial simulated limits
+- Week 6 webcam/overview/FPV simulation checkpoint with logs.
+- Instructor-approved robot assignment, hardware checkout, and operating procedure.
+- Direct instructor supervision and the paired remote for physical motion.
 
-## Task 1: Draw the integration
+## Learning objective
 
-Update the system diagram with actual team module and file names:
+Explain the roles of the Windows webcam, Go2 camera, browser, and onboard controller.
 
-```text
-webcam -> classifier -> validator -> mapper -> command[3]
-                                               |
-                                               v
-robot state -> ONNX locomotion policy -> 12 joint actions -> MuJoCo
-```
+## Activities
 
-The gesture system supplies only the three high-level command values. It does
-not replace the 48-input, 12-output ONNX locomotion policy.
+1. Read [the Go2 hardware guide](../GO2_HARDWARE.md), including the two-camera diagram and coordinate convention.
+2. Obtain the instructor-approved `unitree_go2_setup` bundle, robot assignment, Wi-Fi credentials, and private AES access.
+3. Prepare the separate `go2wifi` environment and local Node runtime while internet is available.
+4. Close other robot clients, join the assigned Go2 hotspot, and check the default endpoint `192.168.12.1`.
+5. Open the Basic WebRTC UI with the instructor and inspect connection/camera/status without commanding locomotion.
 
-## Task 2: Preserve a baseline
+## Expected evidence
 
-Run the keyboard controller and save a short baseline recording. Do not remove
-the known-working keyboard program. Create a separate gesture-simulation entry
-point or an input-source abstraction, following instructor guidance.
+A system diagram, environment/version notes, sanitized stationary connection evidence, and an explanation of which camera sees the operator versus the maze.
 
-## Task 3: Connect a mock gesture source first
+See [the Go2 hardware guide](../GO2_HARDWARE.md) for setup and operating steps and
+[COURSE_PLAN.md](../../COURSE_PLAN.md) for the course sequence. Hardware progress
+depends on demonstrated readiness, not merely reaching the scheduled week.
 
-Before opening the webcam, connect a scripted intent sequence to the simulator:
+## Completion checkpoint
 
-```text
-STOP -> FORWARD -> STOP -> LEFT -> STOP
-```
+Show the instructor the separate environment, Basic UI connection, and live robot view. Record the supplied bundle version and endpoint. This week does not require locomotion; keep keys out of evidence.
 
-Verify sign conventions, command limits, and stopping. Correct mapping errors in
-simulation, never on physical hardware.
+Keep the existing team-branch and weekly submission procedure. Do not include
+AES/Wi-Fi credentials or raw recording ZIPs in public Git history.
 
-## Task 4: Connect live validated intent
+Previous: [Week 6](../week-06-mock-command-mapping/README.md). Next: [Week 8](../week-08-safety-testing/README.md).
 
-Connect the Week 5 validator output to the same command interface. Ensure that:
+## Weekly submission
 
-- camera processing does not block MuJoCo stepping;
-- MuJoCo closure releases the camera;
-- camera failure sends stop;
-- the last motion command cannot persist indefinitely; and
-- printed diagnostics show current gesture, confidence, and approved command.
-
-## Task 5: Demonstrate the vocabulary
-
-From a zero command, demonstrate each approved gesture and return to stop between
-motions. A second team member records observed motion and any mismatch.
-
-| Gesture | Expected motion | Observed motion | Pass? |
-|---|---|---|:--:|
-| STOP | zero command | | |
-| FORWARD | forward | | |
-| BACKWARD | backward | | |
-| LEFT | turn left | | |
-| RIGHT | turn right | | |
-
-## Task 6: Test failure cases
-
-In simulation, test:
-
-1. hand leaves the image;
-2. confidence drops below threshold;
-3. gesture changes during hold time;
-4. webcam is intentionally closed; and
-5. command source stops updating.
-
-All five cases must produce or preserve a zero command within the documented
-timeout.
-
-## Completion checklist
-
-- [ ] Integration diagram uses actual module names.
-- [ ] Original keyboard baseline remains available.
-- [ ] Scripted gesture source works before webcam integration.
-- [ ] Five gestures produce expected simulated behavior.
-- [ ] Five failure cases stop safely.
-- [ ] Camera and viewer close cleanly.
-- [ ] No physical robot interface is enabled.
-
-## Deliverables
-
-- Architecture diagram
-- Gesture-controlled simulation code
-- Gesture-motion results table
-- Failure-case log
-- Short demonstration video
-
-## Next week
-
-Continue to [Week 8: Safety behavior and automated
-tests](../week-08-safety-testing/README.md).
+Submit your individual `week-07/README.md` in your student folder on the
+assigned team branch. Put worksheet answers, results, and evidence summaries there.
+Any code, CSVs, recordings, or ZIPs named in this lab are local working artifacts,
+not additional weekly Git submissions. Optional small media and the final report
+follow [the submission and data policy](../SUBMISSIONS.md).

@@ -1,102 +1,54 @@
-# Week 8: Safety behavior and automated tests
+# Week 8: Stationary Go2 communication checkout
 
-## Milestone
+## Hardware path
 
-Turn safety expectations into executable tests that run without a webcam,
-simulator window, or physical robot.
+This course now uses **Unitree Go2 + Windows 11 + Wi-Fi/WebRTC** for physical
+navigation. The Go2's onboard camera supplies robot FPV; the Windows webcam
+supplies MediaPipe hands. No laptop ROS installation or external Jetson/ZED stack
+is required. This folder retains its historical name to preserve existing links.
 
-## Learning objectives
-
-- Translate a safety statement into a testable requirement.
-- Write normal, boundary, and failure-case tests.
-- Use injected timestamps to test timeout behavior repeatably.
-- Produce evidence that stop behavior overrides motion.
+The simulation code and the Weeks 1–6 simulation exercises are unchanged. Use the separate instructor-provided
+Go2 application; the simulation launcher does not connect to the physical robot.
 
 ## Prerequisites
 
-- Week 6 mapper and Week 7 simulated integration complete
-- Command limits and timeouts stored in configuration
-- Team has a non-actuating mock command sink
+- Week 6 webcam/overview/FPV simulation checkpoint with logs.
+- Instructor-approved robot assignment, hardware checkout, and operating procedure.
+- Direct instructor supervision and the paired remote for physical motion.
 
-## Task 1: Write requirements
+## Learning objective
 
-Give each requirement an identifier. At minimum include:
+Distinguish live feedback, requested commands, and verified physical behavior.
 
-| ID | Requirement |
-|---|---|
-| SAF-01 | `STOP` always produces zero command. |
-| SAF-02 | `UNKNOWN` and no-hand input produce zero command. |
-| SAF-03 | A stale input produces zero command within the timeout. |
-| SAF-04 | Every command component remains within its configured bound. |
-| SAF-05 | Stop overrides a pending or previous motion request. |
-| SAF-06 | Motion does not resume without new validated intent. |
+## Activities
 
-Make each statement specific enough that a test can pass or fail it.
+1. Complete the [stationary checklist](../GO2_HARDWARE.md#stationary-checkout-before-any-motion) with the instructor.
+2. Confirm changing live Go2 video, incoming telemetry, and voxel data when the onboard service is available.
+3. Start the Python hand-tracking service and Clemson UI. Preview operator gestures with control disabled.
+4. Distinguish requested, supervised, transmitted, and measured velocities; identify stale/unavailable data.
+5. Review Stop, disconnect, browser-focus loss, input expiry, and the paired-remote intervention procedure. Record what has actually been verified; do not infer a qualified physical stop from a stationary screenshot.
 
-## Task 2: Build a test table
+## Expected evidence
 
-For each requirement, include:
+A stationary checkout record with pass/fail/untested results, software/firmware versions, and the instructor-reviewed plan for short motion checks.
 
-- initial state;
-- input sequence and timestamps;
-- expected output;
-- actual output; and
-- pass/fail result.
+See [the Go2 hardware guide](../GO2_HARDWARE.md) for setup and operating steps and
+[COURSE_PLAN.md](../../COURSE_PLAN.md) for the course sequence. Hardware progress
+depends on demonstrated readiness, not merely reaching the scheduled week.
 
-Include values just below, exactly at, and just above every threshold or limit.
+## Completion checkpoint
 
-## Task 3: Automate pure command tests
+Submit a pass/fail/untested checklist for authentication, camera freshness, state feedback, available voxels, webcam preview, and the reviewed intervention procedure. Unavailable streams or an unqualified stop path must be resolved before motion.
 
-Write tests around the validator and mapper without opening a camera or MuJoCo.
-Pass a controlled time value into timeout logic instead of making tests sleep.
-This keeps tests fast and repeatable.
+Keep the existing team-branch and weekly submission procedure. Do not include
+AES/Wi-Fi credentials or raw recording ZIPs in public Git history.
 
-Run tests using the framework selected by the instructor and save the complete
-terminal result.
+Previous: [Week 7](../week-07-gesture-simulation/README.md). Next: [Week 9](../week-09-system-evaluation/README.md).
 
-## Task 4: Run integration fault injection
+## Weekly submission
 
-With the Go1 only in simulation, intentionally create:
-
-1. missing hand input;
-2. low-confidence input;
-3. delayed input;
-4. rapidly alternating labels;
-5. out-of-range command requests; and
-6. source shutdown during motion.
-
-Measure time to zero command for each applicable case.
-
-## Task 5: Review defaults
-
-Inspect configuration while the system starts, reloads, or encounters a missing
-value. Safe defaults must not enable motion. A missing configuration must fail
-closed with a clear error or zero command.
-
-## Task 6: Conduct a peer safety review
-
-Another team reviews the requirements, tests, and one fault-injection run. The
-reviewing team should try to find an untested path to persistent motion. Record
-the issue, response, and retest result.
-
-## Completion checklist
-
-- [ ] Safety requirements have identifiers and measurable outcomes.
-- [ ] Boundary cases exist for every threshold and command limit.
-- [ ] Automated command tests pass.
-- [ ] Six integration faults tested in simulation.
-- [ ] Safe-default behavior verified.
-- [ ] Peer review completed and findings addressed.
-- [ ] Hardware output remains disabled.
-
-## Deliverables
-
-- Safety requirements and traceability table
-- Automated test source and terminal results
-- Fault-injection measurements
-- Peer-review record
-
-## Next week
-
-Continue to [Week 9: Integrated system
-evaluation](../week-09-system-evaluation/README.md).
+Submit your individual `week-08/README.md` in your student folder on the
+assigned team branch. Put worksheet answers, results, and evidence summaries there.
+Any code, CSVs, recordings, or ZIPs named in this lab are local working artifacts,
+not additional weekly Git submissions. Optional small media and the final report
+follow [the submission and data policy](../SUBMISSIONS.md).

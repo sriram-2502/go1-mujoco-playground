@@ -1,5 +1,23 @@
 # Week 3: Webcam, MediaPipe, and gesture intent
 
+## Connect this lesson to Go2
+
+MediaPipe sees the student through the Windows webcam in both phases. In the
+Go2 dashboard, a second stream comes from the robot's onboard camera and shows
+the maze. Draw both image paths and mark where hand landmarks become a velocity
+intent. The hardware panel displays extracted hand skeletons rather than the
+full webcam image; keep the current simulation preview unchanged.
+
+See [Go2 hardware onboarding](../GO2_HARDWARE.md) for the later hardware path.
+
+## Reusable webcam component
+
+`vision.py` is the reusable camera/MediaPipe worker used by Week 6. It publishes a
+latest annotated RGB frame and a timestamped gesture prediction, without issuing
+robot commands. Timestamps use actual monotonic acquisition time. Multiple hands
+are rejected. The original standalone activity below remains available.
+
+
 ## Milestone
 
 Read live images from a laptop webcam, extract hand landmarks with MediaPipe,
@@ -32,7 +50,7 @@ git branch --show-current
 ```
 
 Team Bravo should use `origin/team-bravo` instead. Do not create another branch.
-Weeks 1-4 use the team branch for individual summaries only; code experiments
+Throughout the course, use the team branch for individual README reports; code experiments
 remain local.
 
 Install OpenCV:
@@ -153,20 +171,20 @@ git status
 git diff
 ```
 
-Do not commit captured videos, Conda files, or code changes during Weeks 1-4.
+Keep full captured videos, Conda files, and code experiments local throughout the course. Optional small sanitized clips follow the submission policy.
 Complete the [Week 3 worksheet](worksheet.md), copy your answers into your
-individual summary at `course/student-work/team-alpha/first-last/weekly-summaries/week-03.md`,
-and push only that Markdown file. The downloaded `.task` model is ignored by
+individual summary at `course/student-work/team-alpha/first-last/week-03/README.md`,
+and submit that README report (optional small media follows the submission policy). The downloaded `.task` model is ignored by
 Git and should not be committed.
 
 Create the folders if they do not already exist:
 
 ```powershell
-New-Item -ItemType Directory -Force .\course\student-work\team-alpha\first-last\weekly-summaries
+New-Item -ItemType Directory -Force .\course\student-work\team-alpha\first-last\week-03
 ```
 
 ```powershell
-git add .\course\student-work\team-alpha\first-last\weekly-summaries\week-03.md
+git add .\course\student-work\team-alpha\first-last\week-03\README.md
 git diff --cached --stat
 git commit -m "Add week 03 summary"
 git push -u origin team-alpha
@@ -174,7 +192,7 @@ git push -u origin team-alpha
 
 Team Bravo should replace `team-alpha` in the path and push command with
 `team-bravo`. The instructor-provided Week 3 code remains on the team branch;
-students do not upload modified code yet.
+students keep modified code local and report their results in the weekly README.
 
 ## Completion checklist
 
@@ -204,3 +222,11 @@ students do not upload modified code yet.
 
 Continue to [Week 4: Gesture recognition and temporal
 filtering](../week-04-hand-landmarks/README.md).
+
+## Weekly submission
+
+Submit your individual `week-03/README.md` in your student folder on the
+assigned team branch. Put worksheet answers, results, and evidence summaries there.
+Any code, CSVs, recordings, or ZIPs named in this lab are local working artifacts,
+not additional weekly Git submissions. Optional small media and the final report
+follow [the submission and data policy](../SUBMISSIONS.md).

@@ -8,3 +8,24 @@ checkpoints/
 logs
 .mujoco_playground_asset_cache/
 course/week-03-webcam-basics/hand_landmarker.task
+
+# CI raw data and private robot configuration (local only)
+/data/
+/recordings/
+/runs/
+/private/
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.zip
+*.mp4
+*.webm
+*.gif
+*.bag
+*.db3
+*.mcap
+# Only small, reviewed weekly evidence clips belong in Git; see course/SUBMISSIONS.md.
+!course/student-work/*/*/week-*/media/*.mp4
+!course/student-work/*/*/week-*/media/*.gif

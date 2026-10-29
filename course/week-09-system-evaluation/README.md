@@ -1,110 +1,55 @@
-# Week 9: Integrated system evaluation
+# Week 9: Clemson Go2 dashboard and supervised gesture navigation
 
-## Milestone
+## Hardware path
 
-Evaluate the complete gesture-to-simulation system with repeatable engineering
-metrics rather than relying on a successful demonstration alone.
+This course now uses **Unitree Go2 + Windows 11 + Wi-Fi/WebRTC** for physical
+navigation. The Go2's onboard camera supplies robot FPV; the Windows webcam
+supplies MediaPipe hands. No laptop ROS installation or external Jetson/ZED stack
+is required. This folder retains its historical name to preserve existing links.
 
-## Learning objectives
-
-- Define measurable system-level requirements.
-- Measure end-to-end latency, command accuracy, rejection, and stop behavior.
-- Compare performance across users and environmental conditions.
-- Use results to justify one focused design improvement.
+The simulation code and the Weeks 1–6 simulation exercises are unchanged. Use the separate instructor-provided
+Go2 application; the simulation launcher does not connect to the physical robot.
 
 ## Prerequisites
 
-- Gesture-controlled simulation passes Week 7
-- Safety test suite passes Week 8
-- Logging includes timestamps, raw prediction, validated intent, command, and reason
+- Week 6 webcam/overview/FPV simulation checkpoint with logs.
+- Instructor-approved robot assignment, hardware checkout, and operating procedure.
+- Direct instructor supervision and the paired remote for physical motion.
 
-## Task 1: Freeze a test version
+## Learning objective
 
-Record the Git commit, environment package list, configuration values, camera,
-and laptop used for testing:
+Map each Go2 hand pose to one body-frame velocity axis and evaluate recognition.
 
-```powershell
-git rev-parse HEAD
-python -m pip freeze > environment-week-09.txt
-```
+## Activities
 
-Do not change code during a test run. If code changes, assign a new test version.
+1. Review the [Go2 gesture table and speed settings](../GO2_HARDWARE.md#go2-gestures-and-velocity-settings); they differ from the unchanged simulation reference.
+2. Validate each gesture across operators in preview, including palm orientation, no hand, two hands, and transitions.
+3. After instructor qualification, perform the bounded script checkout and short one-axis trials described in the hardware guide.
+4. Show a stop pose, explicitly enable gesture control, and verify forward, sideways, and turn-in-place requests individually.
+5. Verify stopping and stale-input behavior under supervision. Keep obstacle-avoidance changes deliberate; changing its switch disables gesture control.
+6. Record a short run, save its ZIP, and inspect offline replay and the requested/transmitted/measured velocity data.
 
-## Task 2: Define metrics
+## Expected evidence
 
-At minimum measure:
+A Go2 gesture qualification table, short supervised trial evidence, and a replay/log review identifying recognition errors and command-response differences.
 
-- per-gesture accepted accuracy;
-- false-motion command count;
-- rejection rate;
-- gesture-to-command latency;
-- stop latency;
-- stale-input stop latency; and
-- simulator update or command rate.
+See [the Go2 hardware guide](../GO2_HARDWARE.md) for setup and operating steps and
+[COURSE_PLAN.md](../../COURSE_PLAN.md) for the course sequence. Hardware progress
+depends on demonstrated readiness, not merely reaching the scheduled week.
 
-Define exactly how each metric is calculated before collecting data.
+## Completion checkpoint
 
-## Task 3: Create a test matrix
+Submit a gesture table with operator/lighting conditions, correct and incorrect recognitions, and supervised one-axis motion/stop observations. Include a short saved recording and replay check. Instructor approval is required before maze trials.
 
-Include multiple consenting operators and relevant conditions:
+Keep the existing team-branch and weekly submission procedure. Do not include
+AES/Wi-Fi credentials or raw recording ZIPs in public Git history.
 
-| Factor | Example levels |
-|---|---|
-| Operator | Team members |
-| Lighting | normal, dim, bright background |
-| Distance | near, nominal, far |
-| Gesture | five approved gestures plus unknown |
-| Transition | stop-to-motion, motion-to-stop, motion-to-motion |
+Previous: [Week 8](../week-08-safety-testing/README.md). Next: [Week 10](../week-10-ros-hardware-readiness/README.md).
 
-Use enough repeated trials to reveal variability. Record unsuccessful trials.
+## Weekly submission
 
-## Task 4: Run and analyze tests
-
-Use one person to operate and another to record protocol compliance. Save raw
-data before calculating summaries. Plot at least:
-
-1. accuracy or rejection by gesture;
-2. latency distribution; and
-3. failure count by condition.
-
-Report median and worst-case stop latency, not only an average.
-
-## Task 5: Make one evidence-based improvement
-
-Choose the largest important weakness supported by the data. Change one factor,
-such as gesture definition, confidence threshold, hold time, or user feedback.
-Repeat the relevant subset of tests and compare before/after results.
-
-Do not improve apparent accuracy by silently removing hard cases.
-
-## Task 6: Hardware-readiness recommendation
-
-Conclude one of:
-
-- ready to begin non-actuating ROS integration;
-- ready with listed restrictions; or
-- not ready, with corrective work identified.
-
-This is a team recommendation, not permission to operate the robot.
-
-## Completion checklist
-
-- [ ] Test version and environment recorded.
-- [ ] Metrics defined before data collection.
-- [ ] Test matrix covers operators, conditions, gestures, and transitions.
-- [ ] Raw data and summary plots saved.
-- [ ] Worst-case stop behavior reported.
-- [ ] One change evaluated with before/after evidence.
-- [ ] Hardware-readiness recommendation justified.
-
-## Deliverables
-
-- Reproducible test protocol
-- Raw data and analysis plots
-- Before/after comparison
-- Hardware-readiness recommendation
-
-## Next week
-
-Continue to [Week 10: ROS and hardware
-readiness](../week-10-ros-hardware-readiness/README.md).
+Submit your individual `week-09/README.md` in your student folder on the
+assigned team branch. Put worksheet answers, results, and evidence summaries there.
+Any code, CSVs, recordings, or ZIPs named in this lab are local working artifacts,
+not additional weekly Git submissions. Optional small media and the final report
+follow [the submission and data policy](../SUBMISSIONS.md).

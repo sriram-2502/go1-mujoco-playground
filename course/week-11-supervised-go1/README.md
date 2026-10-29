@@ -1,111 +1,54 @@
-# Week 11: Supervised Go1 integration
+# Week 11: Go2 reliability testing and final demonstration
 
-## Milestone
+## Hardware path
 
-Perform a controlled, instructor-supervised checkout of the validated command
-pipeline on the physical Unitree Go1.
+This course now uses **Unitree Go2 + Windows 11 + Wi-Fi/WebRTC** for physical
+navigation. The Go2's onboard camera supplies robot FPV; the Windows webcam
+supplies MediaPipe hands. No laptop ROS installation or external Jetson/ZED stack
+is required. This folder retains its historical name to preserve existing links.
 
-> [!CAUTION]
-> This task sheet does not authorize robot operation. Proceed only when the
-> instructor has approved the Week 10 plan and is present. The instructor and
-> laboratory procedures override this document.
+The simulation code and the Weeks 1–6 simulation exercises are unchanged. Use the separate instructor-provided
+Go2 application; the simulation launcher does not connect to the physical robot.
 
-## Learning objectives
+## Prerequisites
 
-- Apply a pre-run safety checklist and team communication protocol.
-- Introduce hardware output through small, reversible test steps.
-- Compare physical response with simulated expectations.
-- Stop, diagnose, and document unexpected behavior.
+- Week 6 webcam/overview/FPV simulation checkpoint with logs.
+- Instructor-approved robot assignment, hardware checkout, and operating procedure.
+- Direct instructor supervision and the paired remote for physical motion.
 
-## Required authorization
+## Learning objective
 
-Before entering hardware mode, record:
+Evaluate repeatability rather than selecting only the best demonstration.
 
-- instructor approval and date;
-- approved software commit;
-- approved configuration and command limits;
-- test location and boundary;
-- assigned operator and safety observer; and
-- independent emergency-stop method.
+## Activities
 
-If any item is missing, remain in simulation.
+1. Run repeated supervised trials with the qualified Go2 profile and the same stated maze/avoidance conditions.
+2. Measure completion time, contacts, resets/interventions, recognition errors, and observed stopping time/distance.
+3. Use CSVs and replay to compare requested, transmitted, and measured motion. Treat a sent command as a request, not proof of execution.
+4. Present the complete webcam → MediaPipe → gesture → supervised velocity → WebRTC → Go2 loop.
+5. Explain differences from the Go1 simulation: locomotion controller, command limits, gesture vocabulary, video latency, and real stopping behavior.
 
-## Task 1: Pre-run inspection
+## Expected evidence
 
-Under instructor direction, inspect robot pose, battery, cables, mounts, network,
-test-area clearance, and emergency-stop access. Confirm that all team members
-understand the verbal callouts for **arming**, **moving**, **stopping**, and
-**abort**.
+Repeatable Go2 trials, a concise analysis, a final demonstration, and a team presentation supported by logs and limitations.
 
-## Task 2: Re-run zero-output tests
+See [the Go2 hardware guide](../GO2_HARDWARE.md) for setup and operating steps and
+[COURSE_PLAN.md](../../COURSE_PLAN.md) for the course sequence. Hardware progress
+depends on demonstrated readiness, not merely reaching the scheduled week.
 
-Before hardware output is enabled:
+## Completion checkpoint
 
-1. start all nodes in non-actuating mode;
-2. verify current gesture is stop or unknown;
-3. verify current command is zero;
-4. stop the gesture publisher and confirm timeout behavior; and
-5. show that the safety observer can independently stop the system.
+Report all attempted trials, completion time, contacts, recognition errors, and manual interventions under recorded conditions. Compare simulation and Go2 behavior while accounting for different gesture mappings and speeds. Include sanitized replay evidence and unresolved failures.
 
-## Task 3: Enable hardware at zero command
+Keep the existing team-branch and weekly submission procedure. Do not include
+AES/Wi-Fi credentials or raw recording ZIPs in public Git history.
 
-The instructor enables the approved hardware path while the requested command
-remains zero. Observe for unexpected motion, messages, or timing. Abort on any
-discrepancy.
+Previous: [Week 10](../week-10-ros-hardware-readiness/README.md). Next: [Week 12](../week-12-final-demonstration/README.md).
 
-## Task 4: Perform incremental motion checks
+## Weekly submission
 
-Follow the approved sequence. A typical progression is:
-
-1. stop only;
-2. one short, minimum-magnitude forward request;
-3. stop and inspect;
-4. one short turn request;
-5. stop and inspect; and
-6. one selected failure/timeout check if approved.
-
-Return to zero between every motion. Do not improvise gestures or command values.
-
-## Task 5: Compare simulation and hardware
-
-For each approved test, record expected response, observed response, stop time,
-and any difference from MuJoCo. Differences are engineering data, not something
-to tune around during an active hardware test.
-
-## Task 6: Post-run review
-
-Disable hardware output, return the robot to the instructor-approved safe state,
-and archive logs. Conduct a team debrief before changing code. Classify every
-issue by perception, validation, mapping, communication, control, or hardware.
-
-## Immediate abort conditions
-
-- unexpected direction or magnitude of motion;
-- delayed or ineffective stop;
-- stale or missing operator feedback;
-- communication loss;
-- person or object entering the test boundary;
-- loose hardware, low battery, or abnormal sound; or
-- instructor or safety observer calls abort.
-
-## Completion checklist
-
-- [ ] Written instructor approval recorded.
-- [ ] Pre-run inspection and team callouts completed.
-- [ ] Zero-output and timeout checks passed.
-- [ ] Only approved incremental motions attempted.
-- [ ] Zero command restored between motions.
-- [ ] Simulation/hardware comparison recorded.
-- [ ] Hardware output disabled and logs archived after the run.
-
-## Deliverables
-
-- Signed or instructor-recorded checkout
-- Test log with approved command sequence
-- Simulation-versus-hardware comparison
-- Issue list and corrective-action plan
-
-## Next week
-
-Continue to [Week 12: Final demonstration and
-communication](../week-12-final-demonstration/README.md).
+Submit your individual `week-11/README.md` in your student folder on the
+assigned team branch. Put worksheet answers, results, and evidence summaries there.
+Any code, CSVs, recordings, or ZIPs named in this lab are local working artifacts,
+not additional weekly Git submissions. Optional small media and the final report
+follow [the submission and data policy](../SUBMISSIONS.md).

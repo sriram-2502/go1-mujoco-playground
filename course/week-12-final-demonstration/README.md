@@ -1,111 +1,53 @@
-# Week 12: Final demonstration and communication
+# Week 12: Contingency and evaluation, if available
 
-## Milestone
+## Hardware path
 
-Present a repeatable final demonstration and explain the engineering evidence,
-safety decisions, limitations, and future work behind it.
+This course now uses **Unitree Go2 + Windows 11 + Wi-Fi/WebRTC** for physical
+navigation. The Go2's onboard camera supplies robot FPV; the Windows webcam
+supplies MediaPipe hands. No laptop ROS installation or external Jetson/ZED stack
+is required. This folder retains its historical name to preserve existing links.
 
-## Learning objectives
-
-- Plan a demonstration with measurable success and abort criteria.
-- Communicate a multidisciplinary system to technical and general audiences.
-- Support design claims with recorded tests rather than anecdotes.
-- Identify limitations and propose responsible next steps.
+The simulation code and the Weeks 1–6 simulation exercises are unchanged. Use the separate instructor-provided
+Go2 application; the simulation launcher does not connect to the physical robot.
 
 ## Prerequisites
 
-- Weeks 1–10 complete
-- Week 11 hardware checkout complete if the final uses the physical Go1
-- Instructor approves the final demonstration mode and test area
-- A simulation-only final remains acceptable when hardware approval is absent
+- Week 6 webcam/overview/FPV simulation checkpoint with logs.
+- Instructor-approved robot assignment, hardware checkout, and operating procedure.
+- Direct instructor supervision and the paired remote for physical motion.
 
-## Task 1: Freeze the final system
+## Learning objective
 
-Record:
+Communicate what was demonstrated and what remains unresolved.
 
-- Git commit and branch;
-- Conda/package environment;
-- model and configuration versions;
-- command limits and timeout values;
-- hardware/software architecture; and
-- known limitations.
+## Activities
 
-After the freeze, only instructor-approved critical fixes are allowed. Retest any
-changed component.
+1. Resolve remaining Go2 recognition, communication, recording, or stopping qualification failures without expanding unverified features.
+2. Complete the report, sanitized documentation, source references, and individual reflection.
+3. Identify which results are simulated, stationary hardware checks, and supervised physical trials.
+4. Keep secrets and raw run archives out of public Git history; submit data through the instructor's designated channel.
 
-## Task 2: Define success
+## Expected evidence
 
-Create a demonstration scorecard. Example criteria include:
+The final evidence package and a clear statement of verified behavior and outstanding work; use this week only if the calendar permits.
 
-- all approved gestures recognized;
-- no false motion during unknown input;
-- stop succeeds within the approved time;
-- command limits are never exceeded;
-- required course or maze sequence is completed; and
-- system remains recoverable after a rejected gesture.
+See [the Go2 hardware guide](../GO2_HARDWARE.md) for setup and operating steps and
+[COURSE_PLAN.md](../../COURSE_PLAN.md) for the course sequence. Hardware progress
+depends on demonstrated readiness, not merely reaching the scheduled week.
 
-Define abort criteria and a fallback simulation demonstration.
+## Completion checkpoint
 
-## Task 3: Rehearse roles
+Submit the final report, architecture diagram, setup/version notes, trial summary, and known limitations through the existing course workflow. Label simulation, stationary, and physical evidence separately. If hardware qualification is incomplete, report it clearly and present the completed simulation results.
 
-Assign a presenter, operator, safety observer, data observer, and backup. Rehearse
-normal operation, a rejected gesture, a stop, and an abort. Every team member
-should be able to explain the full architecture and their contribution.
+Keep the existing team-branch and weekly submission procedure. Do not include
+AES/Wi-Fi credentials or raw recording ZIPs in public Git history.
 
-## Task 4: Prepare the technical story
+Previous: [Week 11](../week-11-supervised-go1/README.md).
 
-Your poster or presentation should include:
+## Weekly submission
 
-1. motivation and user need;
-2. system architecture;
-3. gesture vocabulary and command mapping;
-4. simulation and hardware progression;
-5. safety requirements and evidence;
-6. accuracy and latency results;
-7. one failure and how the team addressed it;
-8. limitations; and
-9. future work.
-
-Use plots with labeled axes, units, sample counts, and readable captions.
-
-## Task 5: Run the final demonstration
-
-Follow the approved checklist exactly. If using hardware, the instructor must be
-present and Week 11 safety rules remain active. A safe abort is a successful use
-of the safety system, not a reason to hide the result.
-
-## Task 6: Archive and reflect
-
-Save final code, configuration, test data, plots, documentation, and a short demo
-video in instructor-approved locations. Do not commit Conda environments, private
-videos, credentials, or large unapproved artifacts.
-
-Each student writes a short reflection:
-
-- What did I contribute?
-- What technical idea can I now explain?
-- What evidence most changed our design?
-- What would I do next with more time?
-
-## Completion checklist
-
-- [ ] Final version and configuration frozen.
-- [ ] Success and abort criteria documented.
-- [ ] Team roles rehearsed.
-- [ ] Presentation includes evidence, safety, and limitations.
-- [ ] Approved demonstration completed or safely aborted.
-- [ ] Code, results, and documentation archived.
-- [ ] Individual reflections completed.
-
-## Deliverables
-
-- Final demonstration or simulation fallback
-- Poster or technical presentation
-- Final test scorecard and selected raw evidence
-- Demonstration video
-- Team archive and individual reflections
-
-## Course closeout
-
-Return to the [course overview](../../README.md) and review the course outcomes.
-For each outcome, identify one artifact that demonstrates your progress.
+Submit your individual `week-12/README.md` in your student folder on the
+assigned team branch. Put worksheet answers, results, and evidence summaries there.
+Any code, CSVs, recordings, or ZIPs named in this lab are local working artifacts,
+not additional weekly Git submissions. Optional small media and the final report
+follow [the submission and data policy](../SUBMISSIONS.md).

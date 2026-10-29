@@ -1,0 +1,21 @@
+<mujoco model="Week 6 two-turn maze">
+  <include file="common.xml"/>
+  <default>
+    <default class="wall">
+      <geom type="box" material="wall_mat" contype="2" conaffinity="0" condim="3"/>
+    </default>
+  </default>
+  <worldbody>
+    <!-- Route: (0,0) -> (2.15,0) -> (2.15,2.15) -> (5.2,2.15). -->
+    <!-- Corridor width 1.7 m, wall height .6 m. Box sizes are half extents. -->
+    <geom name="wall_south" class="wall" pos="1 -.95 .3" size="2.1 .1 .3"/>
+    <geom name="wall_east_low" class="wall" pos="3.1 .225 .3" size=".1 1.275 .3"/>
+    <geom name="wall_exit_south" class="wall" pos="4.55 1.2 .3" size="1.55 .1 .3"/>
+    <geom name="wall_exit_end" class="wall" pos="6.1 2.15 .3" size=".1 1.05 .3"/>
+    <geom name="wall_north" class="wall" pos="3.7 3.1 .3" size="2.5 .1 .3"/>
+    <geom name="wall_inner_vertical" class="wall" pos="1.2 1.975 .3" size=".1 1.125 .3"/>
+    <geom name="wall_inner_horizontal" class="wall" pos=".1 .95 .3" size="1.2 .1 .3"/>
+    <geom name="wall_start" class="wall" pos="-1.1 0 .3" size=".1 1.05 .3"/>
+    <site name="goal" pos="5.2 2.15 .012" type="cylinder" size=".4 .01" rgba=".2 .95 .6 .8"/>
+  </worldbody>
+</mujoco>

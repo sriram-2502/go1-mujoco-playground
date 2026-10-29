@@ -1,5 +1,24 @@
 # Week 2: Go1 controller behavior, control, and reinforcement learning
 
+## Connect this lesson to Go2
+
+Trace the difference between a body-frame velocity request and the 12 joint
+actions produced by the Go1 simulation policy. Later, Go2 receives supported
+high-level requests over WebRTC and uses its own onboard controller. In your
+notes, explain why the Go1 joint actions and ONNX policy cannot simply be sent
+to Go2. Keep this week's controller and limits unchanged.
+
+See [Go2 hardware onboarding](../GO2_HARDWARE.md) for the later hardware path.
+
+## Reusable simulation component
+
+`simulation.py` wraps the existing ONNX policy for the Week 6 dashboard. It provides
+`Simulation(scene)`, `step((vx, vy, yaw_rate))`, `reset()` and overview/FPV rendering.
+Commands use body-frame m/s and rad/s. The original keyboard program stays available.
+Run the integrated check from the repository root with
+`python run_gesture_navigation.py --input keyboard --scene arena`.
+
+
 ## Milestone
 
 Trace a keyboard press through the Python controller, connect the code to basic
@@ -208,18 +227,25 @@ design exercise only; do not implement the new interface yet.
 Save the worksheet answers and experiment results in your individual summary:
 
 ```text
-course/student-work/team-alpha/first-last/weekly-summaries/week-02.md
+course/student-work/team-alpha/first-last/week-02/README.md
 ```
 
 Create the folders if they do not already exist:
 
 ```powershell
-New-Item -ItemType Directory -Force .\course\student-work\team-alpha\first-last\weekly-summaries
+New-Item -ItemType Directory -Force .\course\student-work\team-alpha\first-last\week-02
 ```
 
-Push only that Markdown summary to `team-alpha` or `team-bravo`. Code commits
-will begin only when the instructor announces the Week 5 integration milestone.
+Submit your README report to `team-alpha` or `team-bravo`; code experiments stay local throughout the course unless explicitly requested by the instructor.
 
 ## Next week
 
 Continue to [Week 3: Webcam image acquisition](../week-03-webcam-basics/README.md).
+
+## Weekly submission
+
+Submit your individual `week-02/README.md` in your student folder on the
+assigned team branch. Put worksheet answers, results, and evidence summaries there.
+Any code, CSVs, recordings, or ZIPs named in this lab are local working artifacts,
+not additional weekly Git submissions. Optional small media and the final report
+follow [the submission and data policy](../SUBMISSIONS.md).

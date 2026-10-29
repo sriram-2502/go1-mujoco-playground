@@ -62,12 +62,12 @@ git status
 ## 5. Commit and push your weekly summary
 
 Copy `weekly-summary-template.md` to
-`course/student-work/team-alpha/first-last/weekly-summaries/week-01.md`.
+`course/student-work/team-alpha/first-last/week-01/README.md`.
 Use your own name and replace `team-alpha` with `team-bravo` when applicable.
 Fill out your individual summary, then run:
 
 ```powershell
-git add course/student-work/team-alpha/first-last/weekly-summaries/week-01.md
+git add course/student-work/team-alpha/first-last/week-01/README.md
 git status
 git commit -m "Add week 01 summary"
 git log --oneline -1
@@ -90,7 +90,7 @@ git remote -v              # Connected GitHub repository
 
 - Work on `team-alpha` or `team-bravo`, not `main`.
 - Read `git status` before committing.
-- Until Week 5, commit and push weekly summaries only.
+- Submit weekly README reports throughout the course; code experiments stay local.
 - Never commit passwords, tokens, robot credentials, private videos, or large
   generated files.
 

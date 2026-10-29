@@ -1,0 +1,25 @@
+<mujoco>
+  <include file="course_robot.xml"/>
+  <include file="sensor_feet.xml"/>
+  <visual>
+    <quality offsamples="0" shadowsize="1024"/>
+    <global offwidth="640" offheight="360"/>
+    <headlight ambient=".35 .35 .4" diffuse=".7 .7 .7"/>
+    <map znear=".01"/>
+  </visual>
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1=".12 .19 .29" rgb2=".45 .65 .75" width="512" height="512"/>
+    <texture name="tiles" type="2d" builtin="checker" rgb1=".15 .20 .26" rgb2=".19 .25 .31" width="512" height="512"/>
+    <material name="floor_mat" texture="tiles" texrepeat="12 12" texuniform="true"/>
+    <material name="wall_mat" rgba=".36 .61 .68 1"/>
+  </asset>
+  <worldbody>
+    <light pos="2 1 5" dir="0 0 -1" diffuse=".8 .8 .8"/>
+    <geom name="floor" type="plane" size="10 10 .1" material="floor_mat" contype="1" conaffinity="0" friction="1"/>
+    <site name="start" pos="0 0 .005" size=".35 .005" type="cylinder" rgba=".2 .6 1 .6"/>
+  </worldbody>
+  <keyframe>
+    <key name="home" qpos="0 0 .35 1 0 0 0 .1 .9 -1.8 -.1 .9 -1.8 .1 .9 -1.8 -.1 .9 -1.8"
+         ctrl=".1 .9 -1.8 -.1 .9 -1.8 .1 .9 -1.8 -.1 .9 -1.8"/>
+  </keyframe>
+</mujoco>

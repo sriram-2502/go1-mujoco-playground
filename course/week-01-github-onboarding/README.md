@@ -1,5 +1,14 @@
 # Week 1: GitHub onboarding and Go1 baseline
 
+## Simulation first, Go2 hardware later
+
+This week uses the existing Go1 simulator and team-branch workflow. The physical
+course robot is Go2, introduced in Week 7 over Wi-Fi/WebRTC on Windows 11.
+Add both phases to your team system sketch; label the older Go1/ROS project as
+a reference rather than the current hardware setup.
+
+See [Go2 hardware onboarding](../GO2_HARDWARE.md) for the later hardware path.
+
 ## Milestone
 
 Join the course workflow, access the assigned team branch, and run the existing
@@ -33,8 +42,7 @@ Most weeks follow this pattern:
 3. Complete the worksheet or experiment requested for the week.
 4. Save your individual weekly summary in your student folder and push only
    that summary to your team branch.
-5. Do not push code changes until the instructor announces the Week 5 code
-   integration milestone.
+5. Keep code experiments local throughout the course unless the instructor explicitly requests a code contribution.
 
 Documentation is the default deliverable. If you are confident that a code
 change is useful, ask for instructor consent before pushing it. After approval,
@@ -187,13 +195,13 @@ joystick or robot yet.
 ## Task 5: Make a documentation-only commit
 
 Create your student folder and copy [the Week 1 summary template](weekly-summary-template.md)
-into `course/student-work/team-alpha/first-last/weekly-summaries/week-01.md`.
+into `course/student-work/team-alpha/first-last/week-01/README.md`.
 Use `team-bravo` instead of `team-alpha` when applicable. Each student submits
 an individual summary. Push only that documentation file:
 
 ```powershell
-New-Item -ItemType Directory -Force .\course\student-work\team-alpha\first-last\weekly-summaries
-git add course/student-work/team-alpha/first-last/weekly-summaries/week-01.md
+New-Item -ItemType Directory -Force .\course\student-work\team-alpha\first-last\week-01
+git add course/student-work/team-alpha/first-last/week-01/README.md
 git commit -m "Add week 01 onboarding summary"
 git push -u origin team-alpha
 ```
@@ -212,7 +220,7 @@ Team Bravo should replace both `team-alpha` values with `team-bravo`.
 
 ## Deliverables
 
-- Shared team branch containing each student's individual summary under `course/student-work/<team>/<student>/weekly-summaries/`.
+- Shared team branch containing each student's individual summary under `course/student-work/<team>/<student>/week-XX/`.
 - Screenshot or short recording of the existing simulation.
 - One sentence explaining the difference between `main` and the team branch.
 
@@ -220,3 +228,11 @@ Team Bravo should replace both `team-alpha` values with `team-bravo`.
 
 Continue to the Week 2 activity page and the next instructor-provided baseline exercise.
 
+
+## Weekly submission
+
+Submit your individual `week-01/README.md` in your student folder on the
+assigned team branch. Put worksheet answers, results, and evidence summaries there.
+Any code, CSVs, recordings, or ZIPs named in this lab are local working artifacts,
+not additional weekly Git submissions. Optional small media and the final report
+follow [the submission and data policy](../SUBMISSIONS.md).

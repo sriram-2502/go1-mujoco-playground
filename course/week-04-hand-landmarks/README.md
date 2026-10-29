@@ -1,107 +1,62 @@
-# Week 4: Hand landmarks and gesture vocabulary
+# Week 4: Gesture Vocabulary and Recognition
+
+## Compare vocabularies before switching robots
+
+Use the simulation gesture table below for this exercise. The Go2 dashboard
+has a different mapping: pointing up requests forward, pointing left with one
+or two fingers selects sideways motion, and thumb up/down selects rotation.
+Compare the two tables in your notes and identify one confusing transition to
+test. Do not replace the simulation classifier with the hardware rules.
+
+See [Go2 hardware onboarding](../GO2_HARDWARE.md) for the later hardware path.
 
 ## Milestone
 
-Detect a hand in webcam images, visualize its landmarks, and define a small
-gesture vocabulary suitable for robot commands.
+Recognize STOP, FORWARD, LEFT and RIGHT from the Week 3 hand landmarks. Evaluate the rules before connecting motion in the Week 6 integration lab.
 
-## Learning objectives
+## Reference code
 
-- Distinguish detection, landmark estimation, and classification.
-- Visualize hand landmarks and observe detection confidence.
-- Define gestures that are distinct, repeatable, and safe to use.
-- Document ambiguous cases before building command logic.
+`gestures.py` provides `classify(landmarks) -> label`. It compares finger-tip distances from the wrist with middle-joint distances. It ignores the thumb and is more tolerant of image rotation than the Week 3 vertical-coordinate rules. These rules are still a baseline and can fail under occlusion or unusual hand orientation.
 
-## Prerequisites
+| Pose | Label |
+|---|---|
+| Open palm or fist | STOP |
+| Index extended | FORWARD |
+| Index and middle extended | LEFT |
+| Index, middle and ring extended | RIGHT |
+| Other pose | UNKNOWN |
 
-- Week 3 webcam program works reliably
-- Team can explain image shape, frame rate, and camera cleanup
-- Companion project available:
-  [`DyCo-AI/go1_gesture_tracking`](https://github.com/DyCo-AI/go1_gesture_tracking)
+No hand and multiple hands are handled by `vision.py`; neither requests motion. Backward and slow mode are optional later extensions.
 
-## Task 1: Review the system boundary
+## Activities
 
-Sketch this pipeline in your engineering notes:
+1. Trace image -> landmarks -> raw label -> validated command.
+2. Inspect `gestures.classify()` and explain the distance threshold.
+3. Run the dashboard with motion disabled: `python run_gesture_navigation.py`.
+4. Record labels for every team member at two distances, two lighting conditions and rotated hand poses.
+5. Identify confusion pairs, transitions and comfortable stop gestures.
+6. Propose one rule improvement and evaluate it on examples not used for tuning.
 
-```text
-image -> hand detection -> landmarks -> gesture label -> validated intent
+The classifier has no calibrated confidence output. Do not use MediaPipe hand tracking thresholds as gesture-classification confidence.
+
+## Verification
+
+```powershell
+python -m unittest discover -s course/week-04-hand-landmarks -v
 ```
 
-For each arrow, write what data moves to the next block. At this stage, no label
-is allowed to command a simulated or physical robot.
-
-## Task 2: Set up the gesture workspace
-
-Follow the current setup instructions in the companion gesture repository. Keep
-gesture-perception work separate from the Go1 simulator until Week 7.
-
-Before running code, verify:
-
-- the webcam index is correct;
-- a frame can be displayed;
-- the program has a documented quit key; and
-- the camera is released even if an error occurs.
-
-## Task 3: Display hand landmarks
-
-Run or complete the instructor-provided landmark starter. Confirm that it:
-
-1. reads a live frame;
-2. converts the color format expected by the landmark model;
-3. draws detected landmarks and connections;
-4. shows whether a hand is currently detected; and
-5. exits cleanly.
-
-Capture examples of an open hand, closed hand, pointing hand, and no-hand frame.
-
-## Task 4: Propose a gesture vocabulary
-
-Start with five abstract intents:
-
-| Intent | Candidate gesture | Why it is distinguishable | Possible confusion |
-|---|---|---|---|
-| `STOP` | | | |
-| `FORWARD` | | | |
-| `BACKWARD` | | | |
-| `LEFT` | | | |
-| `RIGHT` | | | |
-
-`STOP` must be easy to perform and recognize. It must not resemble a motion
-gesture. Instructor approval is required before labels are finalized.
-
-## Task 5: Test variation
-
-Each team member performs every candidate gesture under at least three
-conditions: normal, rotated hand, and different camera distance. Record whether
-the hand and landmarks remain detectable.
-
-Do not tune the vocabulary only for one person. Note accessibility concerns or
-gestures that are uncomfortable to hold.
-
-## Engineering questions
-
-1. Why are landmarks more useful than raw pixels for a simple gesture model?
-2. What is the difference between “no hand” and “unknown gesture”?
-3. Why should `STOP` not depend on a subtle finger position?
-4. Which gesture pair is most likely to be confused, and why?
-
-## Completion checklist
-
-- [ ] Pipeline sketch completed.
-- [ ] Landmarks shown for multiple hands and poses.
-- [ ] No-hand behavior observed.
-- [ ] Five-gesture proposal documented.
-- [ ] Variation tested across team members and conditions.
-- [ ] No robot-motion output is connected.
+Synthetic geometry checks verify the reference mapping and rotation/scale behavior; they do not establish real-world recognition accuracy.
 
 ## Deliverables
 
-- Four annotated example images
-- Proposed gesture table
-- Variation-test notes
-- Answers to the engineering questions
+Gesture table, annotated examples, confusion counts across operators/conditions and a proposed improvement. Keep motion disabled during perception evaluation.
 
-## Next week
+Next: [Week 5 validation and command supervision](../week-05-gesture-classification/README.md).
 
-Continue to [Week 5: Gesture classification and
-validation](../week-05-gesture-classification/README.md).
+## Weekly submission
+
+Submit your individual `week-04/README.md` in your student folder on the
+assigned team branch. Put worksheet answers, results, and evidence summaries there.
+Any code, CSVs, recordings, or ZIPs named in this lab are local working artifacts,
+not additional weekly Git submissions. Optional small media and the final report
+follow [the submission and data policy](../SUBMISSIONS.md).

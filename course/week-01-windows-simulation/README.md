@@ -1,5 +1,14 @@
 # Week 1: Run the Go1 simulation on Windows 11
 
+## Keep simulation and hardware environments separate
+
+Install and run the Go1 simulation exactly as described below. The later Go2
+hardware phase uses a separate `go2wifi` environment and browser application;
+do not install that stack into the simulation environment. For this week,
+verify the simulator only; robot credentials and hardware access come later.
+
+See [Go2 hardware onboarding](../GO2_HARDWARE.md) for the later hardware path.
+
 ## Milestone
 
 Set up the course software and command a simulated Unitree Go1 with the keyboard.
@@ -229,3 +238,11 @@ python .\mujoco_playground\experimental\sim2sim\play_go1_keyboard.py
 
 Continue to [Week 2: Go1 controller behavior, control, and reinforcement
 learning](../week-02-go1-controller/README.md).
+
+## Weekly submission
+
+Submit your individual `week-01/README.md` in your student folder on the
+assigned team branch. Put worksheet answers, results, and evidence summaries there.
+Any code, CSVs, recordings, or ZIPs named in this lab are local working artifacts,
+not additional weekly Git submissions. Optional small media and the final report
+follow [the submission and data policy](../SUBMISSIONS.md).

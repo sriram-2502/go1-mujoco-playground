@@ -1,9 +1,10 @@
-# Creative Inquiry: Gesture Control for a Unitree Go1
+# Creative Inquiry: Go1 Simulation to Go2 Gesture Navigation
 
 This repository is the simulation and course workspace for a Clemson Mechanical
 Engineering Creative Inquiry project. Students will learn how a quadruped robot
 is commanded, develop a camera-based hand-gesture interface, and test their
-ideas in simulation before any supervised work with the physical Unitree Go1.
+ideas with the existing Go1 simulation before supervised work with the physical
+Unitree Go2 over Wi-Fi/WebRTC on Windows 11.
 
 **No previous Python, AI, or robotics experience is required.** The weekly tasks
 introduce the command line, Conda, Python, Git, computer vision, robot commands,
@@ -11,17 +12,33 @@ testing, and system integration one step at a time.
 
 Our companion project is
 [`DyCo-AI/go1_gesture_tracking`](https://github.com/DyCo-AI/go1_gesture_tracking).
-It contains the webcam gesture-recognition and ROS interfaces used in the later
-weeks of this course.
+It remains a reference for the earlier Go1/ROS/Jetson/ZED hardware path. The
+current course hardware target is **Go2 with the Clemson WebRTC UI**, described
+in [the Go2 hardware guide](course/GO2_HARDWARE.md). ROS and an external Jetson/ZED
+setup are not required on the Windows operator laptop. The Go1 simulation and
+its installation instructions remain unchanged.
 
 > [!IMPORTANT]
 > Simulation is the first safety gate. Students must not connect software to or
 > command the physical robot without instructor approval and supervision.
 
+## Course materials and instructor reference
+
+- **Course website:** [DyCo-AI Go1 Gesture Tracking](https://dyco-ai.github.io/go1_gesture_tracking/) provides the schedule, concepts, assignments, and submission expectations.
+- **This repository:** runnable simulation examples, weekly labs, and student reports.
+- **Instructor solution:** the current local `unitree_go2_setup` bundle contains the Basic UI and Clemson Go2 gesture dashboard. Ask the instructor for the approved version. The proposed personal `sriram-2502/go2-webrtc-gesture-nav` repository is not yet published or linked as an available dependency.
+
+The course is intended for Go1 and Go2 experiments. This version uses **Go1 in
+simulation and Go2 over Wi-Fi/WebRTC on Windows 11 for hardware**. Physical Go1
+integration is under development; this is not a claim that both hardware paths
+are ready. Keep the simulation and hardware environments separate.
+
 ## Course challenge
 
 Build and evaluate an interface that lets a human use simple hand gestures to
-request bounded Go1 motions such as forward, backward, left, right, and stop.
+request bounded robot motions such as forward, backward, left, right, and stop.
+The current simulator uses Go1; the hardware phase uses the Go2-specific gesture
+table and speed profile in [the hardware guide](course/GO2_HARDWARE.md).
 The system must reject uncertain input, limit motion commands, prioritize stop,
 and stop automatically when input or communication becomes stale.
 
@@ -34,7 +51,7 @@ gesture model -> confidence and timing checks -> bounded motion intent
                               +--------------------+--------------------+
                               |                                         |
                               v                                         v
-                     MuJoCo simulation                         supervised Go1 test
+                     MuJoCo simulation                         supervised Go2 test
                      (required first)                         (instructor approval)
 ```
 
@@ -51,7 +68,7 @@ By the end of the project, students should be able to:
 6. Convert recognized gestures into bounded, interruptible robot commands.
 7. Design fail-safe behavior for uncertain perception and lost communication.
 8. Plan repeatable tests and measure accuracy, latency, and failure behavior.
-9. Integrate simulation, perception, command logic, ROS, and robot hardware.
+9. Integrate simulation, perception, command logic, and a qualified hardware interface.
 10. Communicate engineering decisions, results, limitations, and next steps.
 
 ## Weekly roadmap
@@ -64,15 +81,30 @@ deliverables, and completion checklist. Complete the weeks in order.
 | 1 | [GitHub onboarding and Go1 baseline](course/week-01-github-onboarding/README.md) | Access the repository, enter the assigned team branch, run the existing baseline, and document the work. |
 | 2 | [Go1 controller behavior, control, and reinforcement learning](course/week-02-go1-controller/README.md) | Trace keyboard input, measure command sensitivity, and make one approved change. |
 | 3 | [Webcam image acquisition](course/week-03-webcam-basics/README.md) | Capture, display, and describe images from a laptop webcam. |
-| 4 | [Hand landmarks and gesture vocabulary](course/week-04-hand-landmarks/README.md) | Detect a hand, visualize landmarks, and define useful gestures. |
-| 5 | [Gesture classification and validation](course/week-05-gesture-classification/README.md) | Measure gesture predictions and reject uncertain or unstable classifications. |
-| 6 | [Gesture-to-command mapping](course/week-06-mock-command-mapping/README.md) | Convert validated gestures into bounded abstract commands without moving a robot. |
-| 7 | [Gesture-controlled Go1 simulation](course/week-07-gesture-simulation/README.md) | Replace keyboard intent with gesture intent in MuJoCo. |
-| 8 | [Safety behavior and automated tests](course/week-08-safety-testing/README.md) | Verify stop priority, timeouts, confidence limits, and command bounds. |
-| 9 | [Integrated system evaluation](course/week-09-system-evaluation/README.md) | Measure the complete simulated system's accuracy, latency, and robustness. |
-| 10 | [ROS and hardware readiness](course/week-10-ros-hardware-readiness/README.md) | Demonstrate the ROS interfaces in a non-actuating mode and pass a safety review. |
-| 11 | [Supervised Go1 integration](course/week-11-supervised-go1/README.md) | Perform a controlled, instructor-supervised robot checkout. |
-| 12 | [Final demonstration and communication](course/week-12-final-demonstration/README.md) | Present a repeatable final demonstration supported by engineering evidence. |
+| 4 | [Gesture vocabulary and recognition](course/week-04-hand-landmarks/README.md) | Recognize stop, forward and turning gestures. |
+| 5 | [Gesture validation and command supervision](course/week-05-gesture-classification/README.md) | Test hold time, bounded commands, input expiry and stop priority. |
+| 6 | [Integrated dashboard and simulation maze](course/week-06-mock-command-mapping/README.md) | Navigate with webcam gestures, overview and simulated robot FPV. |
+| 7 | [Go2 hardware setup](course/week-07-gesture-simulation/README.md) | Prepare Windows 11, go2wifi, Go2 Wi-Fi, AES access, and the Basic WebRTC UI. |
+| 8 | [Stationary Go2 checkout](course/week-08-safety-testing/README.md) | Verify WebRTC, telemetry, onboard camera, voxels, and the supervised stop procedure. |
+| 9 | [Go2 gesture dashboard](course/week-09-system-evaluation/README.md) | Use the Clemson UI, qualify the Go2 gesture mapping, and test short motions under supervision. |
+| 10 | [Physical maze](course/week-10-ros-hardware-readiness/README.md) | Build the maze and run staged navigation trials. |
+| 11 | [Reliability and demonstration](course/week-11-supervised-go1/README.md) | Complete repeatable tests and present results. |
+| 12, if available | [Contingency and evaluation](course/week-12-final-demonstration/README.md) | Complete remaining validation and documentation. |
+
+## Run the Week 6 dashboard
+
+After the Week 1 repository installation, run from the repository root:
+
+```powershell
+conda activate go1-mj-playground
+python -m pip install -r course/requirements-sim.txt
+python course/week-03-webcam-basics/download_hand_model.py
+python run_gesture_navigation.py
+```
+
+The dashboard displays your annotated webcam, MuJoCo maze overview and simulated
+robot FPV. Motion starts disabled. See the [Week 6 lab](course/week-06-mock-command-mapping/README.md)
+for gestures, keyboard/mock modes, stop behavior and navigation checkout.
 
 ## Safety gates
 
@@ -83,7 +115,7 @@ Progress is based on demonstrated readiness, not only the calendar.
 | A: Local software | Week 1 simulation and stop/reset behavior work reliably. |
 | B: Perception | Gestures have measured confidence and temporal-stability rules. |
 | C: Simulated control | Gesture commands work in MuJoCo and fail safely. |
-| D: Hardware readiness | Command limits, timeouts, stop priority, and ROS mock tests pass. |
+| D: Hardware readiness | Command limits, timeouts, stop priority, and hardware-interface mock tests pass. |
 | E: Physical robot | Instructor approves the test plan and directly supervises operation. |
 
 Loss of a valid gesture, controller heartbeat, network connection, or operator
@@ -105,18 +137,18 @@ your output with the expected result.
 
 ## Student branch and submission policy
 
-Students use only their assigned team branch: `team-alpha` or `team-bravo`.
-Do not create personal branches. Until the Week 5 gesture-to-simulation
-milestone, students push weekly summaries only; code experiments remain local.
-Save each summary in a unique folder:
+Each student submits a weekly `README.md` in their own folder on the assigned
+`team-alpha` or `team-bravo` branch:
 
 ```text
-course/student-work/<team>/<first-last>/weekly-summaries/week-XX.md
+course/student-work/<team>/<first-last>/week-XX/README.md
 ```
 
-When code integration begins, the instructor will announce whether approved
-changes should be added directly to the team branch or placed on an
-instructor-managed integration branch.
+Code experiments and full run recordings stay local throughout the course unless
+the instructor requests otherwise. Optional small MP4/GIF evidence is welcome;
+the final report is a Markdown report at the end of the course.
+Follow [the submission and data policy](course/SUBMISSIONS.md) and
+[weekly report template](course/WEEKLY_REPORT_TEMPLATE.md).
 
 ## Repository map
 
@@ -146,8 +178,10 @@ This course repository is based on Google DeepMind's
 open-source framework for robot learning and sim-to-real research. The original
 project website is [playground.mujoco.org](https://playground.mujoco.org/).
 
-The companion gesture-control architecture and course direction are documented
-in [`DyCo-AI/go1_gesture_tracking`](https://github.com/DyCo-AI/go1_gesture_tracking).
+The earlier Go1/ROS hardware architecture is documented in
+[`DyCo-AI/go1_gesture_tracking`](https://github.com/DyCo-AI/go1_gesture_tracking).
+For the current Go2/WebRTC hardware phase, start with
+[course/GO2_HARDWARE.md](course/GO2_HARDWARE.md).
 
 The source code remains under the Apache License 2.0; see [LICENSE](LICENSE).
 This repository is not an officially supported Google product.

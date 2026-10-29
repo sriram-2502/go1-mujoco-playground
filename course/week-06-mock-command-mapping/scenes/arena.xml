@@ -1,0 +1,6 @@
+<mujoco model="Week 6 flat arena">
+  <include file="common.xml"/>
+  <worldbody>
+    <site name="goal" pos="3 0 .012" type="cylinder" size=".4 .01" rgba=".2 .95 .6 .8"/>
+  </worldbody>
+</mujoco>
