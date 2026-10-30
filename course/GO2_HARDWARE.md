@@ -45,8 +45,8 @@ Install Git for Windows, then open **PowerShell**:
 
 ```powershell
 Set-Location "$env:USERPROFILE\Downloads"
-git clone https://github.com/sriram-2502/unitree-go2-setup.git unitree_go2_setup
-Set-Location .\unitree_go2_setup
+git clone https://github.com/sriram-2502/go2-webrtc-gesture-nav.git go2-webrtc-gesture-nav
+Set-Location .\go2-webrtc-gesture-nav
 git rev-parse --short HEAD
 ```
 
@@ -58,7 +58,7 @@ have this checkout, update it rather than cloning into an existing folder.
 ### Receive instructor updates
 
 Stop both local services and disconnect the robot. While connected to internet,
-from the `unitree_go2_setup` checkout:
+from the `go2-webrtc-gesture-nav` checkout:
 
 ```powershell
 git status
@@ -79,7 +79,7 @@ Keep the existing `go1-mj-playground` simulation environment. Create a separate
 hardware environment in **Anaconda Prompt / Miniconda Prompt**:
 
 ```bat
-cd /d "%USERPROFILE%\Downloads\unitree_go2_setup"
+cd /d "%USERPROFILE%\Downloads\go2-webrtc-gesture-nav"
 conda create -n go2wifi python=3.11 pip -y
 conda activate go2wifi
 python -m pip install --upgrade pip
@@ -95,7 +95,7 @@ driver/MediaPipe/OpenCV combination during a trial.
 Install Git for Windows if absent. In **PowerShell**, from the companion folder:
 
 ```powershell
-Set-Location "$env:USERPROFILE\Downloads\unitree_go2_setup"
+Set-Location "$env:USERPROFILE\Downloads\go2-webrtc-gesture-nav"
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\webrtc\setup-ui.ps1 -Edition all
 ```
 
@@ -148,7 +148,7 @@ passwords, keys, or cloud tokens. Clear saved site data after using a shared lab
 ## Open the Clemson gesture UI
 
 Disconnect Basic from the robot and stop its server with Ctrl+C. Use two terminals,
-both in the companion `unitree_go2_setup` folder:
+both in the companion `go2-webrtc-gesture-nav` folder:
 
 **Terminal 1 — Anaconda Prompt:**
 
@@ -178,6 +178,24 @@ The main-view overlay distinguishes **requested**, **supervised**, **transmitted
 and **measured** velocities. A transmitted command is not proof of execution.
 Recognition details explain which fingers and directions were detected; check
 these before enabling motion. Hiding the hand panel stops its webcam tracking.
+
+## Bring your gesture work from previous weeks
+
+You may bring your own MediaPipe landmark rules or gesture classifier into the
+instructor hardware setup. Keep the Go1 simulation and its environment separate;
+reuse the recognition functions, not the MuJoCo/Qt runtime or robot policy.
+
+Follow [the student gesture integration guide](https://github.com/sriram-2502/go2-webrtc-gesture-nav/blob/main/webrtc/STUDENT_INTEGRATION.md).
+It explains the actual `gestures.diagnose()` integration point, label adapter,
+preview checks, and which supervision/transport modules to retain. There is no
+automatic import of your playground code: make and review this small adaptation
+locally. Earlier `LEFT`/`RIGHT` labels mean turning; the hardware's `STRAFE_*`
+labels mean sideways travel. Agree on your mapping before enabling control.
+
+Keep the instructor's freshness/hold checks, Go2 speed bounds, explicit enable,
+and browser stop/feedback checks. Validate without robot motion first, then have
+the instructor approve supervised trials. Report your mapping and results in your
+weekly README; full run data stays local and credentials remain private.
 
 ## Go2 gestures and velocity settings
 

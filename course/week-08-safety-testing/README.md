@@ -7,7 +7,7 @@ navigation. The Go2's onboard camera supplies robot FPV; the Windows webcam
 supplies MediaPipe hands. No laptop ROS installation or external Jetson/ZED stack
 is required. This folder retains its historical name to preserve existing links.
 
-The simulation code and the Weeks 1–6 simulation exercises are unchanged. Use the separate [Go2 GitHub setup](https://github.com/sriram-2502/unitree-go2-setup); the simulation launcher does not connect to the physical robot.
+The simulation code and the Weeks 1–6 simulation exercises are unchanged. Use the separate [Go2 GitHub setup](https://github.com/sriram-2502/go2-webrtc-gesture-nav); the simulation launcher does not connect to the physical robot.
 
 ## Prerequisites
 

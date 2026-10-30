@@ -64,7 +64,7 @@ work, not part of this documentation update. Historical weekly folder names stay
 unchanged so links continue to work.
 
 The simulation dashboard does not contain the physical robot transport. Use the
-separate [Go2 GitHub setup](https://github.com/sriram-2502/unitree-go2-setup). Do not send simulated
+separate [Go2 GitHub setup](https://github.com/sriram-2502/go2-webrtc-gesture-nav). Do not send simulated
 joint targets or the Go1 ONNX output to the Go2. Physical motion requires the
 instructor-approved interface, verified communication/stop behavior, and direct
 supervision. The old Go1/ROS/Jetson/ZED project remains a separate reference.
