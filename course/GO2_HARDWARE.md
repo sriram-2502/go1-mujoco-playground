@@ -5,6 +5,13 @@ You continue learning from the existing Go1 simulator, but the physical robot is
 Go2. This guide does not change the simulation installation, ONNX policy, limits,
 gesture rules, team-branch policy, or weekly submission procedure.
 
+## Visual guide for your first session
+
+Use the instructor's [student visual orientation](https://github.com/sriram-2502/go2-webrtc-gesture-nav/blob/main/webrtc/STUDENT_ORIENTATION.md)
+to recognize the camera/voxel view, extracted hands, velocity overlay, and common
+status messages. The images below are reference material; preview first and
+complete the instructor's hardware checks before enabling movement.
+
 ## Understand the two cameras and computers
 
 ```text
@@ -119,6 +126,13 @@ internet access. Ethernet and Jetson SSH are not required for this course path.
 
 ## Stationary checkout before any motion
 
+![Go2 Basic web view showing the robot camera, robot model, and colored voxel map.](https://raw.githubusercontent.com/sriram-2502/go2-webrtc-gesture-nav/main/docs/assets/go2-camera-voxels.png)
+
+*Upstream Basic UI reference from [Unitree UI](https://github.com/legion1581/unitree_ui),
+with its [MIT notice](https://github.com/sriram-2502/go2-webrtc-gesture-nav/blob/main/webrtc/clemson/UPSTREAM_LICENSE).
+Clemson adds the hand panel and velocity overlay; this is not a Clemson trial capture.*
+
+
 Start Basic first, in **PowerShell from the companion folder**:
 
 ```powershell
@@ -179,6 +193,21 @@ and **measured** velocities. A transmitted command is not proof of execution.
 Recognition details explain which fingers and directions were detected; check
 these before enabling motion. Hiding the hand panel stops its webcam tracking.
 
+## Check the screen before enabling
+
+| Look for | Expected behavior |
+| --- | --- |
+| Robot camera | Updating Go2 view of the operating area, not a frozen frame or the Windows webcam |
+| Extracted hands | One skeleton follows your hand and the label matches the pose; preview works before a robot connection |
+| Recognition details | Explain why the default pose is `UNKNOWN`; for forward, index up with other fingers curled and palm toward the webcam |
+| Velocity overlay | Requested, supervised, transmitted, and measured values are distinct; motion remains disabled until explicitly enabled |
+| Enable / Stop | Enable below the hand view; Stop there and below Disconnect. Focus loss or expired input/feedback revokes control |
+
+For webcam recovery, `HOLD GESTURE`, `UNKNOWN`, expired streams, or an unconfirmed
+Stop, use the [message guide](https://github.com/sriram-2502/go2-webrtc-gesture-nav/blob/main/webrtc/STUDENT_ORIENTATION.md#common-messages-and-what-to-do).
+Do not bypass a gate because a request is nonzero; restore the relevant input
+with the instructor and check the robot visually.
+
 ## Bring your gesture work from previous weeks
 
 You may bring your own MediaPipe landmark rules or gesture classifier into the
@@ -198,6 +227,12 @@ the instructor approve supervised trials. Report your mapping and results in you
 weekly README; full run data stays local and credentials remain private.
 
 ## Go2 gestures and velocity settings
+
+![Default instructor hand poses drawn as MediaPipe landmarks: forward, sideways left/right, turn left/right, and stop.](https://raw.githubusercontent.com/sriram-2502/go2-webrtc-gesture-nav/main/webrtc/clemson/assets/gesture-guide.png)
+
+*Match the mirrored hand panel. These are the instructor's programmed defaults;
+document a replacement table if you integrate your own classifier.*
+
 
 This is the Go2 hardware vocabulary. Weeks 1–6 currently retain the original
 simulation gestures; do not assume their LEFT/RIGHT labels mean the same motion.

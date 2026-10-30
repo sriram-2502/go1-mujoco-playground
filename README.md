@@ -33,6 +33,22 @@ simulation and Go2 over Wi-Fi/WebRTC on Windows 11 for hardware**. Physical Go1
 integration is under development; this is not a claim that both hardware paths
 are ready. Keep the simulation and hardware environments separate.
 
+## Go2 hardware: what to look for
+
+![Basic Go2 reference with onboard camera, robot model, and colored voxel map.](https://raw.githubusercontent.com/sriram-2502/go2-webrtc-gesture-nav/main/docs/assets/go2-camera-voxels.png)
+
+*Upstream Basic UI reference from [Unitree UI](https://github.com/legion1581/unitree_ui),
+with its [MIT notice](https://github.com/sriram-2502/go2-webrtc-gesture-nav/blob/main/webrtc/clemson/UPSTREAM_LICENSE).
+Clemson adds extracted hands, a velocity overlay, and experiment controls.*
+
+![Default hand gestures: forward, sideways left/right, turn left/right, and stop.](https://raw.githubusercontent.com/sriram-2502/go2-webrtc-gesture-nav/main/webrtc/clemson/assets/gesture-guide.png)
+
+Start with the [illustrated hardware guide](course/GO2_HARDWARE.md) for the
+pose-to-velocity table, setup commands, and screen checklist. The Go2 camera
+shows the maze; the Windows webcam supplies the hand skeleton. Preview labels
+before enabling motion. The hardware gestures differ from the Go1 simulation
+defaults; document your own mapping when bringing an earlier classifier.
+
 ## Course challenge
 
 Build and evaluate an interface that lets a human use simple hand gestures to
@@ -120,6 +136,10 @@ Progress is based on demonstrated readiness, not only the calendar.
 
 Loss of a valid gesture, controller heartbeat, network connection, or operator
 video must result in a stop command. Stop must override every motion request.
+
+Before a new lab, follow [team-branch baseline updates](course/UPDATES.md) so
+the assigned branch contains the instructor's current code. For the hardware
+phase, start with the [illustrated Go2 guide](course/GO2_HARDWARE.md#visual-guide-for-your-first-session).
 
 ## How to use the weekly task folders
 

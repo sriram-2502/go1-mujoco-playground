@@ -153,6 +153,10 @@ git status
 Expected branch names are `team-alpha` or `team-bravo`. If the branch does not
 exist, stop and ask the instructor rather than creating a different branch.
 
+Before running later labs, follow [instructor baseline updates](../UPDATES.md).
+Updating `main` alone does not refresh the code on an existing team branch.
+Ask the instructor to merge the approved baseline without losing student reports.
+
 ## Task 4: Run the existing Go1 code
 
 The instructor has already prepared the baseline code. From the repository root:

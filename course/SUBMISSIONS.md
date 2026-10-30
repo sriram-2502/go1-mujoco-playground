@@ -4,6 +4,8 @@ Use your assigned `team-alpha` or `team-bravo` branch. Each student has a unique
 `first-last` folder on that shared branch. Weekly submissions are README reports;
 code experiments remain local unless the instructor explicitly requests a code contribution.
 There is no automatic switch to code submissions in Week 5 or Week 6.
+An instructor-reviewed [baseline update](UPDATES.md) imports approved course code
+into the team branch; it is separate from student code experiments.
 
 ```text
 course/student-work/<team>/<first-last>/
