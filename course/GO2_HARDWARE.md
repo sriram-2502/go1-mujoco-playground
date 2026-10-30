@@ -36,13 +36,42 @@ Do not copy Go1 joint targets or ONNX outputs into the Go2 interface.
 
 - Assigned Go2, charged battery, paired remote, and supervised operating area.
 - Go2 hotspot name/password and the assigned robot's private 32-hex AES key.
-- An approved copy of the companion `unitree_go2_setup` folder and its version.
+- The instructor-approved setup Git commit or course release to use for the session.
 - Confirmation of which firmware, camera, feedback, motion, and stop checks have passed.
 
-The repository separation is planned, not completed: use the supplied bundle
-rather than guessing a future GitHub URL. Keep it separate from this simulation
-repo. The commands below assume it is under your Windows Downloads folder; adapt
-the path if the instructor places it elsewhere. No AES key is included here.
+## Clone the hardware setup from GitHub
+
+Install Git for Windows, then open **PowerShell**:
+
+```powershell
+Set-Location "$env:USERPROFILE\Downloads"
+git clone https://github.com/sriram-2502/unitree-go2-setup.git unitree_go2_setup
+Set-Location .\unitree_go2_setup
+git rev-parse --short HEAD
+```
+
+This public repository includes the Basic UI setup, Clemson dashboard overlays,
+MediaPipe service, and recording/replay code. It is separate from the simulation
+repository. No AES key is included; ask the instructor privately. If you already
+have this checkout, update it rather than cloning into an existing folder.
+
+### Receive instructor updates
+
+Stop both local services and disconnect the robot. While connected to internet,
+from the `unitree_go2_setup` checkout:
+
+```powershell
+git status
+git pull --ff-only
+git rev-parse --short HEAD
+```
+
+Keep local edits; do not reset or force-pull if Git refuses. Ask the instructor
+for help and use the approved commit for the session. After updating, follow the
+dependency/model instructions below if they changed, then rerun `setup-ui.ps1`
+with services stopped to apply the tracked overlays and install UI dependencies.
+Record the commit in your weekly README. Student reports belong in the playground
+team branch, not this instructor setup checkout.
 
 ## Install while connected to the internet
 
@@ -98,7 +127,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\webrtc\start-ui.ps1 -E
 
 Open Chrome at `http://127.0.0.1:5173/`. Choose Connect, Go2, and Access Point
 (Direct), then use `192.168.12.1`. Enter the assigned AES key if prompted.
-Follow the supplied bundle's `webrtc/UI_SETUP.md` if its pinned interface differs.
+Follow the setup repository's `webrtc/UI_SETUP.md` if its pinned interface differs.
 
 With locomotion disabled, record each check as **pass / fail / untested**:
 

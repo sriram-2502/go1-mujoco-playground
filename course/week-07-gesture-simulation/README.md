@@ -7,8 +7,7 @@ navigation. The Go2's onboard camera supplies robot FPV; the Windows webcam
 supplies MediaPipe hands. No laptop ROS installation or external Jetson/ZED stack
 is required. This folder retains its historical name to preserve existing links.
 
-The simulation code and the Weeks 1–6 simulation exercises are unchanged. Use the separate instructor-provided
-Go2 application; the simulation launcher does not connect to the physical robot.
+The simulation code and the Weeks 1–6 simulation exercises are unchanged. Use the separate [Go2 GitHub setup](https://github.com/sriram-2502/unitree-go2-setup); the simulation launcher does not connect to the physical robot.
 
 ## Prerequisites
 
@@ -23,7 +22,7 @@ Explain the roles of the Windows webcam, Go2 camera, browser, and onboard contro
 ## Activities
 
 1. Read [the Go2 hardware guide](../GO2_HARDWARE.md), including the two-camera diagram and coordinate convention.
-2. Obtain the instructor-approved `unitree_go2_setup` bundle, robot assignment, Wi-Fi credentials, and private AES access.
+2. Clone the [Go2 setup repository](https://github.com/sriram-2502/unitree-go2-setup) using the hardware guide; obtain the robot assignment, Wi-Fi credentials, and private AES key from the instructor.
 3. Prepare the separate `go2wifi` environment and local Node runtime while internet is available.
 4. Close other robot clients, join the assigned Go2 hotspot, and check the default endpoint `192.168.12.1`.
 5. Open the Basic WebRTC UI with the instructor and inspect connection/camera/status without commanding locomotion.
@@ -38,7 +37,7 @@ depends on demonstrated readiness, not merely reaching the scheduled week.
 
 ## Completion checkpoint
 
-Show the instructor the separate environment, Basic UI connection, and live robot view. Record the supplied bundle version and endpoint. This week does not require locomotion; keep keys out of evidence.
+Show the instructor the separate environment, Basic UI connection, and live robot view. Record the setup Git commit and endpoint. This week does not require locomotion; keep keys out of evidence.
 
 Keep the existing team-branch and weekly submission procedure. Do not include
 AES/Wi-Fi credentials or raw recording ZIPs in public Git history.

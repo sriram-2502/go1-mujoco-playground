@@ -26,7 +26,7 @@ its installation instructions remain unchanged.
 
 - **Course website:** [DyCo-AI Go1 Gesture Tracking](https://dyco-ai.github.io/go1_gesture_tracking/) provides the schedule, concepts, assignments, and submission expectations.
 - **This repository:** runnable simulation examples, weekly labs, and student reports.
-- **Instructor solution:** the current local `unitree_go2_setup` bundle contains the Basic UI and Clemson Go2 gesture dashboard. Ask the instructor for the approved version. The proposed personal `sriram-2502/go2-webrtc-gesture-nav` repository is not yet published or linked as an available dependency.
+- **Hardware setup and instructor solution:** clone [`unitree-go2-setup`](https://github.com/sriram-2502/unitree-go2-setup) for the Basic UI and Clemson Go2 dashboard. Follow [Go2 hardware onboarding](course/GO2_HARDWARE.md) for clone, installation, and update commands. Ask the instructor only for private robot credentials and hardware approval.
 
 The course is intended for Go1 and Go2 experiments. This version uses **Go1 in
 simulation and Go2 over Wi-Fi/WebRTC on Windows 11 for hardware**. Physical Go1
