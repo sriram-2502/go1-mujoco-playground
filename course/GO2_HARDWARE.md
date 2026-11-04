@@ -7,7 +7,7 @@ gesture rules, team-branch policy, or weekly submission procedure.
 
 ## Visual guide for your first session
 
-Use the instructor's [student visual orientation](https://github.com/sriram-2502/go2-webrtc-gesture-nav/blob/main/webrtc/STUDENT_ORIENTATION.md)
+Use the instructor's [student visual orientation](https://github.com/sriram-2502/go2-gesture-nav/blob/main/webrtc/STUDENT_ORIENTATION.md)
 to recognize the camera/voxel view, extracted hands, velocity overlay, and common
 status messages. The images below are reference material; preview first and
 complete the instructor's hardware checks before enabling movement.
@@ -52,8 +52,8 @@ Install Git for Windows, then open **PowerShell**:
 
 ```powershell
 Set-Location "$env:USERPROFILE\Downloads"
-git clone https://github.com/sriram-2502/go2-webrtc-gesture-nav.git go2-webrtc-gesture-nav
-Set-Location .\go2-webrtc-gesture-nav
+git clone https://github.com/sriram-2502/go2-gesture-nav.git go2-gesture-nav
+Set-Location .\go2-gesture-nav
 git rev-parse --short HEAD
 ```
 
@@ -65,7 +65,7 @@ have this checkout, update it rather than cloning into an existing folder.
 ### Receive instructor updates
 
 Stop both local services and disconnect the robot. While connected to internet,
-from the `go2-webrtc-gesture-nav` checkout:
+from the `go2-gesture-nav` checkout:
 
 ```powershell
 git status
@@ -86,7 +86,7 @@ Keep the existing `go1-mj-playground` simulation environment. Create a separate
 hardware environment in **Anaconda Prompt / Miniconda Prompt**:
 
 ```bat
-cd /d "%USERPROFILE%\Downloads\go2-webrtc-gesture-nav"
+cd /d "%USERPROFILE%\Downloads\go2-gesture-nav"
 conda create -n go2wifi python=3.11 pip -y
 conda activate go2wifi
 python -m pip install --upgrade pip
@@ -102,7 +102,7 @@ driver/MediaPipe/OpenCV combination during a trial.
 Install Git for Windows if absent. In **PowerShell**, from the companion folder:
 
 ```powershell
-Set-Location "$env:USERPROFILE\Downloads\go2-webrtc-gesture-nav"
+Set-Location "$env:USERPROFILE\Downloads\go2-gesture-nav"
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\webrtc\setup-ui.ps1 -Edition all
 ```
 
@@ -126,10 +126,10 @@ internet access. Ethernet and Jetson SSH are not required for this course path.
 
 ## Stationary checkout before any motion
 
-![Go2 Basic web view showing the robot camera, robot model, and colored voxel map.](https://raw.githubusercontent.com/sriram-2502/go2-webrtc-gesture-nav/main/docs/assets/go2-camera-voxels.png)
+![Go2 Basic web view showing the robot camera, robot model, and colored voxel map.](https://raw.githubusercontent.com/sriram-2502/go2-gesture-nav/main/docs/assets/go2-camera-voxels.png)
 
 *Upstream Basic UI reference from [Unitree UI](https://github.com/legion1581/unitree_ui),
-with its [MIT notice](https://github.com/sriram-2502/go2-webrtc-gesture-nav/blob/main/webrtc/clemson/UPSTREAM_LICENSE).
+with its [MIT notice](https://github.com/sriram-2502/go2-gesture-nav/blob/main/webrtc/clemson/UPSTREAM_LICENSE).
 Clemson adds the hand panel and velocity overlay; this is not a Clemson trial capture.*
 
 
@@ -162,7 +162,7 @@ passwords, keys, or cloud tokens. Clear saved site data after using a shared lab
 ## Open the Clemson gesture UI
 
 Disconnect Basic from the robot and stop its server with Ctrl+C. Use two terminals,
-both in the companion `go2-webrtc-gesture-nav` folder:
+both in the companion `go2-gesture-nav` folder:
 
 **Terminal 1 — Anaconda Prompt:**
 
@@ -204,7 +204,7 @@ these before enabling motion. Hiding the hand panel stops its webcam tracking.
 | Enable / Stop | Enable below the hand view; Stop there and below Disconnect. Focus loss or expired input/feedback revokes control |
 
 For webcam recovery, `HOLD GESTURE`, `UNKNOWN`, expired streams, or an unconfirmed
-Stop, use the [message guide](https://github.com/sriram-2502/go2-webrtc-gesture-nav/blob/main/webrtc/STUDENT_ORIENTATION.md#common-messages-and-what-to-do).
+Stop, use the [message guide](https://github.com/sriram-2502/go2-gesture-nav/blob/main/webrtc/STUDENT_ORIENTATION.md#common-messages-and-what-to-do).
 Do not bypass a gate because a request is nonzero; restore the relevant input
 with the instructor and check the robot visually.
 
@@ -214,7 +214,7 @@ You may bring your own MediaPipe landmark rules or gesture classifier into the
 instructor hardware setup. Keep the Go1 simulation and its environment separate;
 reuse the recognition functions, not the MuJoCo/Qt runtime or robot policy.
 
-Follow [the student gesture integration guide](https://github.com/sriram-2502/go2-webrtc-gesture-nav/blob/main/webrtc/STUDENT_INTEGRATION.md).
+Follow [the student gesture integration guide](https://github.com/sriram-2502/go2-gesture-nav/blob/main/webrtc/STUDENT_INTEGRATION.md).
 It explains the actual `gestures.diagnose()` integration point, label adapter,
 preview checks, and which supervision/transport modules to retain. There is no
 automatic import of your playground code: make and review this small adaptation
@@ -228,7 +228,7 @@ weekly README; full run data stays local and credentials remain private.
 
 ## Go2 gestures and velocity settings
 
-![Default instructor hand poses drawn as MediaPipe landmarks: forward, sideways left/right, turn left/right, and stop.](https://raw.githubusercontent.com/sriram-2502/go2-webrtc-gesture-nav/main/webrtc/clemson/assets/gesture-guide.png)
+![Default instructor hand poses drawn as MediaPipe landmarks: forward, sideways left/right, turn left/right, and stop.](https://raw.githubusercontent.com/sriram-2502/go2-gesture-nav/main/webrtc/clemson/assets/gesture-guide.png)
 
 *Match the mirrored hand panel. These are the instructor's programmed defaults;
 document a replacement table if you integrate your own classifier.*

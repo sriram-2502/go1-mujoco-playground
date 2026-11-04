@@ -26,7 +26,7 @@ its installation instructions remain unchanged.
 
 - **Course website:** [DyCo-AI Go1 Gesture Tracking](https://dyco-ai.github.io/go1_gesture_tracking/) provides the schedule, concepts, assignments, and submission expectations.
 - **This repository:** runnable simulation examples, weekly labs, and student reports.
-- **Hardware setup and instructor solution:** clone [`go2-webrtc-gesture-nav`](https://github.com/sriram-2502/go2-webrtc-gesture-nav) for the Basic UI and Clemson Go2 dashboard. Follow [Go2 hardware onboarding](course/GO2_HARDWARE.md) for clone, installation, and update commands. Ask the instructor only for private robot credentials and hardware approval.
+- **Hardware setup and instructor solution:** clone [`go2-gesture-nav`](https://github.com/sriram-2502/go2-gesture-nav) for the Basic UI and Clemson Go2 dashboard. Follow [Go2 hardware onboarding](course/GO2_HARDWARE.md) for clone, installation, and update commands. Ask the instructor only for private robot credentials and hardware approval.
 
 The course is intended for Go1 and Go2 experiments. This version uses **Go1 in
 simulation and Go2 over Wi-Fi/WebRTC on Windows 11 for hardware**. Physical Go1
@@ -35,13 +35,13 @@ are ready. Keep the simulation and hardware environments separate.
 
 ## Go2 hardware: what to look for
 
-![Basic Go2 reference with onboard camera, robot model, and colored voxel map.](https://raw.githubusercontent.com/sriram-2502/go2-webrtc-gesture-nav/main/docs/assets/go2-camera-voxels.png)
+![Basic Go2 reference with onboard camera, robot model, and colored voxel map.](https://raw.githubusercontent.com/sriram-2502/go2-gesture-nav/main/docs/assets/go2-camera-voxels.png)
 
 *Upstream Basic UI reference from [Unitree UI](https://github.com/legion1581/unitree_ui),
-with its [MIT notice](https://github.com/sriram-2502/go2-webrtc-gesture-nav/blob/main/webrtc/clemson/UPSTREAM_LICENSE).
+with its [MIT notice](https://github.com/sriram-2502/go2-gesture-nav/blob/main/webrtc/clemson/UPSTREAM_LICENSE).
 Clemson adds extracted hands, a velocity overlay, and experiment controls.*
 
-![Default hand gestures: forward, sideways left/right, turn left/right, and stop.](https://raw.githubusercontent.com/sriram-2502/go2-webrtc-gesture-nav/main/webrtc/clemson/assets/gesture-guide.png)
+![Default hand gestures: forward, sideways left/right, turn left/right, and stop.](https://raw.githubusercontent.com/sriram-2502/go2-gesture-nav/main/webrtc/clemson/assets/gesture-guide.png)
 
 Start with the [illustrated hardware guide](course/GO2_HARDWARE.md) for the
 pose-to-velocity table, setup commands, and screen checklist. The Go2 camera

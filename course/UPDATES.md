@@ -34,5 +34,5 @@ which case the team pull already brings in the baseline. Check `git log --onelin
 and record the version used in your report.
 
 The physical Go2 application is a separate checkout. Follow its own
-[update instructions](https://github.com/sriram-2502/go2-webrtc-gesture-nav#get-instructor-updates);
+[update instructions](https://github.com/sriram-2502/go2-gesture-nav#get-instructor-updates);
 do not merge hardware application files into the playground.
