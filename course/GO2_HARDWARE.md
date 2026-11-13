@@ -1,395 +1,157 @@
 # Go2 hardware onboarding for Creative Inquiry students
 
-The hardware phase uses a **Unitree Go2, Windows 11 laptop, and Go2 Wi-Fi/WebRTC**.
-You continue learning from the existing Go1 simulator, but the physical robot is
-Go2. This guide does not change the simulation installation, ONNX policy, limits,
-gesture rules, team-branch policy, or weekly submission procedure.
+The hardware phase uses a Go2, Windows 11, and the
+[personal Go2 gesture UI](https://github.com/sriram-2502/go2-gesture-nav).
+**One setup for Weeks 7 onward; no ROS or separate Basic UI repo.** Go1 simulation
+and student reports stay in this playground checkout.
 
 ## Which setup to use
 
-| Course stage | Checkout and interface |
+The [personal repo README](https://github.com/sriram-2502/go2-gesture-nav#1-install-once)
+is the source of installation and daily launch commands. Use it rather than
+copying older `webrtc/` instructions. The app now has root-level scripts and
+one `requirements.txt`.
+
+| Course stage | Same app, different readiness gate |
 | --- | --- |
-| Week 7: stationary Basic UI | [Clemson DyCo-AI/go2-webRTC](https://github.com/DyCo-AI/go2-webRTC), using its [Windows setup guide](https://github.com/DyCo-AI/go2-webRTC/blob/main/docs/SETUP.md). Run its root-level setup/start scripts; no MediaPipe service is needed. |
-| Weeks 8–9 onward: Clemson gesture UI | [Personal go2-gesture-nav instructor reference](https://github.com/sriram-2502/go2-gesture-nav), using the commands below. It includes hand tracking, supervised navigation, recording/replay, **Jump once**, and **Bound gait**. |
+| Week 7 | Install, preview hand tracking, and inspect robot camera/state while stationary; leave movement disabled |
+| Week 8 | Review freshness, control state, feedback, stopping, and intervention procedures |
+| Week 9 onward | Supervised gesture walking, recording/replay, and flat-maze trials |
+| Optional extension | Existing Jump once / Bound gait buttons, only after separate instructor approval |
 
-These are separate checkouts. Do not run the Basic starter's root-level scripts
-from the personal repo, or the personal repo's `webrtc\` commands from the Basic
-starter. Disconnect and stop the Basic client before opening Clemson; only one
-robot client owns the connection. The personal reference also contains research
-material, but the course uses its **Clemson WebRTC edition**, not `ros/`.
-
-The playground's `creative-inquiry-dev` branch is for instructor course
-development. Runnable Go2 UI features live in the personal hardware repo, not in
-that branch or the simulation launcher. Student reports remain on the assigned
-team branches, using the [update procedure](UPDATES.md).
+The playground's `creative-inquiry-dev` branch is instructor course authoring.
+The runnable Go2 UI is the separate personal repo, not a playground branch.
+Students keep the [assigned team-branch/report procedure](UPDATES.md).
 
 ## Visual guide for your first session
 
-Use the instructor's [student visual orientation](https://github.com/sriram-2502/go2-gesture-nav/blob/main/webrtc/STUDENT_ORIENTATION.md)
-to recognize the camera/voxel view, extracted hands, velocity overlay, and common
-status messages. The images below are reference material; preview first and
-complete the instructor's hardware checks before enabling movement.
+Use the [screen guide](https://github.com/sriram-2502/go2-gesture-nav/blob/main/docs/STUDENT_ORIENTATION.md)
+and [illustrated gestures](https://github.com/sriram-2502/go2-gesture-nav/blob/main/dashboard/README.md#gesture-guide-what-your-hand-commands).
+The Windows webcam sees your hand; the Go2 camera sees the operating area.
+The app requests body motion; Unitree's onboard controller handles the joints.
 
-## Understand the two cameras and computers
+## Install and start the same project
 
-```text
-Windows webcam -> MediaPipe -> gesture -> supervised velocity request
-                                            |
-                                  local Clemson web UI
-                                            |
-                                    Wi-Fi / WebRTC
-                                            |
-                                           Go2
-                                            |
-                      onboard camera + robot state + available voxels
-                                            |
-                                  local Clemson web UI
-```
+Install while internet is available, before joining the Go2 hotspot. Follow
+[the complete quick start](https://github.com/sriram-2502/go2-gesture-nav#1-install-once):
+clone the personal repo, create/activate `go2wifi`, install root
+`requirements.txt`, download the hand model, and run root `setup-ui.ps1`.
 
-| Component | Its job |
-| --- | --- |
-| Windows laptop webcam | Sees the operator's hand; MediaPipe runs locally |
-| Go2 onboard camera | Sees the maze; the robot view appears in the browser |
-| Browser UI | Displays robot video/voxels and extracted hand skeletons; uses one robot connection |
-| Go2 onboard controller | Carries out supported high-level motion requests |
+From that personal repo root, keep two terminals open:
 
-The operator laptop needs no ROS, WSL, Docker, external Jetson, or ZED camera for
-this path. The older Go1/ROS/Jetson AGX/ZED project is a separate hardware reference.
-Do not copy Go1 joint targets or ONNX outputs into the Go2 interface.
-
-## What to obtain from the instructor
-
-- Assigned Go2, charged battery, paired remote, and supervised operating area.
-- Go2 hotspot name/password and the assigned robot's private 32-hex AES key.
-- The instructor-approved setup Git commit or course release to use for the session.
-- Confirmation of which firmware, camera, feedback, motion, and stop checks have passed.
-
-## Clone the hardware setup from GitHub
-
-Install Git for Windows, then open **PowerShell**:
-
-```powershell
-Set-Location "$env:USERPROFILE\Downloads"
-git clone https://github.com/sriram-2502/go2-gesture-nav.git go2-gesture-nav
-Set-Location .\go2-gesture-nav
-git rev-parse --short HEAD
-```
-
-This public repository includes the Clemson dashboard overlays, MediaPipe service,
-recording/replay, and the Jump once / Bound gait controls. Clone this for Weeks
-8–9 after the separate Week 7 Basic checkout. It is separate from the simulation
-repository. No AES key is included; ask the instructor privately. If you already
-have this checkout, update it rather than cloning into an existing folder.
-
-### Receive instructor updates
-
-Stop both local services and disconnect the robot. While connected to internet,
-from the `go2-gesture-nav` checkout:
-
-```powershell
-git status
-git pull --ff-only
-git rev-parse --short HEAD
-```
-
-Keep local edits; do not reset or force-pull if Git refuses. Ask the instructor
-for help and use the approved commit for the session. After updating, follow the
-dependency/model instructions below if they changed, then rerun `setup-ui.ps1`
-with services stopped to apply the tracked overlays and install UI dependencies.
-Record the commit in your weekly README. Student reports belong in the playground
-team branch, not this instructor setup checkout.
-
-## Install while connected to the internet
-
-Keep the existing `go1-mj-playground` simulation environment. Create a separate
-hardware environment in **Anaconda Prompt / Miniconda Prompt**:
-
-```bat
-cd /d "%USERPROFILE%\Downloads\go2-gesture-nav"
-conda create -n go2wifi python=3.11 pip -y
-conda activate go2wifi
-python -m pip install --upgrade pip
-python -m pip install -r webrtc\requirements.txt -r webrtc\requirements-gestures.txt
-python -m webrtc.gesture_preview.download_model
-python -m pip check
-```
-
-If `go2wifi` already exists, activate it instead of recreating it. Install the
-instructor-approved requirements; do not independently upgrade the working
-driver/MediaPipe/OpenCV combination during a trial.
-
-Install Git for Windows if absent. In **PowerShell**, from the companion folder:
-
-```powershell
-Set-Location "$env:USERPROFILE\Downloads\go2-gesture-nav"
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\webrtc\setup-ui.ps1 -Edition clemson
-```
-
-This obtains the pinned UI and Clemson overlays plus a workspace-local Node
-runtime. The execution-policy flag affects this process only. Stop dashboard
-servers before rerunning setup. Detailed dependency versions and troubleshooting
-are in the companion `webrtc/DEPENDENCIES.md`; the course does not duplicate its
-dependency lock or vendor UI source.
-
-## Connect to Go2 Wi-Fi
-
-1. With the instructor, power on the Go2 and complete the normal robot/remote checks.
-2. Connect Windows to the assigned **Go2 Wi-Fi hotspot** using the private Wi-Fi credentials.
-3. The hotspot's default robot IP is **`192.168.12.1`**. This is different from the
-   onboard Jetson's Ethernet address used in the separate research/ROS path.
-4. Close the phone app and disconnect other robot scripts/dashboard tabs before
-   opening a robot connection. Use one client at a time.
-
-Install software before switching networks; the robot hotspot may not provide
-internet access. Ethernet and Jetson SSH are not required for this course path.
-
-## Stationary checkout before any motion
-
-![Go2 Basic web view showing the robot camera, robot model, and colored voxel map.](https://raw.githubusercontent.com/sriram-2502/go2-gesture-nav/main/docs/assets/go2-camera-voxels.png)
-
-*Upstream Basic UI reference from [Unitree UI](https://github.com/legion1581/unitree_ui),
-with its [MIT notice](https://github.com/sriram-2502/go2-gesture-nav/blob/main/webrtc/clemson/UPSTREAM_LICENSE).
-Clemson adds the hand panel and velocity overlay; this is not a Clemson trial capture.*
-
-
-For Week 7, use the separate [Clemson Basic starter's setup guide](https://github.com/DyCo-AI/go2-webRTC/blob/main/docs/SETUP.md)
-at **http://127.0.0.1:5173/**. That starter has root-level `setup-ui.ps1` and
-`start-ui.ps1` scripts and no Clemson hand panel.
-
-For Week 8 onward, close/disconnect that client and use **Open the Clemson gesture
-UI** below at **http://127.0.0.1:5174/**. Repeat the following checks in Clemson;
-you do not need to start another Basic client inside the personal repo.
-
-With locomotion disabled, record each check as **pass / fail / untested**:
-
-- Correct assigned robot and successful authenticated WebRTC connection.
-- Changing live onboard video, rather than a frozen image.
-- Robot battery/state feedback arriving; identify unavailable or stale values.
-- LiDAR/voxel display when the onboard stream is available. Do not infer full
-  mapping/localization/navigation support from the presence of voxel graphics.
-- Known paired-remote intervention procedure and instructor-reviewed software Stop.
-
-Do not experiment with actions, gait modes, autonomous goals, or patrol during
-stationary onboarding. Basic's upstream controls are not the same as the Clemson
-gesture supervisor. A stationary screenshot does not qualify physical stopping.
-
-Basic follows upstream key-cache behavior. Do not publish browser logs, screenshots,
-passwords, keys, or cloud tokens. Clear saved site data after using a shared lab PC.
-
-## Open the Clemson gesture UI
-
-Disconnect the Week 7 Basic client from the robot and stop its server with Ctrl+C. Use two terminals,
-both in the companion `go2-gesture-nav` folder:
-
-**Terminal 1 — Anaconda Prompt:**
+**Terminal 1 — Anaconda / Miniconda Prompt:**
 
 ```bat
 conda activate go2wifi
-python -m webrtc.gesture_preview.server
+python -m gesture_preview.server
 ```
 
 **Terminal 2 — PowerShell:**
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\webrtc\start-ui.ps1 -Edition clemson
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\start-ui.ps1
 ```
 
-Open `http://127.0.0.1:5174/`. Hand tracking starts automatically when the side
-panel opens; only skeletons and labels are displayed, not webcam video. Close
-the simulator or another application using the webcam first. For another webcam,
-launch the service with `--camera 1` instead of the default device 0.
+Open **http://127.0.0.1:5174/**. The gesture service uses **8766** through the
+dashboard proxy. Close another webcam app first. No `-Edition` flag is required.
+Do not merge the hardware application's files into the playground.
 
-Preview your gestures with robot control disabled. In the Go2 connection form,
-leave the editable IP at **`192.168.12.1`**, enter the private AES key, and select
-**Connect and open web view**. Successful validation opens camera/voxels directly.
-The Clemson key is held in page memory until disconnect/reload. A valid key does
-not authorize unsupervised motion.
+If you used the old layout, update and rerun the root setup once. Reuse the
+`go2wifi` environment; old generated `webrtc/` checkouts are no longer used.
+See the [migration/update note](https://github.com/sriram-2502/go2-gesture-nav#update-and-restart).
 
-The main-view overlay distinguishes **requested**, **supervised**, **transmitted**,
-and **measured** velocities. A transmitted command is not proof of execution.
-Recognition details explain which fingers and directions were detected; check
-these before enabling motion. Hiding the hand panel stops its webcam tracking.
+## Stationary checkout before any motion
 
-## Check the screen before enabling
+With the instructor, power on the assigned Go2 and complete the normal remote/
+standing checks. Obtain its private hotspot password and AES key. Join the
+**Go2 hotspot**, not Clemson campus Wi-Fi; the default robot IP is
+**192.168.12.1**. Close the phone app and other robot clients before connecting.
 
-| Look for | Expected behavior |
-| --- | --- |
-| Robot camera | Updating Go2 view of the operating area, not a frozen frame or the Windows webcam |
-| Extracted hands | One skeleton follows your hand and the label matches the pose; preview works before a robot connection |
-| Recognition details | Explain why the default pose is `UNKNOWN`; for forward, index up with other fingers curled and palm toward the webcam |
-| Velocity overlay | Requested, supervised, transmitted, and measured values are distinct; motion remains disabled until explicitly enabled |
-| Enable / Stop | Enable below the hand view; Stop there and below Disconnect. Focus loss or expired input/feedback revokes control |
+Keep control disabled and record **pass / fail / untested** for:
 
-For webcam recovery, `HOLD GESTURE`, `UNKNOWN`, expired streams, or an unconfirmed
-Stop, use the [message guide](https://github.com/sriram-2502/go2-gesture-nav/blob/main/webrtc/STUDENT_ORIENTATION.md#common-messages-and-what-to-do).
-Do not bypass a gate because a request is nonzero; restore the relevant input
-with the instructor and check the robot visually.
+- Authenticated connection to the assigned robot.
+- Changing onboard camera video and fresh body-state feedback.
+- Available voxels; these do not establish an automatic obstacle planner.
+- Hand skeleton/labels in preview and requested/supervised/transmitted/measured velocity displays.
+- Battery display, Stop, optional behavior buttons, and the UI build ID.
+- Paired-remote intervention procedure and the plan to verify physical stopping.
+
+Match **Navigation | UI build ID** with the launcher, then record the Git commit.
+If they differ, stop the old server, restart, and hard-refresh Chrome.
+Do not activate Jump/Bound or other actions during stationary onboarding.
 
 ## Bring your gesture work from previous weeks
 
-You may bring your own MediaPipe landmark rules or gesture classifier into the
-instructor hardware setup. Keep the Go1 simulation and its environment separate;
-reuse the recognition functions, not the MuJoCo/Qt runtime or robot policy.
-
-Follow [the student gesture integration guide](https://github.com/sriram-2502/go2-gesture-nav/blob/main/webrtc/STUDENT_INTEGRATION.md).
-It explains the actual `gestures.diagnose()` integration point, label adapter,
-preview checks, and which supervision/transport modules to retain. There is no
-automatic import of your playground code: make and review this small adaptation
-locally. Earlier `LEFT`/`RIGHT` labels mean turning; the hardware's `STRAFE_*`
-labels mean sideways travel. Agree on your mapping before enabling control.
-
-Keep the instructor's freshness/hold checks, Go2 speed bounds, explicit enable,
-and browser stop/feedback checks. Validate without robot motion first, then have
-the instructor approve supervised trials. Report your mapping and results in your
-weekly README; full run data stays local and credentials remain private.
+Follow [the integration guide](https://github.com/sriram-2502/go2-gesture-nav/blob/main/docs/STUDENT_INTEGRATION.md).
+Reuse recognition functions, not the Go1 simulation runtime or ONNX outputs.
+Keep the hardware timestamps, hold/freshness checks, limits, explicit enable,
+and stop/feedback checks. Preview locally before reviewed motion trials.
 
 ## Go2 gestures and velocity settings
 
-![Default instructor hand poses drawn as MediaPipe landmarks: forward, sideways left/right, turn left/right, and stop.](https://raw.githubusercontent.com/sriram-2502/go2-gesture-nav/main/webrtc/clemson/assets/gesture-guide.png)
+Match the mirrored hand panel. Directions use the robot's body frame:
++vx forward, +vy left, +wz counterclockwise from above.
 
-*Match the mirrored hand panel. These are the instructor's programmed defaults;
-document a replacement table if you integrate your own classifier.*
-
-
-This is the Go2 hardware vocabulary. Weeks 1–6 currently retain the original
-simulation gestures; do not assume their LEFT/RIGHT labels mean the same motion.
-Compare the two tables explicitly before changing robot backends.
-
-| Hand pose in the mirrored panel | Go2 request at default settings |
+| Pose | Default request |
 | --- | --- |
-| Index straight up; other fingers curled; palm facing webcam | Forward: `(vx, vy, wz) = (+0.5, 0, 0)` |
-| Index pointing left | Sideways left: `(0, +0.5, 0)` |
-| Index and middle both pointing left | Sideways right: `(0, -0.5, 0)` |
-| Thumb up; other fingers curled | Turn left in place: `(0, 0, +0.8)` |
-| Thumb down; other fingers curled | Turn right in place: `(0, 0, -0.8)` |
-| Open palm or closed fist | Zero/stop request |
-| No hand, two hands, or uncertain pose | Zero/stop request |
+| Index up, other fingers curled, palm toward webcam | Forward, 0.5 m/s |
+| Index pointing left | Sideways left, 0.5 m/s |
+| Index + middle fingers pointing left | Sideways right, 0.5 m/s |
+| Thumb up / down | Turn left / right, 0.8 rad/s |
+| Open palm, fist, no hand, or unclear pose | Stop request |
 
-`vx` and `vy` use **m/s**; `wz` uses **rad/s**. Directions are relative to the
-robot: +vx forward, +vy its left, and +wz counterclockwise viewed from above.
-The robot's left can differ from the operator's left in the room.
-
-- Forward magnitude: **0.5–1.0 m/s**, default **0.5**.
-- Sideways magnitude: **fixed at 0.5 m/s**, sign chosen by the gesture.
-- Turn magnitude: **0.5–1.0 rad/s**, default **0.8**.
-- Inactive axes: zero. One gesture controls one axis; no ramps are added.
-- A clear movement gesture must persist for **300 ms**. A held gesture continues
-  requesting movement; it is not a fixed-distance step.
-- Missing/uncertain hands request zero without a movement hold; input older than
-  **400 ms** is rejected. Robot camera/state checks also gate control.
-
-These are programmed request limits, not verified physical capability limits.
-Do not raise settings merely because the UI accepts them. The visual guide and
-beginner Python examples are in the companion `webrtc/clemson/README.md` and
-`webrtc/gesture_preview/README.md`. No backward gesture is assigned in this version.
+One gesture requests one axis. Movement needs 300 ms consistency; input older
+than 400 ms is rejected. Forward/turn speed settings differ from the unchanged
+Go1 simulator. See [the full gesture guide](https://github.com/sriram-2502/go2-gesture-nav/blob/main/dashboard/README.md)
+for configured limits. No backward gesture is assigned.
 
 ## First supervised motion checks
 
-Only proceed after the instructor approves the physical setup and communication,
-standing, feedback, video, and intervention checks. Keep a clear, level operating
-area and the paired remote in the instructor's hands. The interface does not
-stand the robot up or provide a leg controller.
+After instructor approval, use a clear, level area and keep the paired remote
+with the supervisor. The app does not stand the robot up.
 
-1. If required by the instructor, first run the companion's bounded script from
-   Anaconda Prompt: `python webrtc\go2_wifi_velocity_test.py --vel 0.5 --time 1`.
-   It is a motion command. Disconnect the dashboard first; inspect actual travel
-   and stopping, with clear space for more than the nominal requested distance.
-2. Reconnect only the Clemson UI, then preview each intended pose without enabling.
-3. Click **Enable gesture control** below the hand view. No palm/fist startup pose
-   is required. Fresh tracking, robot state, and video are still required; motion
-   waits for new post-enable frames and the gesture consistency hold.
-4. Test one brief motion at a time, starting with defaults. Return to a stop pose
-   and visually confirm stopping before proceeding to another axis.
-5. Use **Stop** (below Disconnect or under the hand view) to revoke gesture control.
-   Inspect the stop result and actual robot. The guarded sequence requests zero,
-   StopMove, and only then BalanceStand if low-speed upright feedback is confirmed.
-6. If any stop/stance is unconfirmed, use the paired remote and resolve the cause
-   with the instructor before another trial. Browser/network/power failures can
-   prevent software stopping; the screen button is not a hardware emergency stop.
+1. Preview every intended gesture with navigation disabled.
+2. Click **Enable gesture control** directly. There is no palm/fist startup pose; new frames, the consistency hold, and fresh video/state still gate motion.
+3. Test one brief axis at a time, return to Stop, and verify actual stopping before proceeding.
+4. Check Stop and read its recovery result. A transmitted or acknowledged request is not proof of a physical stop.
+5. If recovery is unconfirmed, use the paired remote and resolve it before another trial.
 
-Changing speed settings or obstacle avoidance disables gesture control. The
-avoidance switch reads back the robot's state; OFF disables avoidance behavior,
-and ON does not guarantee every obstacle will be avoided. Do not change it merely
-to get past an unexplained refusal to move. Record its state for each experiment.
+Obstacle avoidance has separate state readback. Do not infer protection from
+voxels or change settings merely to bypass an unexplained refusal to move.
+Record its reported state in each experiment.
 
 ## Optional Forward Jump and Bound gait
 
-These controls already exist in the personal Clemson UI; students do not need
-to implement the buttons to follow the core course. The camera-view control
-stack is **Disconnect → Stop → battery → Jump once / Bound gait**. They are
-explicit buttons, not default hand gestures, and use the same authenticated
-WebRTC connection as walking.
+These buttons already exist below the battery; they are not default gestures.
 
-| Control | What happens | Return to ordinary navigation |
-| --- | --- | --- |
-| **Jump once** | Pauses gesture navigation and requests one forward jump (`FrontJump` 1031). It is not persistent FreeJump mode. | Use Stop after landing and follow the UI's recovery result. Gesture enabling and repeat actions remain locked until recovery is confirmed. |
-| **Bound gait** | Pauses navigation, requests Bound (`FreeBound` 2046), and waits for successful reply and new mode feedback. | After confirmation, explicitly enable gestures to navigate. Bound again or Stop requests exit; a stop/zero gesture while moving also exits Bound and disarms navigation. |
+- **Jump once:** pauses gesture navigation and requests one forward jump. Repeat actions remain locked until Stop/recovery is confirmed.
+- **Bound gait:** pauses navigation, requires successful reply/new mode feedback, then requires explicit gesture enabling to navigate. Stop requests exit.
 
-The maintainer has reported a successful forward jump and landing; this does
-not qualify all firmware, interruption, or recovery cases. Bound requires its
-own supervised hardware checks. A request acknowledgement does not prove an
-executed jump or established gait. The old dashboard videos predate these controls.
+Read [behavior and recovery](https://github.com/sriram-2502/go2-gesture-nav/blob/main/dashboard/CONTROL_EXTENSIONS.md).
+Missing foot-contact data or unconfirmed recovery leaves navigation locked.
+Restore standing using the paired remote before the explicit remote-recovery
+acknowledgement; that acknowledgement sends no motion and does not enable walking.
 
-Jump recovery checks require fresh grounded/upright low-speed feedback. Missing
-foot-contact data or an unconfirmed stop leaves navigation locked; use the paired
-remote and the explicit **I restored standing with the remote** acknowledgement
-only after restoring normal standing. That acknowledgement sends no motion
-commands and does not re-enable gestures. See the authoritative
-[behavior and recovery guide](https://github.com/sriram-2502/go2-gesture-nav/blob/main/webrtc/clemson/CONTROL_EXTENSIONS.md).
-
-Keep the required baseline as ordinary gesture-controlled walking in a flat maze.
-Jump/Bound trials are optional and instructor-approved. Student extensions may
-study deliberate behavior-selection interfaces or evaluation; preserve the
-existing action ownership, stop, feedback, and recovery checks. Stationary Look
-Around remains removed/disabled.
-
-### Confirm the correct UI version
-
-Disconnect and stop both local services before updating the personal checkout.
-Run `git pull --ff-only`, restart the Python service, and launch
-`webrtc\start-ui.ps1 -Edition clemson`. Startup reapplies the tracked overlays.
-Open port **5174**, hard-refresh with Ctrl+Shift+R, and compare **Navigation | UI
-build ID** with the ID printed in PowerShell. Matching IDs identify the loaded
-code; they do not establish hardware qualification. If buttons are missing,
-check the checkout, edition, port, and stale-server/cache state before changing code.
+The maintainer reported a successful forward jump/landing, which does not
+qualify every firmware or recovery case. Bound needs its own supervised checks.
+Keep ordinary walking in a flat maze as the required baseline. These extensions
+require separate approval; Stationary Look Around remains disabled.
 
 ## Record, replay, and submit evidence
 
-Before enabling gesture control, turn the overall **Recording** switch ON and
-choose the Clemson dashboard tab in Chrome's capture chooser. The chooser may
-trigger the focus-loss stop, so enable control separately afterward. Turn
-Recording OFF to stop and save the video and available data together as one ZIP.
+Turn Recording ON before enabling gestures and choose the dashboard tab in
+Chrome. Turn it OFF to save the local ZIP. Replay is offline and sends no robot
+commands. See [recording details](https://github.com/sriram-2502/go2-gesture-nav/blob/main/docs/RECORDING.md).
+Browser receive timing is not synchronized sensor acquisition timing.
 
-Use **Replay** to open the ZIP without a robot command connection. Review the
-dashboard video or interactive recorded hands/voxels/telemetry, and inspect the
-CSV files. Native MP4 is preferred, WebM fallback is supported, and the companion
-`webrtc/RECORDING.md` describes local conversion, data coverage, size/duration
-limits, and approximate timestamp alignment. Try the synthetic replay demo first.
-
-Record robot assignment without exposing its key, software/firmware versions,
-speed settings, gesture mapping, avoidance state, operator, conditions, result,
-and interventions. Separate simulation evidence, stationary checks, and actual
-supervised motion. Submit sanitized summaries using the existing team/weekly
-policy; keep run ZIPs, keys, and account credentials out of public Git history.
+Record commit/build ID, assigned robot without credentials, gesture mapping,
+speeds, avoidance state, conditions, results, and interventions. Full runs remain
+local. Follow [the submission policy](SUBMISSIONS.md) for individual weekly README
+reports on the assigned team branch and optional small sanitized media.
 
 ## What is and is not qualified
 
-The maintainer has confirmed the baseline gesture-navigation hardware setup.
-The companion also has offline gesture/supervision, behavior-transport,
-recording-format, and build checks. These do not qualify every Go2 or all optional
-Jump/Bound behavior and recovery cases.
-The instructor maintains the hardware qualification record. Actual recognition,
-physical motion/stopping, firmware-specific services, browser capture, and combined
-recording performance must be checked for the supplied hardware and bundle version.
-
-Go2 simulation and a shared cross-repository gesture package remain future work.
-The current Go1 simulation controller and lessons are intentionally preserved.
-
-## Course reports and local data
-
-Follow [the submission and data policy](SUBMISSIONS.md): weekly README reports
-in your student folder, optional small sanitized media, full runs stored locally,
-and a final Markdown report. Ask the instructor for the AES key. Install while
-on internet, then join the assigned Go2 hotspot for robot access; do not use
-Clemson campus Wi-Fi for the robot connection. Campus firewall/client isolation
-can interfere; do not disable security controls to work around it.
+The navigation baseline has maintainer-confirmed hardware operation and offline
+application tests. This does not qualify all optional behaviors, stopping cases,
+or Go2 firmware. Version changes still need a supervised checkout. Software Stop
+depends on communication and is not a hardware emergency stop.

@@ -32,7 +32,7 @@ Map each Go2 hand pose to one body-frame velocity axis and evaluate recognition.
 
 The personal Clemson UI already includes **Jump once** and **Bound gait**.
 Identify them and explain the difference between a one-shot action and gait
-selection using [the behavior/recovery guide](https://github.com/sriram-2502/go2-gesture-nav/blob/main/webrtc/clemson/CONTROL_EXTENSIONS.md).
+selection using [the behavior/recovery guide](https://github.com/sriram-2502/go2-gesture-nav/blob/main/dashboard/CONTROL_EXTENSIONS.md).
 Button presence is not permission to activate them. Keep ordinary walking as
 the required baseline. Only after separate instructor approval and qualification,
 evaluate a behavior or a deliberate selection-interface extension while retaining

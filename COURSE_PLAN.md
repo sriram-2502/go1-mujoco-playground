@@ -10,7 +10,7 @@ The required midpoint is **webcam gesture navigation through a baseline MuJoCo m
 | 4 | Gesture vocabulary and recognition | STOP, FORWARD, LEFT, RIGHT; test across operators |
 | 5 | Validation, mapping, command supervision | Hold-time, stale-input, stop and bounds tests; command logs |
 | 6 | Integrated dashboard and baseline maze | Webcam + overview + robot FPV; three repeatable navigation trials |
-| 7 | Go2 hardware inventory and setup | Windows 11, Wi-Fi/AES access, Clemson Basic WebRTC camera and status |
+| 7 | Go2 hardware inventory and setup | Windows 11, Wi-Fi/AES access, personal gesture dashboard, stationary camera/state checkout |
 | 8 | Stationary Go2 checkout | Onboard camera, telemetry, voxels, fresh feedback, and the supervised stop procedure |
 | 9 | Clemson Go2 UI and supervised gestures | Preview the Go2-specific vocabulary, then incremental bounded motion after instructor qualification |
 | 10 | Physical maze construction and navigation | Measured clearances; staged supervised trials |
@@ -52,10 +52,7 @@ The supplied geometric rules have no calibrated classification-confidence score.
 
 ## Hardware phase: Go2 over WebRTC
 
-Week 7 uses [Clemson's Basic starter](https://github.com/DyCo-AI/go2-webRTC).
-Weeks 8 onward use the personal Clemson gesture UI, including the already
-implemented optional Jump once / Bound gait controls. Those behaviors require
-separate instructor approval; they are not part of required flat-maze walking.
+Weeks 7 onward use the same [personal Go2 gesture UI](https://github.com/sriram-2502/go2-gesture-nav): stationary inspection first, supervised gestures later. The root setup/launch scripts replace the old `webrtc/` commands. No ROS or separate Basic starter is needed. Jump once / Bound gait are supplied optional controls requiring separate approval.
 
 Use [the Go2 hardware guide](course/GO2_HARDWARE.md) for Windows 11, the separate
 `go2wifi` environment, Go2 Wi-Fi/AES access, stationary checks, the Clemson UI,

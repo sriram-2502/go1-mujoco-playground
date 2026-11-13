@@ -26,8 +26,7 @@ its installation instructions remain unchanged.
 
 - **Course website:** [DyCo-AI Go1 Gesture Tracking](https://dyco-ai.github.io/go1_gesture_tracking/) provides the schedule, concepts, assignments, and submission expectations.
 - **This repository:** runnable simulation examples, weekly labs, and student reports.
-- **Week 7 Basic hardware setup:** use Clemson's [`DyCo-AI/go2-webRTC`](https://github.com/DyCo-AI/go2-webRTC) starter for stationary camera/feedback checkout.
-- **Weeks 8 onward, Clemson gesture UI:** use the personal [`go2-gesture-nav`](https://github.com/sriram-2502/go2-gesture-nav) reference for MediaPipe, supervised walking, recording/replay, and optional Jump once / Bound gait controls. Follow [Go2 hardware onboarding](course/GO2_HARDWARE.md#which-setup-to-use) for the transition, commands, and build-ID checks. Credentials and physical trials require instructor approval.
+- **All Go2 hardware weeks:** use the personal [go2-gesture-nav](https://github.com/sriram-2502/go2-gesture-nav) project. One root setup supplies the gesture UI, stationary inspection, supervised walking, recording/replay, and optional Jump once / Bound gait. No ROS or separate Basic starter is needed. Follow [Go2 hardware onboarding](course/GO2_HARDWARE.md).
 
 The course is intended for Go1 and Go2 experiments. This version uses **Go1 in
 simulation and Go2 over Wi-Fi/WebRTC on Windows 11 for hardware**. Physical Go1
@@ -39,10 +38,10 @@ are ready. Keep the simulation and hardware environments separate.
 ![Basic Go2 reference with onboard camera, robot model, and colored voxel map.](https://raw.githubusercontent.com/sriram-2502/go2-gesture-nav/main/docs/assets/go2-camera-voxels.png)
 
 *Upstream Basic UI reference from [Unitree UI](https://github.com/legion1581/unitree_ui),
-with its [MIT notice](https://github.com/sriram-2502/go2-gesture-nav/blob/main/webrtc/clemson/UPSTREAM_LICENSE).
+with its [MIT notice](https://github.com/sriram-2502/go2-gesture-nav/blob/main/dashboard/UPSTREAM_LICENSE).
 Clemson adds extracted hands, a velocity overlay, and experiment controls.*
 
-![Default hand gestures: forward, sideways left/right, turn left/right, and stop.](https://raw.githubusercontent.com/sriram-2502/go2-gesture-nav/main/webrtc/clemson/assets/gesture-guide.png)
+![Default hand gestures: forward, sideways left/right, turn left/right, and stop.](https://raw.githubusercontent.com/sriram-2502/go2-gesture-nav/main/dashboard/assets/gesture-guide.png)
 
 Start with the [illustrated hardware guide](course/GO2_HARDWARE.md) for the
 pose-to-velocity table, setup commands, and screen checklist. The Go2 camera
@@ -101,7 +100,7 @@ deliverables, and completion checklist. Complete the weeks in order.
 | 4 | [Gesture vocabulary and recognition](course/week-04-hand-landmarks/README.md) | Recognize stop, forward and turning gestures. |
 | 5 | [Gesture validation and command supervision](course/week-05-gesture-classification/README.md) | Test hold time, bounded commands, input expiry and stop priority. |
 | 6 | [Integrated dashboard and simulation maze](course/week-06-mock-command-mapping/README.md) | Navigate with webcam gestures, overview and simulated robot FPV. |
-| 7 | [Go2 hardware setup](course/week-07-gesture-simulation/README.md) | Prepare Windows 11, Go2 Wi-Fi/AES access, and Clemson's separate Basic WebRTC starter. |
+| 7 | [Go2 hardware setup](course/week-07-gesture-simulation/README.md) | Prepare the personal gesture UI; preview and inspect Go2 camera/state while stationary. |
 | 8 | [Stationary Go2 checkout](course/week-08-safety-testing/README.md) | Verify WebRTC, telemetry, onboard camera, voxels, and the supervised stop procedure. |
 | 9 | [Go2 gesture dashboard](course/week-09-system-evaluation/README.md) | Use the Clemson UI, qualify the Go2 gesture mapping, and test short motions under supervision. |
 | 10 | [Physical maze](course/week-10-ros-hardware-readiness/README.md) | Build the maze and run staged navigation trials. |

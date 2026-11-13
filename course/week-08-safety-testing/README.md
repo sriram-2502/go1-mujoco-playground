@@ -23,7 +23,7 @@ Distinguish live feedback, requested commands, and verified physical behavior.
 
 1. Complete the [stationary checklist](../GO2_HARDWARE.md#stationary-checkout-before-any-motion) with the instructor.
 2. Confirm changing live Go2 video, incoming telemetry, and voxel data when the onboard service is available.
-3. Switch from the Week 7 Basic starter to the personal [Clemson gesture UI](https://github.com/sriram-2502/go2-gesture-nav#quick-start-on-windows-11), following [the course guide](../GO2_HARDWARE.md#which-setup-to-use). Close the Basic client, then start the Python hand service and Clemson UI on port 5174. Preview with control disabled.
+3. Use the same personal [gesture UI checkout](https://github.com/sriram-2502/go2-gesture-nav#1-install-once) prepared in Week 7. Start `python -m gesture_preview.server` and root `start-ui.ps1`; preview with control disabled on port 5174.
 4. Match the Navigation UI build ID to the launcher and locate battery, Jump once, and Bound gait without activating the optional behaviors.
 5. Distinguish requested, supervised, transmitted, and measured velocities; identify stale/unavailable data.
 6. Review Stop, disconnect, browser-focus loss, input expiry, and the paired-remote intervention procedure. Record what has actually been verified; do not infer a qualified physical stop from a stationary screenshot.

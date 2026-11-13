@@ -40,5 +40,6 @@ do not merge hardware application files into the playground.
 The `creative-inquiry-dev` branch is instructor authoring work, not the source
 of the Go2 dashboard runtime. The personal hardware repo's `main` contains the
 Clemson Jump once / Bound gait controls; update that separate checkout and check
-the UI build ID. Week 7 uses the [Clemson Basic starter](https://github.com/DyCo-AI/go2-webRTC);
-Weeks 8 onward use the [personal Clemson UI](https://github.com/sriram-2502/go2-gesture-nav).
+the UI build ID. All hardware weeks use the [personal gesture UI](https://github.com/sriram-2502/go2-gesture-nav).
+Run its root setup/launch scripts and `python -m gesture_preview.server`; there
+is no separate Basic starter or ROS setup for the course.
