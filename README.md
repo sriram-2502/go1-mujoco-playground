@@ -26,7 +26,8 @@ its installation instructions remain unchanged.
 
 - **Course website:** [DyCo-AI Go1 Gesture Tracking](https://dyco-ai.github.io/go1_gesture_tracking/) provides the schedule, concepts, assignments, and submission expectations.
 - **This repository:** runnable simulation examples, weekly labs, and student reports.
-- **Hardware setup and instructor solution:** clone [`go2-gesture-nav`](https://github.com/sriram-2502/go2-gesture-nav) for the Basic UI and Clemson Go2 dashboard. Follow [Go2 hardware onboarding](course/GO2_HARDWARE.md) for clone, installation, and update commands. Ask the instructor only for private robot credentials and hardware approval.
+- **Week 7 Basic hardware setup:** use Clemson's [`DyCo-AI/go2-webRTC`](https://github.com/DyCo-AI/go2-webRTC) starter for stationary camera/feedback checkout.
+- **Weeks 8 onward, Clemson gesture UI:** use the personal [`go2-gesture-nav`](https://github.com/sriram-2502/go2-gesture-nav) reference for MediaPipe, supervised walking, recording/replay, and optional Jump once / Bound gait controls. Follow [Go2 hardware onboarding](course/GO2_HARDWARE.md#which-setup-to-use) for the transition, commands, and build-ID checks. Credentials and physical trials require instructor approval.
 
 The course is intended for Go1 and Go2 experiments. This version uses **Go1 in
 simulation and Go2 over Wi-Fi/WebRTC on Windows 11 for hardware**. Physical Go1
@@ -100,7 +101,7 @@ deliverables, and completion checklist. Complete the weeks in order.
 | 4 | [Gesture vocabulary and recognition](course/week-04-hand-landmarks/README.md) | Recognize stop, forward and turning gestures. |
 | 5 | [Gesture validation and command supervision](course/week-05-gesture-classification/README.md) | Test hold time, bounded commands, input expiry and stop priority. |
 | 6 | [Integrated dashboard and simulation maze](course/week-06-mock-command-mapping/README.md) | Navigate with webcam gestures, overview and simulated robot FPV. |
-| 7 | [Go2 hardware setup](course/week-07-gesture-simulation/README.md) | Prepare Windows 11, go2wifi, Go2 Wi-Fi, AES access, and the Basic WebRTC UI. |
+| 7 | [Go2 hardware setup](course/week-07-gesture-simulation/README.md) | Prepare Windows 11, Go2 Wi-Fi/AES access, and Clemson's separate Basic WebRTC starter. |
 | 8 | [Stationary Go2 checkout](course/week-08-safety-testing/README.md) | Verify WebRTC, telemetry, onboard camera, voxels, and the supervised stop procedure. |
 | 9 | [Go2 gesture dashboard](course/week-09-system-evaluation/README.md) | Use the Clemson UI, qualify the Go2 gesture mapping, and test short motions under supervision. |
 | 10 | [Physical maze](course/week-10-ros-hardware-readiness/README.md) | Build the maze and run staged navigation trials. |

@@ -24,9 +24,20 @@ Map each Go2 hand pose to one body-frame velocity axis and evaluate recognition.
 1. Review the [Go2 gesture table and speed settings](../GO2_HARDWARE.md#go2-gestures-and-velocity-settings); they differ from the unchanged simulation reference.
 2. Validate each gesture across operators in preview, including palm orientation, no hand, two hands, and transitions.
 3. After instructor qualification, perform the bounded script checkout and short one-axis trials described in the hardware guide.
-4. Show a stop pose, explicitly enable gesture control, and verify forward, sideways, and turn-in-place requests individually.
+4. Click Enable gesture control directly; no palm/fist startup ritual is required. After fresh post-enable frames and the consistency hold, verify forward, sideways, and turn-in-place requests individually.
 5. Verify stopping and stale-input behavior under supervision. Keep obstacle-avoidance changes deliberate; changing its switch disables gesture control.
 6. Record a short run, save its ZIP, and inspect offline replay and the requested/transmitted/measured velocity data.
+
+## Optional behavior extension
+
+The personal Clemson UI already includes **Jump once** and **Bound gait**.
+Identify them and explain the difference between a one-shot action and gait
+selection using [the behavior/recovery guide](https://github.com/sriram-2502/go2-gesture-nav/blob/main/webrtc/clemson/CONTROL_EXTENSIONS.md).
+Button presence is not permission to activate them. Keep ordinary walking as
+the required baseline. Only after separate instructor approval and qualification,
+evaluate a behavior or a deliberate selection-interface extension while retaining
+the supplied recovery checks. These controls are not default hand gestures;
+Bound must be confirmed before explicitly enabling gesture navigation.
 
 ## Expected evidence
 

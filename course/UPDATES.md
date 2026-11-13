@@ -34,5 +34,11 @@ which case the team pull already brings in the baseline. Check `git log --onelin
 and record the version used in your report.
 
 The physical Go2 application is a separate checkout. Follow its own
-[update instructions](https://github.com/sriram-2502/go2-gesture-nav#get-instructor-updates);
+[update instructions](https://github.com/sriram-2502/go2-gesture-nav#update-and-restart);
 do not merge hardware application files into the playground.
+
+The `creative-inquiry-dev` branch is instructor authoring work, not the source
+of the Go2 dashboard runtime. The personal hardware repo's `main` contains the
+Clemson Jump once / Bound gait controls; update that separate checkout and check
+the UI build ID. Week 7 uses the [Clemson Basic starter](https://github.com/DyCo-AI/go2-webRTC);
+Weeks 8 onward use the [personal Clemson UI](https://github.com/sriram-2502/go2-gesture-nav).

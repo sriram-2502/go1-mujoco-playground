@@ -5,6 +5,24 @@ You continue learning from the existing Go1 simulator, but the physical robot is
 Go2. This guide does not change the simulation installation, ONNX policy, limits,
 gesture rules, team-branch policy, or weekly submission procedure.
 
+## Which setup to use
+
+| Course stage | Checkout and interface |
+| --- | --- |
+| Week 7: stationary Basic UI | [Clemson DyCo-AI/go2-webRTC](https://github.com/DyCo-AI/go2-webRTC), using its [Windows setup guide](https://github.com/DyCo-AI/go2-webRTC/blob/main/docs/SETUP.md). Run its root-level setup/start scripts; no MediaPipe service is needed. |
+| Weeks 8–9 onward: Clemson gesture UI | [Personal go2-gesture-nav instructor reference](https://github.com/sriram-2502/go2-gesture-nav), using the commands below. It includes hand tracking, supervised navigation, recording/replay, **Jump once**, and **Bound gait**. |
+
+These are separate checkouts. Do not run the Basic starter's root-level scripts
+from the personal repo, or the personal repo's `webrtc\` commands from the Basic
+starter. Disconnect and stop the Basic client before opening Clemson; only one
+robot client owns the connection. The personal reference also contains research
+material, but the course uses its **Clemson WebRTC edition**, not `ros/`.
+
+The playground's `creative-inquiry-dev` branch is for instructor course
+development. Runnable Go2 UI features live in the personal hardware repo, not in
+that branch or the simulation launcher. Student reports remain on the assigned
+team branches, using the [update procedure](UPDATES.md).
+
 ## Visual guide for your first session
 
 Use the instructor's [student visual orientation](https://github.com/sriram-2502/go2-gesture-nav/blob/main/webrtc/STUDENT_ORIENTATION.md)
@@ -57,8 +75,9 @@ Set-Location .\go2-gesture-nav
 git rev-parse --short HEAD
 ```
 
-This public repository includes the Basic UI setup, Clemson dashboard overlays,
-MediaPipe service, and recording/replay code. It is separate from the simulation
+This public repository includes the Clemson dashboard overlays, MediaPipe service,
+recording/replay, and the Jump once / Bound gait controls. Clone this for Weeks
+8–9 after the separate Week 7 Basic checkout. It is separate from the simulation
 repository. No AES key is included; ask the instructor privately. If you already
 have this checkout, update it rather than cloning into an existing folder.
 
@@ -103,10 +122,10 @@ Install Git for Windows if absent. In **PowerShell**, from the companion folder:
 
 ```powershell
 Set-Location "$env:USERPROFILE\Downloads\go2-gesture-nav"
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\webrtc\setup-ui.ps1 -Edition all
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\webrtc\setup-ui.ps1 -Edition clemson
 ```
 
-This obtains the pinned Basic UI and Clemson source plus a workspace-local Node
+This obtains the pinned UI and Clemson overlays plus a workspace-local Node
 runtime. The execution-policy flag affects this process only. Stop dashboard
 servers before rerunning setup. Detailed dependency versions and troubleshooting
 are in the companion `webrtc/DEPENDENCIES.md`; the course does not duplicate its
@@ -133,15 +152,13 @@ with its [MIT notice](https://github.com/sriram-2502/go2-gesture-nav/blob/main/w
 Clemson adds the hand panel and velocity overlay; this is not a Clemson trial capture.*
 
 
-Start Basic first, in **PowerShell from the companion folder**:
+For Week 7, use the separate [Clemson Basic starter's setup guide](https://github.com/DyCo-AI/go2-webRTC/blob/main/docs/SETUP.md)
+at **http://127.0.0.1:5173/**. That starter has root-level `setup-ui.ps1` and
+`start-ui.ps1` scripts and no Clemson hand panel.
 
-```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\webrtc\start-ui.ps1 -Edition basic
-```
-
-Open Chrome at `http://127.0.0.1:5173/`. Choose Connect, Go2, and Access Point
-(Direct), then use `192.168.12.1`. Enter the assigned AES key if prompted.
-Follow the setup repository's `webrtc/UI_SETUP.md` if its pinned interface differs.
+For Week 8 onward, close/disconnect that client and use **Open the Clemson gesture
+UI** below at **http://127.0.0.1:5174/**. Repeat the following checks in Clemson;
+you do not need to start another Basic client inside the personal repo.
 
 With locomotion disabled, record each check as **pass / fail / untested**:
 
@@ -161,7 +178,7 @@ passwords, keys, or cloud tokens. Clear saved site data after using a shared lab
 
 ## Open the Clemson gesture UI
 
-Disconnect Basic from the robot and stop its server with Ctrl+C. Use two terminals,
+Disconnect the Week 7 Basic client from the robot and stop its server with Ctrl+C. Use two terminals,
 both in the companion `go2-gesture-nav` folder:
 
 **Terminal 1 — Anaconda Prompt:**
@@ -278,8 +295,9 @@ stand the robot up or provide a leg controller.
    It is a motion command. Disconnect the dashboard first; inspect actual travel
    and stopping, with clear space for more than the nominal requested distance.
 2. Reconnect only the Clemson UI, then preview each intended pose without enabling.
-3. Show an open palm/fist. Click **Enable gesture control** below the hand view and
-   keep the stop pose while the motion-service check completes.
+3. Click **Enable gesture control** below the hand view. No palm/fist startup pose
+   is required. Fresh tracking, robot state, and video are still required; motion
+   waits for new post-enable frames and the gesture consistency hold.
 4. Test one brief motion at a time, starting with defaults. Return to a stop pose
    and visually confirm stopping before proceeding to another axis.
 5. Use **Stop** (below Disconnect or under the hand view) to revoke gesture control.
@@ -293,6 +311,47 @@ Changing speed settings or obstacle avoidance disables gesture control. The
 avoidance switch reads back the robot's state; OFF disables avoidance behavior,
 and ON does not guarantee every obstacle will be avoided. Do not change it merely
 to get past an unexplained refusal to move. Record its state for each experiment.
+
+## Optional Forward Jump and Bound gait
+
+These controls already exist in the personal Clemson UI; students do not need
+to implement the buttons to follow the core course. The camera-view control
+stack is **Disconnect → Stop → battery → Jump once / Bound gait**. They are
+explicit buttons, not default hand gestures, and use the same authenticated
+WebRTC connection as walking.
+
+| Control | What happens | Return to ordinary navigation |
+| --- | --- | --- |
+| **Jump once** | Pauses gesture navigation and requests one forward jump (`FrontJump` 1031). It is not persistent FreeJump mode. | Use Stop after landing and follow the UI's recovery result. Gesture enabling and repeat actions remain locked until recovery is confirmed. |
+| **Bound gait** | Pauses navigation, requests Bound (`FreeBound` 2046), and waits for successful reply and new mode feedback. | After confirmation, explicitly enable gestures to navigate. Bound again or Stop requests exit; a stop/zero gesture while moving also exits Bound and disarms navigation. |
+
+The maintainer has reported a successful forward jump and landing; this does
+not qualify all firmware, interruption, or recovery cases. Bound requires its
+own supervised hardware checks. A request acknowledgement does not prove an
+executed jump or established gait. The old dashboard videos predate these controls.
+
+Jump recovery checks require fresh grounded/upright low-speed feedback. Missing
+foot-contact data or an unconfirmed stop leaves navigation locked; use the paired
+remote and the explicit **I restored standing with the remote** acknowledgement
+only after restoring normal standing. That acknowledgement sends no motion
+commands and does not re-enable gestures. See the authoritative
+[behavior and recovery guide](https://github.com/sriram-2502/go2-gesture-nav/blob/main/webrtc/clemson/CONTROL_EXTENSIONS.md).
+
+Keep the required baseline as ordinary gesture-controlled walking in a flat maze.
+Jump/Bound trials are optional and instructor-approved. Student extensions may
+study deliberate behavior-selection interfaces or evaluation; preserve the
+existing action ownership, stop, feedback, and recovery checks. Stationary Look
+Around remains removed/disabled.
+
+### Confirm the correct UI version
+
+Disconnect and stop both local services before updating the personal checkout.
+Run `git pull --ff-only`, restart the Python service, and launch
+`webrtc\start-ui.ps1 -Edition clemson`. Startup reapplies the tracked overlays.
+Open port **5174**, hard-refresh with Ctrl+Shift+R, and compare **Navigation | UI
+build ID** with the ID printed in PowerShell. Matching IDs identify the loaded
+code; they do not establish hardware qualification. If buttons are missing,
+check the checkout, edition, port, and stale-server/cache state before changing code.
 
 ## Record, replay, and submit evidence
 
@@ -315,8 +374,10 @@ policy; keep run ZIPs, keys, and account credentials out of public Git history.
 
 ## What is and is not qualified
 
-The companion implementation has offline gesture/supervision, recording-format,
-and build checks. That is not a claim that every feature has passed on this Go2.
+The maintainer has confirmed the baseline gesture-navigation hardware setup.
+The companion also has offline gesture/supervision, behavior-transport,
+recording-format, and build checks. These do not qualify every Go2 or all optional
+Jump/Bound behavior and recovery cases.
 The instructor maintains the hardware qualification record. Actual recognition,
 physical motion/stopping, firmware-specific services, browser capture, and combined
 recording performance must be checked for the supplied hardware and bundle version.

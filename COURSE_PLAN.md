@@ -10,7 +10,7 @@ The required midpoint is **webcam gesture navigation through a baseline MuJoCo m
 | 4 | Gesture vocabulary and recognition | STOP, FORWARD, LEFT, RIGHT; test across operators |
 | 5 | Validation, mapping, command supervision | Hold-time, stale-input, stop and bounds tests; command logs |
 | 6 | Integrated dashboard and baseline maze | Webcam + overview + robot FPV; three repeatable navigation trials |
-| 7 | Go2 hardware inventory and setup | Windows 11, go2wifi, Wi-Fi/AES access, Basic WebRTC camera and status |
+| 7 | Go2 hardware inventory and setup | Windows 11, Wi-Fi/AES access, Clemson Basic WebRTC camera and status |
 | 8 | Stationary Go2 checkout | Onboard camera, telemetry, voxels, fresh feedback, and the supervised stop procedure |
 | 9 | Clemson Go2 UI and supervised gestures | Preview the Go2-specific vocabulary, then incremental bounded motion after instructor qualification |
 | 10 | Physical maze construction and navigation | Measured clearances; staged supervised trials |
@@ -52,6 +52,11 @@ The supplied geometric rules have no calibrated classification-confidence score.
 
 ## Hardware phase: Go2 over WebRTC
 
+Week 7 uses [Clemson's Basic starter](https://github.com/DyCo-AI/go2-webRTC).
+Weeks 8 onward use the personal Clemson gesture UI, including the already
+implemented optional Jump once / Bound gait controls. Those behaviors require
+separate instructor approval; they are not part of required flat-maze walking.
+
 Use [the Go2 hardware guide](course/GO2_HARDWARE.md) for Windows 11, the separate
 `go2wifi` environment, Go2 Wi-Fi/AES access, stationary checks, the Clemson UI,
 and recording/replay. This path uses the Go2's onboard camera and WebRTC endpoint;
@@ -64,7 +69,7 @@ work, not part of this documentation update. Historical weekly folder names stay
 unchanged so links continue to work.
 
 The simulation dashboard does not contain the physical robot transport. Use the
-separate [Go2 GitHub setup](https://github.com/sriram-2502/go2-webrtc-gesture-nav). Do not send simulated
+separate [Go2 GitHub setup](https://github.com/sriram-2502/go2-gesture-nav). Do not send simulated
 joint targets or the Go1 ONNX output to the Go2. Physical motion requires the
 instructor-approved interface, verified communication/stop behavior, and direct
 supervision. The old Go1/ROS/Jetson/ZED project remains a separate reference.
