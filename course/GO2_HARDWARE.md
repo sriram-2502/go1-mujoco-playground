@@ -125,6 +125,7 @@ Record its reported state in each experiment.
 These buttons already exist below the battery; they are not default gestures.
 
 - **Jump once:** pauses gesture navigation and requests one forward jump. Repeat actions remain locked until Stop/recovery is confirmed.
+- **Backflip once:** directly below Jump once; sends one backflip request and locks repeats/gesture enabling until grounded recovery. **Clear the surrounding area, keep people away, use a level non-slip surface, and keep the paired remote ready.** This new control has offline tests and requires separate supervised robot/firmware qualification.
 - **Bound gait:** pauses navigation, requires successful reply/new mode feedback, then requires explicit gesture enabling to navigate. Stop requests exit.
 
 Read [behavior and recovery](https://github.com/sriram-2502/go2-gesture-nav/blob/main/dashboard/CONTROL_EXTENSIONS.md).
